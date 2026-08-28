@@ -26,6 +26,18 @@ export const otevruConfig = {
   address: "O. Kišové 88, 739 25 Sviadnov",
   hours: "Po–Ne 07:00–18:00",
   hoursNote: "Před návštěvou zavolejte — často jsme na montážích.",
+  openingSchedule: {
+    timezone: "Europe/Prague",
+    week: [
+      { open: "07:00", close: "18:00" },
+      { open: "07:00", close: "18:00" },
+      { open: "07:00", close: "18:00" },
+      { open: "07:00", close: "18:00" },
+      { open: "07:00", close: "18:00" },
+      { open: "07:00", close: "18:00" },
+      { open: "07:00", close: "18:00" },
+    ],
+  },
   emergencyNote:
     "V pracovní době vyjíždíme na nouzové otevírání v MS kraji. Mimo dobu domluvíme telefonicky.",
   serviceArea:

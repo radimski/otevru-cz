@@ -30,3 +30,11 @@ export {
   subscribeToConsent,
   writeConsent,
 } from "./cookieConsent";
+
+export type {
+  DayHours,
+  OpenStatusResult,
+  OpeningSchedule,
+  WeekSchedule,
+} from "./openHours";
+export { evaluateOpenStatus } from "./openHours";

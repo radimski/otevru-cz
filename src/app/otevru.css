@@ -264,3 +264,48 @@
   align-items: center;
   justify-content: center;
 }
+
+.open-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.open-status-header {
+  color: var(--otevru-charcoal);
+}
+
+.open-status-nav {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.open-status-detail {
+  color: inherit;
+  opacity: 0.72;
+  font-weight: 500;
+}
+
+.open-status-dot {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 999px;
+  flex: none;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.12);
+}
+
+.open-status-dot.is-open {
+  background: #22c55e;
+  box-shadow:
+    0 0 0 2px rgba(34, 197, 94, 0.2),
+    0 0 8px rgba(34, 197, 94, 0.55);
+}
+
+.open-status-dot.is-closed {
+  background: #ef4444;
+  box-shadow:
+    0 0 0 2px rgba(239, 68, 68, 0.2),
+    0 0 8px rgba(239, 68, 68, 0.45);
+}
