@@ -1,0 +1,266 @@
+.otevru-root {
+  --otevru-lime: #acf53d;
+  --otevru-blue: #004c93;
+  --otevru-orange: #ff8800;
+  --otevru-dark: #282b34;
+  --otevru-slate: #2f333b;
+  --otevru-charcoal: #484d55;
+  --otevru-muted: #919499;
+  --otevru-light: #f3f3f3;
+  color: var(--otevru-charcoal);
+}
+
+/* Sekce v barvách původního webu (wrapper style1/2/3) */
+.otevru-section-blue {
+  background-color: var(--otevru-blue);
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.otevru-section-lime {
+  background-color: var(--otevru-lime);
+  color: var(--otevru-charcoal);
+}
+
+.otevru-section-light {
+  background-color: var(--otevru-light);
+}
+
+.otevru-section-dark {
+  background-color: var(--otevru-dark);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Tlačítka podle style1 / style3 */
+.otevru-btn-orange {
+  background-color: var(--otevru-orange);
+  color: #fff;
+  transition: filter 0.2s ease;
+}
+
+.otevru-btn-orange:hover {
+  filter: brightness(1.08);
+}
+
+.otevru-btn-slate {
+  background-color: var(--otevru-slate);
+  color: #fff;
+  transition: background-color 0.2s ease;
+}
+
+.otevru-btn-slate:hover {
+  background-color: var(--otevru-dark);
+}
+
+.otevru-btn-lime {
+  background-color: var(--otevru-lime);
+  color: var(--otevru-charcoal);
+  transition: filter 0.2s ease;
+}
+
+.otevru-btn-lime:hover {
+  filter: brightness(1.06);
+}
+
+/* Titulek sekce ve stylu původního "title" pásku */
+.otevru-title {
+  display: inline-block;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  font-size: 0.8rem;
+}
+
+.otevru-card {
+  background: #fff;
+  border: 1px solid rgba(72, 77, 85, 0.12);
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.otevru-card:hover {
+  border-color: var(--otevru-lime);
+  box-shadow: 0 8px 24px rgba(40, 43, 52, 0.1);
+}
+
+/* ============ FORMULÁŘ ============ */
+.otevru-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.otevru-form-row {
+  display: grid;
+  gap: 1.1rem;
+}
+
+@media (min-width: 640px) {
+  .otevru-form-row {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.otevru-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--otevru-charcoal);
+}
+
+.otevru-form label span[aria-hidden] {
+  color: var(--otevru-orange);
+}
+
+.otevru-form input[type="text"],
+.otevru-form input[type="tel"],
+.otevru-form input[type="email"],
+.otevru-form select,
+.otevru-form textarea {
+  font: inherit;
+  /* 16px minimum stops iOS Safari zooming in on focus. */
+  font-size: max(1rem, 16px);
+  font-weight: 400;
+  color: var(--otevru-charcoal);
+  background: #fff;
+  border: 1px solid rgba(72, 77, 85, 0.25);
+  border-radius: 4px;
+  padding: 0.7rem 0.75rem;
+  resize: vertical;
+  width: 100%;
+  min-width: 0;
+}
+
+.otevru-form input:focus-visible,
+.otevru-form select:focus-visible,
+.otevru-form textarea:focus-visible {
+  outline: 2px solid var(--otevru-orange);
+  outline-offset: 1px;
+  border-color: var(--otevru-orange);
+}
+
+.otevru-form [aria-invalid="true"] {
+  border-color: #b91c1c;
+  background: #fef5f5;
+}
+
+.otevru-form [data-form-error] {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: #b91c1c;
+}
+
+.otevru-form[data-form-done] input,
+.otevru-form[data-form-done] textarea,
+.otevru-form[data-form-done] button {
+  opacity: 0.55;
+}
+
+.otevru-consent {
+  flex-direction: row !important;
+  align-items: flex-start;
+  gap: 0.6rem !important;
+  font-weight: 400 !important;
+  font-size: 0.85rem !important;
+  line-height: 1.5;
+  color: var(--otevru-muted) !important;
+}
+
+.otevru-consent input[type="checkbox"] {
+  margin-top: 0.2rem;
+  width: 1.05rem;
+  height: 1.05rem;
+  accent-color: var(--otevru-orange);
+  flex: none;
+}
+
+.otevru-consent a {
+  color: var(--otevru-blue);
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.otevru-form-submit {
+  align-self: flex-start;
+  border: none;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+  border-radius: 4px;
+  /* Comfortable thumb target on phones. */
+  min-height: 48px;
+  padding: 0.8rem 1.6rem;
+}
+
+.otevru-form-submit[aria-busy="true"],
+.otevru-form-submit:disabled {
+  cursor: progress;
+  opacity: 0.7;
+}
+
+@media (max-width: 480px) {
+  .otevru-form-submit {
+    align-self: stretch;
+    width: 100%;
+  }
+}
+
+/* Status paragraph — the engine sets data-state="info|ok|error". */
+.otevru-form-status {
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-radius: 4px;
+  padding: 0.7rem 0.85rem;
+}
+
+.otevru-form-status[hidden] {
+  display: none;
+}
+
+.otevru-form-status[data-state="info"] {
+  background: #eef3f8;
+  color: var(--otevru-blue);
+}
+
+.otevru-form-status[data-state="ok"] {
+  background: #f2fbe6;
+  color: #3f6212;
+  border-left: 4px solid var(--otevru-lime);
+}
+
+.otevru-form-status[data-state="error"] {
+  background: #fef5f5;
+  color: #b91c1c;
+  border-left: 4px solid #b91c1c;
+}
+
+.otevru-form-note {
+  font-size: 0.8rem;
+  line-height: 1.6;
+  color: var(--otevru-muted);
+}
+
+.otevru-keyhole-rule {
+  background: linear-gradient(
+    90deg,
+    var(--otevru-lime) 0%,
+    var(--otevru-lime) 60%,
+    transparent 60%
+  );
+}
+
+.otevru-icon {
+  width: 2rem;
+  height: 2rem;
+  stroke: currentColor;
+}
+
+.otevru-icon-wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}

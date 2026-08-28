@@ -1,0 +1,71 @@
+{
+  "_comment": "Single source of truth for every form on this site. The engine refuses any form id that is not listed here and drops any field that is not described.",
+
+  "forms": {
+    "poptavka": {
+      "label": "Poptávka z webu",
+      "to": ["patrik@otevru.cz"],
+      "cc": [],
+      "subject": "Poptávka z webu — {sluzba}, {jmeno}",
+      "replyTo": "email",
+      "minSeconds": 3,
+      "maxPerHour": 5,
+      "maxPerDay": 20,
+      "store": true,
+
+      "fields": {
+        "jmeno": {
+          "type": "text",
+          "label": "Jméno a příjmení",
+          "required": true,
+          "min": 2,
+          "max": 100
+        },
+        "telefon": {
+          "type": "tel",
+          "label": "Telefon",
+          "required": true,
+          "max": 40
+        },
+        "email": {
+          "type": "email",
+          "label": "E-mail",
+          "required": false,
+          "max": 200
+        },
+        "sluzba": {
+          "type": "select",
+          "label": "Typ poptávky",
+          "required": true,
+          "options": [
+            "Nouzové otevírání",
+            "Klíčová služba",
+            "Bezpečnostní dveře",
+            "Trezory & sejfy",
+            "Opravy po vloupání",
+            "Komplexní zabezpečení",
+            "Jiné"
+          ]
+        },
+        "zprava": {
+          "type": "textarea",
+          "label": "Co potřebujete",
+          "required": true,
+          "min": 5,
+          "max": 4000,
+          "maxLinks": 1
+        },
+        "souhlas": {
+          "type": "consent",
+          "label": "Souhlas se zpracováním osobních údajů",
+          "required": true
+        },
+        "lang": {
+          "type": "hidden",
+          "label": "Jazyk",
+          "max": 5
+        }
+      }
+    }
+  }
+}
