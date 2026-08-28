@@ -89,8 +89,8 @@ export const otevruConfig = {
     },
   ] as const,
   promo: {
-    title: "Akce na bezklíčový chytrý zámek Yale Linus",
-    text: "Více informací v sekci klíčová služba nebo na telefonu.",
+    title: "Yale Linus — chytrý zámek bez klíče",
+    text: "Více v sekci klíčová služba nebo na telefonu.",
   },
   services: [
     {
@@ -130,5 +130,5 @@ export const otevruConfig = {
       icon: "home",
     },
   ],
-  partners: ["Assa Abloy", "Mul-T-Lock", "Prověřená společnost"],
+  partners: ["Assa Abloy", "Mul-T-Lock", "Frýdek-Místek & okolí"],
 } as const;
