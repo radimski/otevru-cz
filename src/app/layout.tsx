@@ -17,13 +17,28 @@ const dmSans = DM_Sans({
 export const metadata: Metadata = {
   title: `${otevruConfig.brand} | Zámečnická pohotovost Frýdek-Místek`,
   description: otevruConfig.tagline,
+  robots: { index: true, follow: true },
+  alternates: { canonical: otevruConfig.url },
+  openGraph: {
+    type: "website",
+    siteName: otevruConfig.brand,
+    title: `${otevruConfig.brand} | Zámečnická pohotovost Frýdek-Místek`,
+    description: otevruConfig.shortDescription,
+    url: otevruConfig.url,
+    locale: "cs_CZ",
+  },
+  twitter: {
+    card: "summary",
+    title: `${otevruConfig.brand} | Zámečnická pohotovost`,
+    description: otevruConfig.shortDescription,
+  },
 };
 
 const structuredData = {
   "@context": "https://schema.org",
   "@type": "Locksmith",
   name: otevruConfig.name,
-  url: "https://www.otevru.cz/",
+  url: otevruConfig.url,
   telephone: "+420606262118",
   email: otevruConfig.email,
   address: {

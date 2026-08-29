@@ -17,6 +17,9 @@ export const otevruConfig = {
   name: "Patrik Panenka",
   brand: "OTEVŘU",
   tagline: "Zámečnická pohotovost & speciální zámečnictví",
+  shortDescription:
+    "Nouzové otevírání, klíčová služba, bezpečnostní dveře a trezory ve Frýdku-Místku a okolí.",
+  url: "https://www.otevru.cz/",
   colors: otevruColors,
   ico: "73290939",
   dic: "CZ7401244928",
