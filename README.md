@@ -25,6 +25,6 @@ docs/             Client brief and legal checklist
 ## Before launch
 
 - Confirm operator data in `src/config/operator.ts`
-- Set `FORM_SECRET` and SMTP for production forms
+- Set `FORM_SECRET`, Turnstile keys (`NEXT_PUBLIC_TURNSTILE_SITE_KEY`, `TURNSTILE_SECRET_KEY`), and SMTP for production forms
 - Have legal texts reviewed by a lawyer
 - Point `otevru.cz` at this deployment

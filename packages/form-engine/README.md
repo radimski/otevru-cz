@@ -56,6 +56,10 @@ Point the markup at it with `<body data-form-endpoint="/api/form">`.
 Set a real `FORM_SECRET` in production. The dev fallback is shared and logs a
 warning.
 
+Set both Turnstile keys before going live — the widget renders only when
+`NEXT_PUBLIC_TURNSTILE_SITE_KEY` is set, and the server rejects submissions
+without a valid token once `TURNSTILE_SECRET_KEY` is configured.
+
 ## Note on serverless
 
 Storage writes to the local filesystem, which is ephemeral on Vercel and similar
