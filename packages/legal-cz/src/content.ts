@@ -73,7 +73,7 @@ export function buildPrivacySections(operator: Operator): Section[] {
       blocks: [
         {
           kind: "p",
-          text: "Údaje mohou být zpřístupněny zpracovatelům, kteří pro nás zajišťují hosting, e-mailovou komunikaci nebo analytiku, a to na základě smlouvy o zpracování osobních údajů. Pokud má poskytovatel sídlo mimo EU, zajišťujeme odpovídající záruky podle kapitoly V GDPR.",
+          text: "Údaje mohou být zpřístupněny zpracovatelům, kteří pro nás zajišťují hosting, e-mailovou komunikaci, ochranu formulářů (Cloudflare Turnstile) nebo analytiku, a to na základě smlouvy o zpracování osobních údajů. Pokud má poskytovatel sídlo mimo EU, zajišťujeme odpovídající záruky podle kapitoly V GDPR.",
         },
       ],
     },
@@ -101,7 +101,7 @@ export function buildPrivacySections(operator: Operator): Section[] {
       blocks: [
         {
           kind: "p",
-          text: `Odesláním formuláře nám sdělujete údaje potřebné k odpovědi. Formulář otevírá vaši e-mailovou aplikaci s předvyplněnou zprávou — zpráva se odešle až vaším potvrzením na adresu ${operator.contact.email}.`,
+          text: `Odesláním kontaktního formuláře nám sdělujete údaje potřebné k odpovědi. Před odesláním probíhá automatická kontrola proti spamu (Cloudflare Turnstile), která může zpracovat IP adresu a technické údaje prohlížeče. Zpráva se uloží u provozovatele webu a dorazí na ${operator.contact.email}.`,
         },
       ],
     },
@@ -129,7 +129,7 @@ export function buildCookieSections(): Section[] {
         {
           kind: "ul",
           items: [
-            "Nezbytné — zajišťují základní funkce webu včetně uložení vaší volby ohledně cookies. Nelze je vypnout.",
+            "Nezbytné — zajišťují základní funkce webu včetně uložení vaší volby ohledně cookies a ochrany kontaktních formulářů (Cloudflare Turnstile). Nelze je vypnout.",
             "Analytické — pomáhají měřit návštěvnost a chování na webu. Spouští se až po vašem souhlasu.",
             "Marketingové — slouží k personalizaci reklamy a měření kampaní. Spouští se až po vašem souhlasu.",
           ],

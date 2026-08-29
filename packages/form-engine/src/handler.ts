@@ -183,8 +183,9 @@ async function verifyTurnstile(token: string, ip: string) {
   const secret = process.env.TURNSTILE_SECRET_KEY?.trim();
   if (!secret) {
     if (process.env.NODE_ENV === "production") {
-      console.warn(
-        "[form-engine] TURNSTILE_SECRET_KEY is not set — form submissions skip Turnstile verification.",
+      throw new FormError(
+        "server",
+        "Turnstile is not configured for this environment.",
       );
     }
     return;
