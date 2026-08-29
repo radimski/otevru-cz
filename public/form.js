@@ -26,6 +26,9 @@
 
   var body = document.body;
   var ENDPOINT = body.getAttribute('data-form-endpoint') || '/api/form.php';
+  var TURNSTILE_SITE_KEY = body.getAttribute('data-turnstile-site-key') || '';
+  var TURNSTILE_THEME = body.getAttribute('data-turnstile-theme') || 'auto';
+  var turnstileLoader = null;
 
   /* Honeypots. These names are also listed in lib/Spam.php; keep them in step.
    * They are injected from JS rather than written into the HTML so that they
@@ -48,7 +51,8 @@
     pattern: 'Hodnota nemá správny tvar.',
     type: 'Hodnota nemá správny tvar.',
     rate: 'Formulár ste odoslali príliš veľa krát. Skúste to prosím neskôr.',
-    offline: 'Vyzerá to, že ste offline. Skontrolujte pripojenie a skúste znova.'
+    offline: 'Vyzerá to, že ste offline. Skontrolujte pripojenie a skúste znova.',
+    captcha: 'Potvrďte prosím, že nie ste robot, a skúste to znova.'
   };
 
   var forms = document.querySelectorAll('[data-form]');
@@ -79,10 +83,12 @@
       nonceAt: 0,
       nonceTtl: 7200,
       pending: false,
-      done: false
+      done: false,
+      turnstileId: null
     };
 
     addHoneypots(form);
+    setupTurnstile(state);
 
     // The token is fetched on first interaction, not on page load: a visitor who
     // scrolls past the form costs the server nothing, and the token's clock
@@ -134,6 +140,57 @@
       wrap.appendChild(input);
       form.appendChild(wrap);
     });
+  }
+
+  function setupTurnstile(state) {
+    if (!TURNSTILE_SITE_KEY) return;
+
+    var mount = state.form.querySelector('[data-turnstile]');
+    if (!mount) return;
+
+    loadTurnstile()
+      .then(function (turnstile) {
+        if (!turnstile || state.turnstileId != null) return;
+        state.turnstileId = turnstile.render(mount, {
+          sitekey: TURNSTILE_SITE_KEY,
+          theme: TURNSTILE_THEME
+        });
+      })
+      .catch(function () {
+        // Widget failure should not break the page; submit() reports if needed.
+      });
+  }
+
+  function loadTurnstile() {
+    if (!TURNSTILE_SITE_KEY) return Promise.resolve(null);
+    if (window.turnstile) return Promise.resolve(window.turnstile);
+    if (turnstileLoader) return turnstileLoader;
+
+    turnstileLoader = new Promise(function (resolve, reject) {
+      var script = document.createElement('script');
+      script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+      script.async = true;
+      script.onload = function () { resolve(window.turnstile || null); };
+      script.onerror = reject;
+      document.head.appendChild(script);
+    });
+
+    return turnstileLoader;
+  }
+
+  function resetTurnstile(state) {
+    if (!state.turnstileId || !window.turnstile) return;
+    try {
+      window.turnstile.reset(state.turnstileId);
+    } catch (e) {
+      // Ignore reset errors on retry.
+    }
+  }
+
+  function hasTurnstileToken(form) {
+    if (!TURNSTILE_SITE_KEY || !form.querySelector('[data-turnstile]')) return true;
+    var field = form.querySelector('[name="cf-turnstile-response"]');
+    return !!(field && field.value);
   }
 
   /* ------------------------------------------------------------------ token */
@@ -188,6 +245,11 @@
       return;
     }
 
+    if (!hasTurnstileToken(form)) {
+      say(state, 'error', state.msg.captcha);
+      return;
+    }
+
     setPending(state, true);
     say(state, 'info', state.msg.sending);
 
@@ -226,11 +288,13 @@
         // The token is single-use, so any rejection burns it. Drop it or the
         // visitor's retry fails for a different reason than the first attempt.
         state.nonce = null;
+        resetTurnstile(state);
 
         fail(state, data);
       })
       .catch(function () {
         state.nonce = null;
+        resetTurnstile(state);
         setPending(state, false);
         say(state, 'error', state.msg.error);
       });
@@ -282,6 +346,12 @@
 
     if (code === 'rate_limited') {
       say(state, 'error', state.msg.rate);
+      return;
+    }
+
+    if (code === 'captcha') {
+      resetTurnstile(state);
+      say(state, 'error', state.msg.captcha);
       return;
     }
 

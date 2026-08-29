@@ -46,6 +46,8 @@ Point the markup at it with `<body data-form-endpoint="/api/form">`.
 | Variable | Default | Purpose |
 | --- | --- | --- |
 | `FORM_SECRET` | dev fallback | HMAC key for submission tokens |
+| `NEXT_PUBLIC_TURNSTILE_SITE_KEY` | unset | Cloudflare Turnstile site key (public) |
+| `TURNSTILE_SECRET_KEY` | unset | Cloudflare Turnstile secret for server verification |
 | `FORM_ALLOWED_ORIGINS` | unset (any) | Comma-separated allowed hostnames |
 | `FORM_NONCE_TTL` | `7200` | Token lifetime in seconds |
 | `FORM_DATA_DIR` | `.form-data` | Where submissions and the outbox are written |

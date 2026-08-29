@@ -33,8 +33,8 @@ const structuredData = {
     addressLocality: "Sviadnov",
     addressCountry: "CZ",
   },
-  geo: { "@type": "GeoCoordinates", latitude: 49.6892, longitude: 18.3278 },
   areaServed: "Frýdek-Místek, Ostrava a okolí",
+  geo: { "@type": "GeoCoordinates", latitude: 49.6892, longitude: 18.3278 },
   openingHoursSpecification: [
     {
       "@type": "OpeningHoursSpecification",
@@ -59,6 +59,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html lang="cs" className={`${dmSans.variable} h-full`}>
       <body
         data-form-endpoint="/api/form"
+        data-turnstile-site-key={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? ""}
         className="otevru-root flex min-h-full flex-col font-[family-name:var(--font-otevru)] antialiased"
       >
         <script

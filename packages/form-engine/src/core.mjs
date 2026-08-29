@@ -35,7 +35,8 @@ export class FormError extends Error {
       case 'server':
       case 'mail_failed': return 500;
       case 'spam':
-      case 'bad_nonce': return 403;
+      case 'bad_nonce':
+      case 'captcha': return 403;
       default: return 400;
     }
   }

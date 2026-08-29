@@ -86,13 +86,19 @@ export function createFormRoute({ formsJson, siteId }: FormRouteOptions) {
       );
 
       const body = await readBody(request);
+      const ip = clientIp(request);
+
+      await verifyTurnstile(
+        String(body["cf-turnstile-response"] ?? ""),
+        ip,
+      );
 
       const { formId, form, values, verdict } = await processSubmission({
         body,
         formsJson,
         secret,
         nonceTtl,
-        ip: clientIp(request),
+        ip,
         consumeNonce: async (token) => {
           if (spentNonces.has(token)) return false;
           spentNonces.add(token);
@@ -171,6 +177,42 @@ function clientIp(request: Request) {
   const forwarded = request.headers.get("x-forwarded-for");
   if (forwarded) return forwarded.split(",")[0].trim();
   return request.headers.get("x-real-ip") || "0.0.0.0";
+}
+
+async function verifyTurnstile(token: string, ip: string) {
+  const secret = process.env.TURNSTILE_SECRET_KEY?.trim();
+  if (!secret) {
+    if (process.env.NODE_ENV === "production") {
+      console.warn(
+        "[form-engine] TURNSTILE_SECRET_KEY is not set — form submissions skip Turnstile verification.",
+      );
+    }
+    return;
+  }
+
+  if (!token) {
+    throw new FormError("captcha", "Security check missing.");
+  }
+
+  const body = new URLSearchParams({
+    secret,
+    response: token,
+    remoteip: ip,
+  });
+
+  const res = await fetch(
+    "https://challenges.cloudflare.com/turnstile/v0/siteverify",
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body,
+    },
+  );
+
+  const data = (await res.json()) as { success?: boolean };
+  if (!data.success) {
+    throw new FormError("captcha", "Security check failed.");
+  }
 }
 
 async function store(
