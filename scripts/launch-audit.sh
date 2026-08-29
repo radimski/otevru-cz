@@ -1,23 +1,68 @@
 #!/usr/bin/env bash
-# Pre-launch audit helper — view-source capture, header check, scanner links.
-# Usage: ./scripts/launch-audit.sh https://www.example.cz [contact-path]
+# Pre-launch audit — view-source, header check, scanner links.
+#
+# Usage:
+#   ./scripts/launch-audit.sh <base-url> [path ...]
+#   ./scripts/launch-audit.sh <base-url> --file audit-pages.txt
+#
+# Examples:
+#   ./scripts/launch-audit.sh https://www.otevru.cz / /kontakt
+#   ./scripts/launch-audit.sh https://www.kinles.cz /
+#   ./scripts/launch-audit.sh https://www.kolmokafe.cz --file kolmokafe/audit-pages.txt
+#
+# Applies to every current and future site in this repo (see RULEBOOK.md).
 set -euo pipefail
 
-if [[ $# -lt 1 ]]; then
-  echo "Usage: $0 <base-url> [contact-path]" >&2
-  echo "Example: $0 https://www.otevru.cz /kontakt" >&2
+slugify_path() {
+  local p="$1"
+  if [[ "$p" == "/" ]]; then
+    echo "home"
+  else
+    printf '%s' "$p" | sed 's#^/##; s#/#-#g; s#[^a-zA-Z0-9._-]#-#g'
+  fi
+}
+
+usage() {
+  echo "Usage: $0 <base-url> [path ...]" >&2
+  echo "       $0 <base-url> --file <audit-pages.txt>" >&2
+  echo "" >&2
+  echo "Default paths when none given: / /kontakt" >&2
   exit 1
-fi
+}
+
+[[ $# -ge 1 ]] || usage
 
 BASE_URL="${1%/}"
-CONTACT_PATH="${2:-/kontakt}"
+shift
+
+PATHS=()
+if [[ $# -eq 0 ]]; then
+  PATHS=("/" "/kontakt")
+elif [[ "${1:-}" == "--file" ]]; then
+  [[ $# -eq 2 && -f "$2" ]] || usage
+  while IFS= read -r line || [[ -n "$line" ]]; do
+    line="${line%%#*}"
+    line="$(printf '%s' "$line" | xargs)"
+    [[ -n "$line" ]] && PATHS+=("$line")
+  done < "$2"
+  [[ ${#PATHS[@]} -gt 0 ]] || { echo "No paths in $2" >&2; exit 1; }
+else
+  PATHS=("$@")
+fi
+
 HOST="$(printf '%s' "$BASE_URL" | sed -E 's#^https?://([^/]+).*#\1#')"
-SLUG="$(printf '%s' "$HOST" | tr '.' '-')"
+HOST_SLUG="$(printf '%s' "$HOST" | tr '.:' '-')"
 STAMP="$(date -u +%Y-%m-%dT%H%M%SZ)"
-OUT_DIR="$(dirname "$0")/../docs/audit/${STAMP}-${SLUG}"
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+OUT_DIR="${ROOT}/docs/audit/${STAMP}-${HOST_SLUG}"
 mkdir -p "$OUT_DIR"
 
-ENCODED="$(python3 -c "import urllib.parse; print(urllib.parse.quote('$BASE_URL/', safe=''))")"
+ENCODED="$(python3 -c "import urllib.parse; print(urllib.parse.quote('${BASE_URL}/', safe=''))")"
+
+export BYPASS_HEADER=""
+if [[ "$HOST" == *loca.lt ]]; then
+  export BYPASS_HEADER=1
+fi
 
 fetch() {
   local path="$1"
@@ -29,25 +74,28 @@ fetch() {
     "$url" -o "$out" || echo "(fetch failed)" > "$out"
 }
 
-export BYPASS_HEADER=""
-if [[ "$HOST" == *loca.lt ]]; then
-  export BYPASS_HEADER=1
-fi
-
-fetch "/" "$OUT_DIR/view-source-home.html"
-fetch "$CONTACT_PATH" "$OUT_DIR/view-source-contact.html"
+CAPTURED=()
+for path in "${PATHS[@]}"; do
+  slug="$(slugify_path "$path")"
+  out="${OUT_DIR}/view-source-${slug}.html"
+  fetch "$path" "$out"
+  CAPTURED+=("$path|$slug")
+done
 
 {
   echo "# Audit capture — $HOST"
   echo ""
   echo "- **Date (UTC):** $STAMP"
   echo "- **Base URL:** $BASE_URL"
-  echo "- **Contact path:** $CONTACT_PATH"
+  echo "- **Paths audited:** ${PATHS[*]}"
   echo ""
   echo "## Step 1 — view-source files"
   echo ""
-  echo "- [\`view-source-home.html\`](./view-source-home.html)"
-  echo "- [\`view-source-contact.html\`](./view-source-contact.html)"
+  for entry in "${CAPTURED[@]}"; do
+    path="${entry%%|*}"
+    slug="${entry##*|}"
+    echo "- [\`${path}\`](./view-source-${slug}.html) → \`view-source-${slug}.html\`"
+  done
   echo ""
   echo "## Step 1 — automated signals"
   echo ""
@@ -58,6 +106,7 @@ from pathlib import Path
 out = Path(sys.argv[1])
 
 def check(name, html):
+    has_form = 'data-form="' in html or "data-form='" in html
     return {
         "file": name,
         "bytes": len(html),
@@ -69,6 +118,7 @@ def check(name, html):
         "http_assets": len(re.findall(r'(?:src|href)=["\']http://', html, re.I)),
         "form_js": "/form.js" in html,
         "json_ld": "application/ld+json" in html,
+        "has_form": has_form,
     }
 
 for path in sorted(out.glob("view-source-*.html")):
@@ -78,7 +128,13 @@ for path in sorted(out.glob("view-source-*.html")):
     for k, v in data.items():
         if k == "file":
             continue
-        flag = "⚠️" if (k == "test_turnstile_key" and v) or (k == "http_assets" and v) else ""
+        flag = ""
+        if k == "test_turnstile_key" and v:
+            flag = "⚠️ prod blocker"
+        if k == "http_assets" and v:
+            flag = "⚠️ mixed content"
+        if k == "has_form" and v and not data["turnstile_mount"]:
+            flag = "⚠️ form without Turnstile mount"
         print(f"- **{k}:** {v} {flag}")
     print()
 PY
@@ -90,14 +146,16 @@ PY
     "$BASE_URL/" | sed -n '1,30p' || echo "(header fetch failed)"
   echo '```'
   echo ""
-  echo "## Step 2 — multi-model review (manual / agent)"
+  echo "## Step 2 — multi-perspective review (agent / optional LLM passes)"
   echo ""
-  echo "Review saved HTML from three perspectives:"
-  echo "1. **Security** — CSP, Turnstile, secrets, third-party scripts"
-  echo "2. **Performance** — HTML size, script count, images"
-  echo "3. **SEO / a11y** — meta, headings, structured data"
+  echo "Review **each saved HTML file** from three angles:"
+  echo "1. **Security** — CSP, Turnstile on forms, secrets, third-party scripts"
+  echo "2. **Performance** — payload size, scripts, images, LCP"
+  echo "3. **SEO / a11y** — meta, headings, structured data, mobile nav"
   echo ""
-  echo "## Step 3 — external scanners"
+  echo "Mark findings: \`OK\` / \`WARN\` / \`BLOCK\`."
+  echo ""
+  echo "## Step 3 — external scanners (site-wide; re-run per major URL after deploy)"
   echo ""
   echo "| Tool | Link |"
   echo "| --- | --- |"
@@ -106,11 +164,11 @@ PY
   echo "| Mozilla Observatory | https://observatory.mozilla.org/analyze/${HOST} |"
   echo "| SSL Labs | https://www.ssllabs.com/ssltest/analyze.html?d=${HOST} |"
   echo ""
-  echo "## Turnstile checklist"
+  echo "## Turnstile checklist (any page with a form)"
   echo ""
-  echo "- [ ] \`data-turnstile-site-key\` in HTML (production: real key, not test key)"
-  echo "- [ ] \`data-turnstile\` mount on contact form"
-  echo "- [ ] \`/form.js\` loaded"
+  echo "- [ ] \`data-turnstile-site-key\` on \`<body>\` (prod: real key, not test key)"
+  echo "- [ ] \`<div data-turnstile />\` inside every \`[data-form]\`"
+  echo "- [ ] \`/form.js\` loaded from layout"
   echo "- [ ] Production env: \`TURNSTILE_SECRET_KEY\` + \`NEXT_PUBLIC_TURNSTILE_SITE_KEY\`"
 } > "$OUT_DIR/REPORT.md"
 
