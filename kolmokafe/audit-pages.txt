@@ -1,5 +1,0 @@
-# Launch-critical pages — add new routes here when shipping new sections
-/
-/kontakt
-/menu
-/akce

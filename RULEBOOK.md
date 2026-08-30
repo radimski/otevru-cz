@@ -151,24 +151,8 @@ Any new third-party script (maps, analytics, Facebook, embeds) **must** update C
 | `FORM_ALLOWED_ORIGINS` | yes (live hostname) |
 | `TURNSTILE_SECRET_KEY` | yes |
 | `NEXT_PUBLIC_TURNSTILE_SITE_KEY` | yes |
-| `SMTP_HOST` (+ `SMTP_USER` / `SMTP_PASS` as required) | yes for live forms |
 
-Form engine sends email via SMTP when configured; otherwise it writes `.eml` files to the outbox (dev fallback only).
-
----
-
-## 4b. SEO baseline (every public site)
-
-| Item | Location |
-| --- | --- |
-| `metadataBase` in root layout | `src/app/layout.tsx` |
-| Per-page `alternates.canonical` | each route’s `page.tsx` (use `withCanonical` helper) |
-| `robots.ts` + `sitemap.ts` | `src/app/` |
-| OG/Twitter image | `src/app/opengraph-image.tsx` |
-| Favicon | `src/app/icon.tsx` |
-| Czech `not-found.tsx` | `src/app/not-found.tsx` |
-
-Do not put unverified `aggregateRating` in JSON-LD.
+Wire SMTP / mail delivery before treating forms as production-ready.
 
 ---
 
