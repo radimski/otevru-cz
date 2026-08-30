@@ -18,8 +18,8 @@ export default function OtevruKontaktPage() {
         <span className="otevru-keyhole-rule bg-[linear-gradient(90deg,#004c93_0%,#004c93_55%,transparent_55%)]" aria-hidden />
         <h1 className="mt-3 text-4xl font-bold text-[#2f333b]">Kontakt</h1>
         <p className="mt-4 max-w-2xl text-lg text-[#717479]">
-          Nejrychlejší je telefon — u nouzového otevírání voláme zpět obratem.
-          Nespěchá-li to, napište nám přes formulář.
+          Nejrychlejší je telefon — u nouzového otevírání reagujeme prioritně.
+          U ostatních poptávek využijte formulář níže.
         </p>
 
         <a

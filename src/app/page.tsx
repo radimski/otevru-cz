@@ -20,12 +20,12 @@ export default function OtevruPage() {
             </p>
             <span className="otevru-keyhole-rule" aria-hidden />
             <h1 className="mt-4 text-4xl font-bold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
-              Zabouchli jste si dveře?{" "}
-              <span className="text-[#acf53d]">Otevřeme.</span>
+              Nouzové otevírání{" "}
+              <span className="text-[#acf53d]">a zabezpečení.</span>
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-8 text-white/80">
-              {otevruConfig.tagline}. Nouzové otevírání, bezpečnostní dveře,
-              trezory a komplexní zabezpečení majetku.
+              {otevruConfig.tagline}. Profesionální řešení od nouzového otevření
+              po montáž bezpečnostních dveří, trezorů a komplexního zabezpečení.
             </p>
             <p className="mt-4 text-sm text-white/60">
               {otevruConfig.serviceArea}
@@ -69,10 +69,10 @@ export default function OtevruPage() {
 
       <section className="otevru-section-light border-b border-[#484d55]/10">
         <div className="mx-auto max-w-6xl px-6 py-12">
-          <p className="otevru-title text-[#004c93]">Zabouchnuté dveře?</p>
+          <p className="otevru-title text-[#004c93]">Nouzové otevírání</p>
           <span className="otevru-keyhole-rule bg-[linear-gradient(90deg,#004c93_0%,#004c93_55%,transparent_55%)]" aria-hidden />
           <h2 className="mt-3 text-2xl font-bold text-[#2f333b]">
-            Co dělat hned teď
+            Doporučený postup
           </h2>
           <ol className="mt-8 grid gap-5 md:grid-cols-3">
             {otevruConfig.panicSteps.map((step, index) => (
@@ -130,8 +130,8 @@ export default function OtevruPage() {
             Tři kroky k řešení
           </h2>
           <p className="mt-3 max-w-2xl text-[#717479]">
-            U nouzového otevírání voláte přímo — u montáží a poptávek se
-            domluvíme telefonicky nebo přes formulář.
+            U nouzového otevírání volejte přímo. U montáží a poptávek se
+            domluvíme telefonicky nebo prostřednictvím formuláře.
           </p>
           <ol className="mt-10 grid gap-6 md:grid-cols-3">
             {otevruConfig.steps.map((step) => (
@@ -188,9 +188,9 @@ export default function OtevruPage() {
               Specialisté na vaši bezpečnost
             </h2>
             <p className="mt-4 leading-7 text-white/80">
-              Naší snahou je provádět nouzové otevírání bez zbytečného poškození
-              zámků. Poradíme s technickou stránkou zabezpečení a připravíme
-              nabídku na míru.
+              Zaměřujeme se na nouzové otevírání bez zbytečného poškození zámků
+              a konstrukcí. Poradíme s technickým řešením zabezpečení a připravíme
+              nabídku podle vašich požadavků.
             </p>
             <p className="mt-4 text-sm text-white/60">{otevruConfig.hoursNote}</p>
             <a

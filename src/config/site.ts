@@ -16,7 +16,7 @@ export const otevruColors = {
 export const otevruConfig = {
   name: "Patrik Panenka",
   brand: "OTEVŘU",
-  tagline: "Zámečnická pohotovost & speciální zámečnictví",
+  tagline: "Zámečnická pohotovost a specializované zámečnictví",
   shortDescription:
     "Nouzové otevírání, klíčová služba, bezpečnostní dveře a trezory ve Frýdku-Místku a okolí.",
   url: "https://www.otevru.cz/",
@@ -28,7 +28,8 @@ export const otevruConfig = {
   email: "patrik@otevru.cz",
   address: "O. Kišové 88, 739 25 Sviadnov",
   hours: "Po–Ne 07:00–18:00",
-  hoursNote: "Před návštěvou zavolejte — často jsme na montážích.",
+  hoursNote:
+    "Před návštěvou prosím zavolejte — technici jsou často v terénu na zakázkách.",
   openingSchedule: {
     timezone: "Europe/Prague",
     week: [
@@ -42,9 +43,9 @@ export const otevruConfig = {
     ],
   },
   emergencyNote:
-    "V pracovní době vyjíždíme na nouzové otevírání v MS kraji. Mimo dobu domluvíme telefonicky.",
+    "Ve standardní pracovní době vyjíždíme na nouzové otevírání v Moravskoslezském kraji. Mimo provozní dobu domluvíme postup telefonicky.",
   serviceArea:
-    "Sviadnov, Frýdek-Místek, Ostrava a okolí — v nouzi dojedeme k vám.",
+    "Působíme ve Sviadnově, Frýdku-Místku, Ostravě a okolí — v nouzi dojedeme k vám.",
   trust: [
     { value: "Assa Abloy", label: "Autorizovaný partner" },
     { value: "Mul-T-Lock", label: "Certifikované systémy" },
@@ -54,15 +55,15 @@ export const otevruConfig = {
   panicSteps: [
     {
       title: "Zachovejte klid",
-      text: "Nepokoušejte se násilně otevírat zámek — hrozí poškození.",
+      text: "Nepokoušejte se zámek otevírat násilím — hrozí trvalé poškození.",
     },
     {
-      title: "Zavolejte nám",
-      text: "Popíšete typ dveří, zámku nebo auta a kde jste.",
+      title: "Kontaktujte nás",
+      text: "Uveďte typ dveří, zámku nebo vozidla a přesnou adresu.",
     },
     {
       title: "Počkejte na technika",
-      text: "Domluvíme čas příjezdu a připravíme potřebné nástroje.",
+      text: "Domluvíme čas příjezdu a připravíme vhodné vybavení.",
     },
   ] as const,
   serviceOptions: [
@@ -77,23 +78,23 @@ export const otevruConfig = {
   steps: [
     {
       num: "01",
-      title: "Zavoláte",
-      text: "Popíšete situaci — zablokované dveře, zámek, trezor nebo montáž.",
+      title: "Kontakt",
+      text: "Popíšete situaci — zablokované dveře, výměnu zámku, trezor nebo montáž.",
     },
     {
       num: "02",
-      title: "Dojedeme",
-      text: "Domluvíme čas a místo. U nouzového otevírání reagujeme co nejdříve.",
+      title: "Příjezd",
+      text: "Domluvíme termín a místo. U nouzového otevírání reagujeme prioritně.",
     },
     {
       num: "03",
-      title: "Vyřešíme",
-      text: "Otevřeme, opravíme nebo namontujeme — s důrazem na šetrnost a kvalitu.",
+      title: "Realizace",
+      text: "Otevřeme, opravíme nebo namontujeme — s důrazem na šetrnost a kvalitu práce.",
     },
   ] as const,
   promo: {
     title: "Yale Linus — chytrý zámek bez klíče",
-    text: "Více v sekci klíčová služba nebo na telefonu.",
+    text: "Podrobnosti v sekci klíčová služba nebo po telefonu.",
   },
   services: [
     {

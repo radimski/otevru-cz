@@ -13,7 +13,7 @@ export function OtevruContactForm({ privacyHref }: { privacyHref: string }) {
         data-form="poptavka"
         noValidate
         data-msg-sending="Odesíláme…"
-        data-msg-success="Děkujeme, poptávku máme. Ozveme se vám co nejdříve."
+        data-msg-success="Děkujeme, poptávku jsme přijali. Ozveme se vám co nejdříve."
         data-msg-error={`Formulář se nepodařilo odeslat. Zavolejte prosím na ${otevruConfig.phone}.`}
         data-msg-required="Zkontrolujte prosím zvýrazněná pole."
         data-msg-email="Zadejte platnou e-mailovou adresu."
@@ -110,8 +110,8 @@ export function OtevruContactForm({ privacyHref }: { privacyHref: string }) {
           hidden
         />
         <p className="otevru-form-note">
-          Spěchá-li to, volejte {otevruConfig.phone} — u nouzového otevírání
-          voláme zpět obratem.
+          V naléhavých případech volejte {otevruConfig.phone} — u nouzového
+          otevírání reagujeme prioritně.
         </p>
       </form>
     </>
