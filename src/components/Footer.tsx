@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { otevruConfig } from "@/config/site";
 import { CookieSettingsButton } from "@/components/CookieBanner";
+import { EmailLink } from "@/components/EmailLink";
 
 const legalLinks = [
   { href: "/provozovatel", label: "Provozovatel" },
@@ -31,12 +32,10 @@ export function Footer() {
           >
             {otevruConfig.phone}
           </a>
-          <a
-            href={`mailto:${otevruConfig.email}`}
+          <EmailLink
+            email={otevruConfig.email}
             className="mt-1 block text-sm hover:text-[#acf53d]"
-          >
-            {otevruConfig.email}
-          </a>
+          />
         </div>
         <nav aria-label="Právní informace">
           <p className="otevru-title text-[#acf53d]">Informace</p>

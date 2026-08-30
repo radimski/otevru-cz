@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { OtevruContactForm } from "@/components/ContactForm";
+import { EmailLink } from "@/components/EmailLink";
 import { otevruConfig } from "@/config/site";
 import { withCanonical } from "@/lib/page-metadata";
 
@@ -44,12 +45,10 @@ export default function OtevruKontaktPage() {
             <div>
               <dt className="text-sm text-[#919499]">E-mail</dt>
               <dd className="mt-1 text-lg">
-                <a
-                  href={`mailto:${otevruConfig.email}`}
+                <EmailLink
+                  email={otevruConfig.email}
                   className="font-semibold text-[#004c93] hover:underline"
-                >
-                  {otevruConfig.email}
-                </a>
+                />
               </dd>
             </div>
             <div>
