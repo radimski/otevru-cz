@@ -23,7 +23,7 @@ that `core.mjs` leaves to the caller:
 - **nonce replay protection** — single-use tokens
 - **rate limiting** — sliding hour and day windows
 - **storage** — appends to `<dataDir>/<form>/<YYYY-MM>.jsonl`
-- **mail** — writes a `.eml` into `<dataDir>/outbox/` (no SMTP dependency)
+- **mail** — sends via SMTP when configured; otherwise writes a `.eml` into `<dataDir>/outbox/`
 
 Quarantined submissions are stored with `spam: true`, not mailed, and reported to
 the browser as success — the upstream behaviour.
@@ -52,6 +52,12 @@ Point the markup at it with `<body data-form-endpoint="/api/form">`.
 | `FORM_NONCE_TTL` | `7200` | Token lifetime in seconds |
 | `FORM_DATA_DIR` | `.form-data` | Where submissions and the outbox are written |
 | `FORM_DEBUG` | unset | `1` adds error detail to responses |
+| `SMTP_HOST` | unset | SMTP server hostname — required for production email |
+| `SMTP_PORT` | `587` | SMTP port (`465` implies TLS when `SMTP_SECURE` unset) |
+| `SMTP_SECURE` | unset | `1` or `true` for TLS (auto on port 465) |
+| `SMTP_USER` | unset | SMTP username (if auth required) |
+| `SMTP_PASS` | unset | SMTP password |
+| `SMTP_FROM` | `SMTP_USER` or fallback | From address, e.g. `Site web <noreply@example.cz>` |
 
 Set a real `FORM_SECRET` in production. The dev fallback is shared and logs a
 warning.

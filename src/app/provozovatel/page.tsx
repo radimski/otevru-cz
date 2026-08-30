@@ -2,11 +2,12 @@ import type { Metadata } from "next";
 import { buildOperatorRows, buildOperatorSections } from "@websites/legal-cz";
 import { LegalPage } from "@/components/LegalPage";
 import { operator } from "@/config/operator";
+import { withCanonical } from "@/lib/page-metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withCanonical("/provozovatel", {
   title: "Provozovatel webu",
   description: "Identifikační údaje provozovatele podle § 435 občanského zákoníku.",
-};
+});
 
 export default function Page() {
   const rows = buildOperatorRows(operator);

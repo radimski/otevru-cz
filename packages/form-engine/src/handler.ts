@@ -9,6 +9,7 @@
 import { appendFile, mkdir, writeFile } from "node:fs/promises";
 import { randomUUID } from "node:crypto";
 import { join } from "node:path";
+import nodemailer from "nodemailer";
 import {
   FormError,
   checkOrigin,
@@ -151,7 +152,7 @@ export function createFormRoute({ formsJson, siteId }: FormRouteOptions) {
         return json({ ok: true, id });
       }
 
-      const mail = await writeEml(dataDir, form, values, record);
+      const mail = await deliverMail(dataDir, form, values, record);
       return json({ ok: true, id, mail });
     } catch (error) {
       return errorResponse(error, debug);
@@ -230,20 +231,13 @@ async function store(
   );
 }
 
-/**
- * Writes what a mailer would have sent, as a file any mail client can open.
- * Keeps the engine free of an SMTP dependency; see the package README for
- * wiring up real delivery.
- */
-async function writeEml(
-  dataDir: string,
+type MailRecord = { id: string; spamScore: number };
+
+function buildMailBody(
   form: ResolvedForm,
   values: FormValues,
-  record: { id: string; spamScore: number },
+  record: MailRecord,
 ) {
-  const outbox = join(dataDir, "outbox");
-  await mkdir(outbox, { recursive: true });
-
   const lines: string[] = [];
   for (const [name, spec] of Object.entries(form.fields)) {
     if (spec.type === "hidden" || !(name in values)) continue;
@@ -265,15 +259,7 @@ async function writeEml(
   const replyTo =
     form.replyTo && values[form.replyTo] ? String(values[form.replyTo]) : "";
 
-  const eml = [
-    `Date: ${new Date().toUTCString()}`,
-    "From: Web form <noreply@localhost>",
-    `To: ${form.to.join(", ")}`,
-    replyTo ? `Reply-To: ${replyTo}` : null,
-    `Subject: ${subject}`,
-    "MIME-Version: 1.0",
-    "Content-Type: text/plain; charset=UTF-8",
-    "",
+  const text = [
     form.label,
     "=".repeat(Math.max(4, form.label.length)),
     "",
@@ -282,11 +268,117 @@ async function writeEml(
     "-".repeat(40),
     `ID: ${record.id}`,
     `Spam score: ${record.spamScore}`,
+  ].join("\n");
+
+  return { subject, text, replyTo };
+}
+
+function buildEml(
+  form: ResolvedForm,
+  values: FormValues,
+  record: MailRecord,
+  from: string,
+) {
+  const { subject, text, replyTo } = buildMailBody(form, values, record);
+
+  return [
+    `Date: ${new Date().toUTCString()}`,
+    `From: ${from}`,
+    `To: ${form.to.join(", ")}`,
+    replyTo ? `Reply-To: ${replyTo}` : null,
+    `Subject: ${subject}`,
+    "MIME-Version: 1.0",
+    "Content-Type: text/plain; charset=UTF-8",
+    "",
+    text,
   ]
     .filter((line) => line !== null)
     .join("\r\n");
+}
 
-  await writeFile(join(outbox, `${record.id}.eml`), eml, "utf8");
+function smtpConfigured() {
+  return Boolean(process.env.SMTP_HOST?.trim());
+}
+
+function resolveSmtpFrom() {
+  const from = process.env.SMTP_FROM?.trim();
+  if (from) return from;
+  const user = process.env.SMTP_USER?.trim();
+  if (user) return user;
+  return "Web form <noreply@localhost>";
+}
+
+async function sendViaSmtp(
+  form: ResolvedForm,
+  values: FormValues,
+  record: MailRecord,
+) {
+  const host = process.env.SMTP_HOST!.trim();
+  const port = Number(process.env.SMTP_PORT || 587);
+  const secure =
+    process.env.SMTP_SECURE === "1" ||
+    process.env.SMTP_SECURE === "true" ||
+    port === 465;
+  const user = process.env.SMTP_USER?.trim();
+  const pass = process.env.SMTP_PASS?.trim();
+  const from = resolveSmtpFrom();
+  const { subject, text, replyTo } = buildMailBody(form, values, record);
+
+  const transporter = nodemailer.createTransport({
+    host,
+    port,
+    secure,
+    auth: user && pass ? { user, pass } : undefined,
+  });
+
+  await transporter.sendMail({
+    from,
+    to: form.to,
+    replyTo: replyTo || undefined,
+    subject,
+    text,
+  });
+}
+
+/**
+ * Sends via SMTP when configured; otherwise writes a `.eml` file the operator
+ * can open locally. In production without SMTP, logs a warning and still
+ * stores the outbox copy as a fallback.
+ */
+async function deliverMail(
+  dataDir: string,
+  form: ResolvedForm,
+  values: FormValues,
+  record: MailRecord,
+) {
+  const from = resolveSmtpFrom();
+
+  if (smtpConfigured()) {
+    try {
+      await sendViaSmtp(form, values, record);
+      return "smtp";
+    } catch (error) {
+      console.error("[form-engine] SMTP delivery failed:", error);
+      if (process.env.NODE_ENV === "production") {
+        throw new FormError(
+          "server",
+          "Message could not be delivered. Please try again later.",
+        );
+      }
+    }
+  } else if (process.env.NODE_ENV === "production") {
+    console.warn(
+      "[form-engine] SMTP is not configured — writing to outbox only. Set SMTP_HOST before launch.",
+    );
+  }
+
+  const outbox = join(dataDir, "outbox");
+  await mkdir(outbox, { recursive: true });
+  await writeFile(
+    join(outbox, `${record.id}.eml`),
+    buildEml(form, values, record, from),
+    "utf8",
+  );
   return "outbox";
 }
 

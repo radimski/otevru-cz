@@ -1,6 +1,13 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { otevruConfig } from "@/config/site";
 import { serviceIcons } from "@/components/icons";
+import { withCanonical } from "@/lib/page-metadata";
+
+export const metadata: Metadata = withCanonical("/", {
+  title: `${otevruConfig.brand} | Zámečnická pohotovost Frýdek-Místek`,
+  description: otevruConfig.tagline,
+});
 
 export default function OtevruPage() {
   return (

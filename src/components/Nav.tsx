@@ -22,13 +22,12 @@ export function Nav() {
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-6 py-3">
           <Link href="/" className="flex shrink-0 items-center">
             <Image
-              src="/logo.gif"
+              src="/logo.png"
               alt={`${otevruConfig.name} — zámečnická pohotovost`}
               width={295}
               height={60}
               className="h-9 w-auto"
               priority
-              unoptimized
             />
           </Link>
           <div className="flex items-center gap-2 sm:gap-4">

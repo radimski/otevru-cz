@@ -15,6 +15,11 @@ NEXT_PUBLIC_TURNSTILE_SITE_KEY=<Turnstile site key>
 TURNSTILE_SECRET_KEY=<Turnstile secret>
 FORM_SECRET=<random 16+ chars>
 FORM_ALLOWED_ORIGINS=www.otevru.cz
+SMTP_HOST=smtp.example.com
+SMTP_PORT=587
+SMTP_USER=<smtp user>
+SMTP_PASS=<smtp password>
+SMTP_FROM=OTEVŘU web <patrik@otevru.cz>
 ```
 
 Do not use test keys from `.env.development` in Production.
@@ -32,4 +37,4 @@ Add `www.otevru.cz` and `otevru.cz`. Remove old Aruba DNS/hosting once verified.
 
 ## 5. Forms
 
-Wire SMTP or mail delivery in `form-engine` before relying on contact forms in production.
+Set SMTP variables (see `.env.example`) so contact forms deliver email in production. Without SMTP, submissions are stored locally only.

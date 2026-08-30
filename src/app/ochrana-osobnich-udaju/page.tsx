@@ -2,12 +2,13 @@ import type { Metadata } from "next";
 import { buildPrivacySections } from "@websites/legal-cz";
 import { LegalPage } from "@/components/LegalPage";
 import { operator } from "@/config/operator";
+import { withCanonical } from "@/lib/page-metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = withCanonical("/ochrana-osobnich-udaju", {
   title: "Ochrana osobních údajů",
   description:
     "Zásady zpracování osobních údajů podle GDPR a zákona č. 110/2019 Sb.",
-};
+});
 
 export default function Page() {
   return (

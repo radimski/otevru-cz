@@ -9,8 +9,14 @@
     "./client": "./src/client.ts",
     "./core": "./src/core.mjs"
   },
+  "dependencies": {
+    "nodemailer": "^7.0.6"
+  },
   "peerDependencies": {
     "next": ">=15",
     "react": ">=19"
+  },
+  "devDependencies": {
+    "@types/nodemailer": "^7.0.1"
   }
 }

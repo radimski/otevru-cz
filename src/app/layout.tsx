@@ -15,10 +15,10 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(otevruConfig.url),
   title: `${otevruConfig.brand} | Zámečnická pohotovost Frýdek-Místek`,
   description: otevruConfig.tagline,
   robots: { index: true, follow: true },
-  alternates: { canonical: otevruConfig.url },
   openGraph: {
     type: "website",
     siteName: otevruConfig.brand,
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     locale: "cs_CZ",
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: `${otevruConfig.brand} | Zámečnická pohotovost`,
     description: otevruConfig.shortDescription,
   },
@@ -66,7 +66,6 @@ const structuredData = {
       closes: "18:00",
     },
   ],
-  aggregateRating: { "@type": "AggregateRating", ratingValue: "4.9", reviewCount: "4", bestRating: "5" },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

@@ -1,4 +1,6 @@
-export type DayHours = { open: string; close: string } | null;
+export type TimePeriod = { open: string; close: string };
+
+export type DayHours = TimePeriod | { periods: readonly TimePeriod[] } | null;
 
 /** Index 0 = Sunday … 6 = Saturday (matches `Date.getDay()` in Europe/Prague). */
 export type WeekSchedule = readonly [
@@ -73,15 +75,21 @@ function getPragueClock(date: Date, timezone: string) {
   };
 }
 
+function dayPeriods(hours: DayHours): readonly TimePeriod[] {
+  if (!hours) return [];
+  if ("periods" in hours) return hours.periods;
+  return [hours];
+}
+
 function findNextOpen(
   week: WeekSchedule,
   fromDay: number,
 ): { day: number; open: string } | null {
   for (let offset = 0; offset < 7; offset += 1) {
     const day = (fromDay + offset) % 7;
-    const hours = week[day];
-    if (hours) {
-      return { day, open: hours.open };
+    const periods = dayPeriods(week[day]);
+    if (periods.length > 0) {
+      return { day, open: periods[0].open };
     }
   }
   return null;
@@ -93,27 +101,32 @@ export function evaluateOpenStatus(
 ): OpenStatusResult {
   const timezone = schedule.timezone ?? "Europe/Prague";
   const { day, minutes } = getPragueClock(now, timezone);
-  const today = schedule.week[day];
+  const periods = dayPeriods(schedule.week[day]);
 
-  if (today) {
-    const openMinutes = parseTime(today.open);
-    const closeMinutes = parseTime(today.close);
+  if (periods.length > 0) {
+    for (const period of periods) {
+      const openMinutes = parseTime(period.open);
+      const closeMinutes = parseTime(period.close);
 
-    if (minutes >= openMinutes && minutes < closeMinutes) {
-      return {
-        isOpen: true,
-        label: "Otevřeno",
-        detail: `Do ${formatTime(today.close)}`,
-        ariaLabel: `Právě otevřeno, zavírá v ${formatTime(today.close)}`,
-      };
+      if (minutes >= openMinutes && minutes < closeMinutes) {
+        return {
+          isOpen: true,
+          label: "Otevřeno",
+          detail: `Do ${formatTime(period.close)}`,
+          ariaLabel: `Právě otevřeno, zavírá v ${formatTime(period.close)}`,
+        };
+      }
     }
 
-    if (minutes < openMinutes) {
+    const nextPeriodToday = periods.find(
+      (period) => minutes < parseTime(period.open),
+    );
+    if (nextPeriodToday) {
       return {
         isOpen: false,
         label: "Zavřeno",
-        detail: `Otevírá v ${formatTime(today.open)}`,
-        ariaLabel: `Právě zavřeno, dnes otevírá v ${formatTime(today.open)}`,
+        detail: `Otevírá v ${formatTime(nextPeriodToday.open)}`,
+        ariaLabel: `Právě zavřeno, dnes otevírá v ${formatTime(nextPeriodToday.open)}`,
       };
     }
   }

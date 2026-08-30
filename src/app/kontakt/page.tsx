@@ -1,5 +1,13 @@
+import type { Metadata } from "next";
 import { OtevruContactForm } from "@/components/ContactForm";
 import { otevruConfig } from "@/config/site";
+import { withCanonical } from "@/lib/page-metadata";
+
+export const metadata: Metadata = withCanonical("/kontakt", {
+  title: `Kontakt | ${otevruConfig.brand}`,
+  description:
+    "Zavolejte nebo napište — zámečnická pohotovost ve Frýdku-Místku a okolí.",
+});
 
 export default function OtevruKontaktPage() {
   return (
