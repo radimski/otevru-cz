@@ -2,6 +2,9 @@
   "name": "otevru",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=22"
+  },
   "description": "otevru.cz — zámečnická pohotovost Patrik Panenka",
   "scripts": {
     "dev": "next dev --webpack --port 43124",
