@@ -12,12 +12,13 @@ export const metadata: Metadata = withCanonical("/", {
 export default function OtevruPage() {
   return (
     <div>
-      <section className="otevru-section-blue">
+      <section className="otevru-section-blue otevru-hero">
         <div className="mx-auto grid max-w-6xl gap-10 px-6 py-16 lg:grid-cols-2 lg:items-center lg:py-24">
           <div>
             <p className="otevru-title text-[#acf53d]">
               Sviadnov · Frýdek-Místek
             </p>
+            <span className="otevru-keyhole-rule" aria-hidden />
             <h1 className="mt-4 text-4xl font-bold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
               Zabouchli jste si dveře?{" "}
               <span className="text-[#acf53d]">Otevřeme.</span>
@@ -41,7 +42,7 @@ export default function OtevruPage() {
               </a>
               <Link
                 href="/kontakt"
-                className="otevru-btn-lime inline-flex items-center justify-center rounded-md px-6 py-3 font-bold"
+                className="otevru-btn-outline-lime inline-flex items-center justify-center rounded-md px-6 py-3 font-bold"
               >
                 Kontakt
               </Link>
@@ -51,7 +52,7 @@ export default function OtevruPage() {
             {otevruConfig.services.slice(0, 4).map((service) => (
               <div
                 key={service.title}
-                className="rounded-lg border border-white/15 bg-white/5 p-5"
+                className="otevru-hero-card rounded-lg border border-white/15 bg-white/5 p-5"
               >
                 <span className="otevru-icon-wrap text-[#acf53d]">
                   {serviceIcons[service.icon]}
@@ -69,6 +70,7 @@ export default function OtevruPage() {
       <section className="otevru-section-light border-b border-[#484d55]/10">
         <div className="mx-auto max-w-6xl px-6 py-12">
           <p className="otevru-title text-[#004c93]">Zabouchnuté dveře?</p>
+          <span className="otevru-keyhole-rule bg-[linear-gradient(90deg,#004c93_0%,#004c93_55%,transparent_55%)]" aria-hidden />
           <h2 className="mt-3 text-2xl font-bold text-[#2f333b]">
             Co dělat hned teď
           </h2>
@@ -113,7 +115,7 @@ export default function OtevruPage() {
           </div>
           <a
             href={otevruConfig.phoneHref}
-            className="otevru-btn-slate inline-flex shrink-0 items-center justify-center rounded-md px-6 py-3 font-bold"
+            className="otevru-btn-blue inline-flex shrink-0 items-center justify-center rounded-md px-6 py-3 font-bold"
           >
             Zjistit více
           </a>
@@ -123,6 +125,7 @@ export default function OtevruPage() {
       <section id="jak" className="otevru-section-light">
         <div className="mx-auto max-w-6xl px-6 py-20">
           <p className="otevru-title text-[#004c93]">Jak to funguje</p>
+          <span className="otevru-keyhole-rule bg-[linear-gradient(90deg,#004c93_0%,#004c93_55%,transparent_55%)]" aria-hidden />
           <h2 className="mt-3 text-3xl font-bold text-[#2f333b]">
             Tři kroky k řešení
           </h2>
@@ -151,6 +154,7 @@ export default function OtevruPage() {
       <section id="sluzby" className="otevru-section-light border-t border-[#484d55]/10">
         <div className="mx-auto max-w-6xl px-6 py-20">
           <p className="otevru-title text-[#004c93]">Naše nabídka</p>
+          <span className="otevru-keyhole-rule bg-[linear-gradient(90deg,#004c93_0%,#004c93_55%,transparent_55%)]" aria-hidden />
           <h2 className="mt-3 text-3xl font-bold text-[#2f333b]">Naše služby</h2>
           <p className="mt-3 max-w-2xl text-[#717479]">
             Od nouzového otevření po montáž bezpečnostních systémů na míru.

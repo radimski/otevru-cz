@@ -15,6 +15,7 @@ export default function OtevruKontaktPage() {
     <div className="otevru-section-light">
       <div className="mx-auto max-w-5xl px-6 py-20">
         <p className="otevru-title text-[#004c93]">Rychlý kontakt</p>
+        <span className="otevru-keyhole-rule bg-[linear-gradient(90deg,#004c93_0%,#004c93_55%,transparent_55%)]" aria-hidden />
         <h1 className="mt-3 text-4xl font-bold text-[#2f333b]">Kontakt</h1>
         <p className="mt-4 max-w-2xl text-lg text-[#717479]">
           Nejrychlejší je telefon — u nouzového otevírání voláme zpět obratem.
@@ -29,7 +30,7 @@ export default function OtevruKontaktPage() {
         </a>
 
         <div className="mt-10 grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
-          <section className="otevru-card rounded-lg p-8">
+          <section className="otevru-card otevru-form-card rounded-lg p-8">
             <h2 className="text-xl font-bold text-[#2f333b]">
               Poptávkový formulář
             </h2>

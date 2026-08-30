@@ -98,7 +98,7 @@ export function OtevruContactForm({ privacyHref }: { privacyHref: string }) {
         <button
           type="submit"
           data-form-submit
-          className="otevru-btn-orange otevru-form-submit"
+          className="otevru-btn-blue otevru-form-submit"
         >
           Odeslat poptávku
         </button>

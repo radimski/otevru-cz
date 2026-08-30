@@ -3,21 +3,23 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { otevruConfig } from "@/config/site";
 import { OpenStatus } from "@/components/OpenStatus";
 
 const links = [
-  { href: "/#sluzby", label: "Služby" },
-  { href: "/#jak", label: "Jak to funguje" },
-  { href: "/#o-nas", label: "O nás" },
-  { href: "/kontakt", label: "Kontakt" },
+  { href: "/#sluzby", label: "Služby", match: "/" },
+  { href: "/#jak", label: "Jak to funguje", match: "/" },
+  { href: "/#o-nas", label: "O nás", match: "/" },
+  { href: "/kontakt", label: "Kontakt", match: "/kontakt" },
 ] as const;
 
 export function Nav() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
 
   return (
-    <header className="sticky top-0 z-40 shadow-sm">
+    <header className="otevru-header sticky top-0 z-40">
       <div className="otevru-section-lime">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-6 py-3">
           <Link href="/" className="flex shrink-0 items-center">
@@ -60,7 +62,12 @@ export function Nav() {
             <Link
               key={link.href}
               href={link.href}
-              className="text-xs font-bold uppercase tracking-[0.2em] text-white/70 transition hover:text-[#acf53d]"
+              className="otevru-nav-link"
+              aria-current={
+                pathname === link.match && link.match !== "/"
+                  ? "page"
+                  : undefined
+              }
             >
               {link.label}
             </Link>
@@ -82,6 +89,7 @@ export function Nav() {
               key={link.href}
               href={link.href}
               className="rounded-md px-3 py-2.5 text-sm font-medium text-white/85 transition hover:bg-white/5"
+              aria-current={pathname === link.match ? "page" : undefined}
               onClick={() => setOpen(false)}
             >
               {link.label}
