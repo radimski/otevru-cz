@@ -38,3 +38,4 @@ terminals/
 # form engine data (submissions + outbox)
 .form-data/
 .open-next
+.wrangler
