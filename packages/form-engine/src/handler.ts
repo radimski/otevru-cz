@@ -273,6 +273,45 @@ function buildMailBody(
   return { subject, text, replyTo };
 }
 
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+function resolveSubmitterEmail(
+  form: ResolvedForm,
+  values: FormValues,
+): string | null {
+  const field = form.confirmation?.field ?? form.replyTo;
+  if (!field || !(field in values)) return null;
+  const raw = String(values[field] ?? "").trim();
+  if (!raw || !EMAIL_RE.test(raw)) return null;
+  return raw;
+}
+
+function buildConfirmationBody(form: ResolvedForm, values: FormValues) {
+  const conf = form.confirmation;
+  if (!conf) return null;
+
+  const name =
+    typeof values.jmeno === "string" && values.jmeno.trim()
+      ? values.jmeno.trim()
+      : null;
+  const greeting = name ? `Dobrý den, ${name},` : "Dobrý den,";
+
+  const lines: string[] = [greeting, "", conf.intro];
+
+  if ("zprava" in values && values.zprava) {
+    lines.push("", "Vaše zpráva:", String(values.zprava));
+  }
+
+  if (conf.footer) {
+    lines.push("", conf.footer);
+  }
+
+  return {
+    subject: conf.subject,
+    text: lines.join("\n"),
+  };
+}
+
 function buildEml(
   form: ResolvedForm,
   values: FormValues,
@@ -338,6 +377,17 @@ async function sendViaSmtp(
     subject,
     text,
   });
+
+  const submitterEmail = resolveSubmitterEmail(form, values);
+  const confirmation = buildConfirmationBody(form, values);
+  if (submitterEmail && confirmation) {
+    await transporter.sendMail({
+      from,
+      to: submitterEmail,
+      subject: confirmation.subject,
+      text: confirmation.text,
+    });
+  }
 }
 
 /**
@@ -379,6 +429,26 @@ async function deliverMail(
     buildEml(form, values, record, from),
     "utf8",
   );
+
+  const submitterEmail = resolveSubmitterEmail(form, values);
+  const confirmation = buildConfirmationBody(form, values);
+  if (submitterEmail && confirmation) {
+    await writeFile(
+      join(outbox, `${record.id}-confirmation.eml`),
+      [
+        `Date: ${new Date().toUTCString()}`,
+        `From: ${from}`,
+        `To: ${submitterEmail}`,
+        `Subject: ${confirmation.subject}`,
+        "MIME-Version: 1.0",
+        "Content-Type: text/plain; charset=UTF-8",
+        "",
+        confirmation.text,
+      ].join("\r\n"),
+      "utf8",
+    );
+  }
+
   return "outbox";
 }
 

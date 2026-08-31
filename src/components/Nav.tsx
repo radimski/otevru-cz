@@ -33,11 +33,6 @@ export function Nav() {
             />
           </Link>
           <div className="flex items-center gap-2 sm:gap-4">
-            <OpenStatus
-              schedule={otevruConfig.openingSchedule}
-              className="open-status open-status-header hidden min-[480px]:flex"
-              showDetail={false}
-            />
             <a
               href={otevruConfig.phoneHref}
               className="otevru-btn-orange rounded-md px-3 py-2 text-xs font-bold sm:px-4 sm:text-sm"

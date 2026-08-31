@@ -31,6 +31,13 @@ export type FieldSpec = {
   maxLinks?: number;
 };
 
+export type FormConfirmation = {
+  field: string;
+  subject: string;
+  intro: string;
+  footer?: string;
+};
+
 export type ResolvedForm = {
   label: string;
   to: string[];
@@ -42,6 +49,7 @@ export type ResolvedForm = {
   maxPerDay: number;
   store: boolean;
   fields: Record<string, FieldSpec>;
+  confirmation?: FormConfirmation;
 };
 
 export type FormsJson = {

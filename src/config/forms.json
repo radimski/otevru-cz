@@ -8,6 +8,12 @@
       "cc": [],
       "subject": "Poptávka z webu — {sluzba}, {jmeno}",
       "replyTo": "email",
+      "confirmation": {
+        "field": "email",
+        "subject": "Potvrzení — obdrželi jsme vaši poptávku | OTEVŘU",
+        "intro": "Děkujeme za poptávku. Potvrzujeme, že jsme vaši zprávu obdrželi a co nejdříve se vám ozveme.",
+        "footer": "V naléhavých případech volejte +420 606 262 118.\n\nS pozdravem,\nPatrik Panenka — OTEVŘU"
+      },
       "minSeconds": 3,
       "maxPerHour": 5,
       "maxPerDay": 20,
