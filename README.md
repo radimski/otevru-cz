@@ -2,6 +2,10 @@
 
 Website for **Patrik Panenka** — zámečnická pohotovost & speciální zámečnictví (Frýdek-Místek, Sviadnov).
 
+**Local path:** `/workspace/otevru/` · **GitHub:** [radimski/otevru-cz](https://github.com/radimski/otevru-cz) · **Preview:** [otevru-cz.radim-pajurek.workers.dev](https://otevru-cz.radim-pajurek.workers.dev/)
+
+See [../SITES.md](../SITES.md) for all paths and URLs across sites.
+
 ## Run locally
 
 ```bash
