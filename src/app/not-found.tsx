@@ -9,7 +9,7 @@ export default function NotFound() {
         <h1 className="mt-4 text-3xl font-bold text-[#2f333b]">
           Stránka nenalezena
         </h1>
-        <p className="mt-4 text-[#717479]">
+        <p className="mt-4 text-[#5c6169]">
           Odkaz je neplatný nebo stránka už neexistuje.
         </p>
         <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">

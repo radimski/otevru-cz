@@ -5,9 +5,29 @@
   --otevru-dark: #282b34;
   --otevru-slate: #2f333b;
   --otevru-charcoal: #484d55;
-  --otevru-muted: #919499;
+  --otevru-muted: #5c6169;
   --otevru-light: #f3f3f3;
   color: var(--otevru-charcoal);
+}
+
+html {
+  scroll-padding-top: 7.5rem;
+}
+
+.otevru-skip {
+  position: absolute;
+  left: 1rem;
+  top: -4rem;
+  z-index: 80;
+  padding: 0.6rem 1rem;
+  background: #fff;
+  color: var(--otevru-blue);
+  font-weight: 700;
+  border-radius: 6px;
+}
+
+.otevru-skip:focus {
+  top: 1rem;
 }
 
 /* Sekce v barvách původního webu (wrapper style1/2/3) */
@@ -18,8 +38,21 @@
 
 .otevru-hero {
   background:
-    radial-gradient(ellipse 80% 55% at 100% 0%, rgba(172, 245, 61, 0.1), transparent),
+    radial-gradient(ellipse 80% 55% at 100% 0%, rgba(172, 245, 61, 0.14), transparent),
+    radial-gradient(ellipse 50% 40% at 0% 100%, rgba(0, 0, 0, 0.18), transparent),
     var(--otevru-blue);
+}
+
+.otevru-hero-panel {
+  border-radius: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.07);
+  padding: 1.75rem 1.6rem;
+}
+
+.otevru-panic {
+  background: #fff;
+  border-bottom: 1px solid rgba(72, 77, 85, 0.1);
 }
 
 .otevru-section-lime {
@@ -45,6 +78,14 @@
 
 .otevru-btn-orange:hover {
   filter: brightness(1.08);
+}
+
+.otevru-btn-orange:focus-visible,
+.otevru-btn-blue:focus-visible,
+.otevru-btn-outline-lime:focus-visible,
+.otevru-nav-link:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
 }
 
 .otevru-btn-slate {
@@ -104,12 +145,37 @@
   border: 1px solid rgba(72, 77, 85, 0.12);
   transition:
     border-color 0.2s ease,
-    box-shadow 0.2s ease;
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
 }
 
 .otevru-card:hover {
   border-color: var(--otevru-lime);
-  box-shadow: 0 8px 24px rgba(40, 43, 52, 0.1);
+  box-shadow: 0 10px 28px rgba(40, 43, 52, 0.08);
+  transform: translateY(-1px);
+}
+
+.otevru-card-step {
+  position: relative;
+}
+
+.otevru-step-num {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: var(--otevru-orange);
+}
+
+.otevru-icon-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 0.55rem;
+  background: rgba(0, 76, 147, 0.08);
+  color: var(--otevru-blue);
 }
 
 /* ============ FORMULÁŘ ============ */
@@ -332,7 +398,18 @@
 }
 
 .otevru-header {
-  box-shadow: 0 1px 0 rgba(40, 43, 52, 0.08);
+  box-shadow: 0 1px 0 rgba(40, 43, 52, 0.1);
+}
+
+.otevru-call-fab {
+  bottom: 1.25rem;
+  right: 1.25rem;
+}
+
+@media (max-width: 639px) {
+  .otevru-call-fab {
+    bottom: 5.5rem;
+  }
 }
 
 .otevru-form-card {

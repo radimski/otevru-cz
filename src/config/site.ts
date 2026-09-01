@@ -49,8 +49,8 @@ export const otevruConfig = {
   trust: [
     { value: "Assa Abloy", label: "Autorizovaný partner" },
     { value: "Mul-T-Lock", label: "Certifikované systémy" },
-    { value: "Po–Ne", label: "07:00–18:00" },
-    { value: "73290939", label: "IČO provozovatele" },
+    { value: "07:00–18:00", label: "Každý den včetně víkendů" },
+    { value: "MS kraj", label: "Výjezdy v nouzi" },
   ] as const,
   panicSteps: [
     {
@@ -94,8 +94,9 @@ export const otevruConfig = {
   ] as const,
   promo: {
     title: "Yale Linus — chytrý zámek bez klíče",
-    text: "Podrobnosti v sekci klíčová služba nebo po telefonu.",
+    text: "Montáž a poradenství k bezklíčovému systému. Zeptejte se telefonicky nebo přes formulář.",
   },
+  partners: ["Assa Abloy", "Mul-T-Lock"],
   services: [
     {
       title: "Nouzové otevírání",
@@ -134,5 +135,4 @@ export const otevruConfig = {
       icon: "home",
     },
   ],
-  partners: ["Assa Abloy", "Mul-T-Lock", "Frýdek-Místek & okolí"],
 } as const;

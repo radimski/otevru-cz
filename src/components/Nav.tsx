@@ -21,23 +21,29 @@ export function Nav() {
   return (
     <header className="otevru-header sticky top-0 z-40">
       <div className="otevru-section-lime">
-        <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-6 py-3">
-          <Link href="/" className="flex shrink-0 items-center">
+        <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-5 py-2.5 sm:px-6">
+          <Link href="/" className="flex min-w-0 shrink items-center">
             <Image
               src="/logo.png"
-              alt={`${otevruConfig.name} — zámečnická pohotovost`}
+              alt={`${otevruConfig.brand} — zámečnická pohotovost`}
               width={295}
               height={60}
-              className="h-9 w-auto"
+              className="h-8 w-auto sm:h-9"
               priority
             />
           </Link>
-          <div className="flex items-center gap-2 sm:gap-4">
+          <div className="flex items-center gap-2 sm:gap-3">
+            <OpenStatus
+              schedule={otevruConfig.openingSchedule}
+              className="open-status open-status-header hidden sm:inline-flex"
+              showDetail={false}
+            />
             <a
               href={otevruConfig.phoneHref}
               className="otevru-btn-orange rounded-md px-3 py-2 text-xs font-bold sm:px-4 sm:text-sm"
             >
-              {otevruConfig.phone}
+              <span className="sm:hidden">Zavolat</span>
+              <span className="hidden sm:inline">{otevruConfig.phone}</span>
             </a>
             <button
               type="button"
@@ -52,7 +58,7 @@ export function Nav() {
         </div>
       </div>
       <div className="otevru-section-dark hidden md:block">
-        <nav className="mx-auto flex max-w-6xl items-center gap-8 px-6 py-3">
+        <nav className="mx-auto flex max-w-6xl items-center gap-8 px-6 py-2.5">
           {links.map((link) => (
             <Link
               key={link.href}
@@ -67,10 +73,6 @@ export function Nav() {
               {link.label}
             </Link>
           ))}
-          <OpenStatus
-            schedule={otevruConfig.openingSchedule}
-            className="open-status open-status-nav ml-auto"
-          />
         </nav>
       </div>
       <div
@@ -78,13 +80,17 @@ export function Nav() {
         className={`otevru-section-dark md:hidden ${open ? "block" : "hidden"}`}
         hidden={!open}
       >
-        <nav className="mx-auto flex max-w-6xl flex-col gap-1 px-6 py-4">
+        <nav className="mx-auto flex max-w-6xl flex-col gap-1 px-5 py-3">
           {links.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="rounded-md px-3 py-2.5 text-sm font-medium text-white/85 transition hover:bg-white/5"
-              aria-current={pathname === link.match ? "page" : undefined}
+              className="rounded-md px-3 py-2.5 text-sm font-medium text-white/90 transition hover:bg-white/5"
+              aria-current={
+                pathname === link.match && link.match !== "/"
+                  ? "page"
+                  : undefined
+              }
               onClick={() => setOpen(false)}
             >
               {link.label}

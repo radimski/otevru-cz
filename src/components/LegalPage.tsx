@@ -22,7 +22,7 @@ export function LegalPage({
           ← Zpět na úvod
         </Link>
         <h1 className="mt-6 text-4xl font-bold text-[#2f333b]">{title}</h1>
-        <p className="mt-4 text-[#717479]">{intro}</p>
+        <p className="mt-4 text-[#5c6169]">{intro}</p>
 
         {children}
 
@@ -35,13 +35,13 @@ export function LegalPage({
               <div className="mt-3 space-y-3">
                 {section.blocks.map((block, index) =>
                   block.kind === "p" ? (
-                    <p key={index} className="leading-7 text-[#717479]">
+                    <p key={index} className="leading-7 text-[#5c6169]">
                       {block.text}
                     </p>
                   ) : (
                     <ul
                       key={index}
-                      className="list-disc space-y-2 pl-5 leading-7 text-[#717479]"
+                      className="list-disc space-y-2 pl-5 leading-7 text-[#5c6169]"
                     >
                       {block.items.map((item) => (
                         <li key={item}>{item}</li>

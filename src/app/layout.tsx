@@ -80,15 +80,20 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
+        <a href="#obsah" className="otevru-skip">
+          Přeskočit na obsah
+        </a>
         <Nav />
-        <div className="flex-1">{children}</div>
+        <div id="obsah" className="flex-1">
+          {children}
+        </div>
         <Footer />
         <CookieBanner />
         <Script src="/form.js" strategy="beforeInteractive" />
         <FormRouteBinder />
         <a
           href={otevruConfig.phoneHref}
-          className="otevru-btn-orange fixed bottom-5 right-5 z-40 rounded-full px-5 py-3 text-sm font-bold shadow-lg sm:hidden"
+          className="otevru-btn-orange otevru-call-fab fixed z-40 rounded-full px-5 py-3 text-sm font-bold shadow-lg sm:hidden"
         >
           Zavolat
         </a>
