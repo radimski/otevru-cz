@@ -1,4 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 48" role="img" aria-label="Mul-T-Lock">
-  <text x="0" y="34" fill="#ffffff" font-family="Arial Black, Helvetica, sans-serif" font-size="28" font-weight="900" letter-spacing="-0.3">Mul-T-Lock</text>
-  <rect x="0" y="40" width="168" height="3" fill="#acf53d" rx="1"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 56" role="img" aria-label="Mul-T-Lock">
+  <rect x="2" y="6" width="44" height="44" rx="10" fill="#acf53d"/>
+  <path fill="none" stroke="#004c93" stroke-width="3.2" stroke-linecap="round" d="M16 26v-5.5a8 8 0 0 1 16 0V26"/>
+  <rect x="13" y="26" width="22" height="16" rx="3" fill="#004c93"/>
+  <circle cx="24" cy="33" r="2.2" fill="#acf53d"/>
+  <path stroke="#acf53d" stroke-width="2.2" stroke-linecap="round" d="M24 35.2v3.2"/>
+  <text x="60" y="37" fill="#ffffff" font-family="system-ui,Segoe UI,Arial,sans-serif" font-size="26" font-weight="800" letter-spacing="0.02em">Mul-T-Lock</text>
 </svg>

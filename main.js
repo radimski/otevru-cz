@@ -92,13 +92,28 @@
   }
 
   function bindNav() {
-    var btn = document.querySelector("[data-nav-toggle]");
+    var btns = document.querySelectorAll("[data-nav-toggle]");
     var panel = document.getElementById("otevru-mobile-nav");
-    if (!btn || !panel) return;
-    btn.addEventListener("click", function () {
-      var open = panel.classList.toggle("hidden") === false;
-      panel.hidden = !open;
-      btn.setAttribute("aria-expanded", open ? "true" : "false");
+    if (!btns.length || !panel) return;
+
+    function setOpen(open) {
+      if (open) panel.removeAttribute("hidden");
+      else panel.setAttribute("hidden", "");
+      btns.forEach(function (btn) {
+        btn.setAttribute("aria-expanded", open ? "true" : "false");
+        btn.textContent = open ? "Zavřít" : "Menu";
+      });
+    }
+
+    btns.forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        setOpen(panel.hasAttribute("hidden"));
+      });
+    });
+    panel.querySelectorAll("a").forEach(function (a) {
+      a.addEventListener("click", function () {
+        setOpen(false);
+      });
     });
   }
 

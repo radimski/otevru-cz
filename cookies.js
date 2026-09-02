@@ -18,6 +18,7 @@
       necessary: true,
       analytics: !!analytics,
       marketing: !!marketing,
+      gdprNotice: true,
       updatedAt: new Date().toISOString(),
     };
     localStorage.setItem(KEY, JSON.stringify(value));

@@ -1,4 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 48" role="img" aria-label="ASSA ABLOY">
-  <text x="0" y="34" fill="#004c93" font-family="Arial Black, Helvetica, sans-serif" font-size="30" font-weight="900" letter-spacing="-0.5">ASSA</text>
-  <text x="98" y="34" fill="#484d55" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="400" letter-spacing="0.5">ABLOY</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 56" role="img" aria-label="ASSA ABLOY">
+  <rect x="2" y="6" width="44" height="44" rx="10" fill="#004c93"/>
+  <path fill="#acf53d" d="M24 16c-5.5 0-10 4.1-10 9.2 0 3.4 1.8 6.3 4.5 8l-2.7 8.6h16.4l-2.7-8.6c2.7-1.7 4.5-4.6 4.5-8 0-5.1-4.5-9.2-10-9.2zm0 5.2c2.4 0 4.3 1.8 4.3 4 0 2.2-1.9 4-4.3 4s-4.3-1.8-4.3-4c0-2.2 1.9-4 4.3-4z"/>
+  <text x="60" y="37" fill="#004c93" font-family="system-ui,Segoe UI,Arial,sans-serif" font-size="26" font-weight="800" letter-spacing="0.04em">ASSA</text>
+  <text x="148" y="37" fill="#484d55" font-family="system-ui,Segoe UI,Arial,sans-serif" font-size="26" font-weight="500" letter-spacing="0.12em">ABLOY</text>
 </svg>
