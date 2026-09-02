@@ -205,3 +205,25 @@ When finishing work on any site or page:
 | Kolmo | `radimski/kolmo-kafe` | www.kolmokafe.cz |
 
 Add new rows here when new sites are created. See per-site `DEPLOY.md` for Cloudflare Pages steps.
+
+---
+
+## 9. Project layout and FTP output (required)
+
+Every site uses **two folders**:
+
+| Folder | Purpose |
+| --- | --- |
+| **Project root** (`otevru-cz/`, `kinles-cz/`, `kolmo-kafe/`, …) | Source code, dev server, Cloudflare deploy |
+| **`ftp/`** (inside project) | Production-ready static site — drag contents to hosting |
+
+The `ftp/` folder is **generated**, not edited by hand. Rebuild after any change:
+
+```bash
+npm run build:ftp
+```
+
+Upload rule: select **everything inside `ftp/`**, not the `ftp` folder name itself.
+
+`ftp/` is gitignored. Cloudflare Pages deploy is unchanged (`npm run deploy`).
+

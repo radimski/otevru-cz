@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { otevruConfig } from "@/config/site";
 import { serviceIcons } from "@/components/icons";
 import { OpenStatus } from "@/components/OpenStatus";
+import { PartnerLogo, PartnerStrip } from "@/components/PartnerLogo";
 import { withCanonical } from "@/lib/page-metadata";
 
 export const metadata: Metadata = withCanonical("/", {
@@ -22,7 +23,7 @@ export default function OtevruPage() {
             <span className="otevru-keyhole-rule" aria-hidden />
             <h1 className="mt-5 text-4xl font-bold leading-[1.12] tracking-tight text-white sm:text-5xl lg:text-[3.4rem]">
               Zabouchli jste si dveře?{" "}
-              <span className="text-[#acf53d]">Otevřeme.</span>
+              <span className="text-[#acf53d]">{otevruConfig.brand}.</span>
             </h1>
             <p className="mt-5 max-w-xl text-lg leading-8 text-white/85">
               {otevruConfig.tagline}. Nouzové otevírání, klíče, bezpečnostní
@@ -92,7 +93,15 @@ export default function OtevruPage() {
 
       <section className="otevru-section-dark" aria-label="Důvěryhodnost">
         <div className="mx-auto grid max-w-6xl gap-8 px-6 py-10 sm:grid-cols-2 lg:grid-cols-4">
-          {otevruConfig.trust.map((item) => (
+          {otevruConfig.partners.map((partner) => (
+            <div key={partner.id} className="text-center sm:text-left">
+              <PartnerLogo partner={partner} variant="onDark" />
+              <p className="mt-2 text-xs uppercase tracking-[0.15em] text-white/60">
+                {partner.label}
+              </p>
+            </div>
+          ))}
+          {otevruConfig.trustStats.map((item) => (
             <div key={item.label} className="text-center sm:text-left">
               <p className="text-lg font-bold text-[#acf53d]">{item.value}</p>
               <p className="mt-1 text-xs uppercase tracking-[0.15em] text-white/60">
@@ -210,17 +219,11 @@ export default function OtevruPage() {
           </div>
           <div className="otevru-hero-panel">
             <p className="otevru-title text-[#acf53d]">Certifikace a zázemí</p>
-            <ul className="mt-6 space-y-3">
-              {otevruConfig.partners.map((partner) => (
-                <li
-                  key={partner}
-                  className="flex items-center gap-3 text-lg font-semibold text-white"
-                >
-                  <span className="h-2 w-2 shrink-0 rounded-full bg-[#ff8800]" />
-                  {partner}
-                </li>
-              ))}
-            </ul>
+            <PartnerStrip
+              partners={otevruConfig.partners}
+              variant="onDark"
+              className="mt-6 otevru-partner-strip--stacked"
+            />
             <p className="mt-8 text-sm leading-6 text-white/75">
               {otevruConfig.serviceArea}
             </p>

@@ -5,6 +5,7 @@ import { FormRouteBinder } from "@websites/form-engine/client";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { CookieBanner } from "@/components/CookieBanner";
+import { CloudflareAnalytics } from "@/components/CloudflareAnalytics";
 import { otevruConfig } from "@/config/site";
 import "./globals.css";
 import "./otevru.css";
@@ -72,7 +73,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="cs" className={`${dmSans.variable} h-full`}>
       <body
-        data-form-endpoint="/api/form"
+        data-form-endpoint={
+          process.env.NEXT_PUBLIC_FORM_ENDPOINT ?? "/api/form"
+        }
         data-turnstile-site-key={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? ""}
         className="otevru-root flex min-h-full flex-col font-[family-name:var(--font-otevru)] antialiased"
       >
@@ -89,6 +92,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         </div>
         <Footer />
         <CookieBanner />
+        <CloudflareAnalytics />
         <Script src="/form.js" strategy="beforeInteractive" />
         <FormRouteBinder />
         <a

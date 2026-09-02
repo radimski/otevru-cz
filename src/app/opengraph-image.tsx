@@ -1,7 +1,8 @@
 import { ImageResponse } from "next/og";
 import { otevruConfig } from "@/config/site";
 
-export const runtime = "edge";
+export const runtime = "nodejs";
+export const dynamic = "force-static";
 export const alt = `${otevruConfig.brand} — zámečnická pohotovost Frýdek-Místek`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";

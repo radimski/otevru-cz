@@ -60,6 +60,7 @@ export default function OtevruKontaktPage() {
               <dd className="mt-1 text-lg">
                 <EmailLink
                   email={otevruConfig.email}
+                  plain
                   className="font-semibold text-[#004c93] hover:underline"
                 />
               </dd>

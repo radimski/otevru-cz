@@ -1,6 +1,8 @@
 import type { MetadataRoute } from "next";
 import { otevruConfig } from "@/config/site";
 
+export const dynamic = "force-static";
+
 const paths = [
   "/",
   "/kontakt",

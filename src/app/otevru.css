@@ -472,3 +472,42 @@ html {
     0 0 0 2px rgba(255, 136, 0, 0.2),
     0 0 8px rgba(255, 136, 0, 0.35);
 }
+
+.otevru-partner-logo {
+  display: block;
+  height: 2rem;
+  width: auto;
+  max-width: 10.5rem;
+  object-fit: contain;
+  object-position: left center;
+}
+
+.text-center .otevru-partner-logo {
+  object-position: center;
+  margin-inline: auto;
+}
+
+.otevru-partner-strip {
+  display: grid;
+  gap: 1.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.otevru-partner-strip--stacked {
+  grid-template-columns: 1fr;
+}
+
+.otevru-partner-strip-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.otevru-partner-strip-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: rgba(255, 255, 255, 0.65);
+}

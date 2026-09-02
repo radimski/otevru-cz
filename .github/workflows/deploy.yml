@@ -1,6 +1,8 @@
 name: Deploy to Cloudflare Workers
 
 on:
+  push:
+    branches: [main]
   workflow_dispatch:
 
 jobs:
@@ -17,7 +19,7 @@ jobs:
       - run: npm ci
 
       - name: Build OpenNext worker
-        run: npm run build:worker
+        run: npm run build
 
       - name: Deploy worker
         run: npx opennextjs-cloudflare deploy

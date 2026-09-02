@@ -7,11 +7,11 @@ export function buildSecurityHeaders(): { key: string; value: string }[] {
 
   const csp = [
     "default-src 'self'",
-    "script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com",
+    "script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com https://static.cloudflareinsights.com",
     "style-src 'self' 'unsafe-inline'",
     "img-src 'self' data: blob: https://*.fbcdn.net",
     "font-src 'self'",
-    "connect-src 'self' https://challenges.cloudflare.com",
+    "connect-src 'self' https://challenges.cloudflare.com https://cloudflareinsights.com",
     "frame-src 'self' https://www.google.com https://maps.google.com",
     "frame-ancestors 'self'",
     "base-uri 'self'",

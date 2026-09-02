@@ -66,6 +66,10 @@ Set both Turnstile keys before going live — the widget renders only when
 `NEXT_PUBLIC_TURNSTILE_SITE_KEY` is set, and the server rejects submissions
 without a valid token once `TURNSTILE_SECRET_KEY` is configured.
 
+**FTP hosting:** PHP backend verifies Turnstile via `turnstileSecretKey` in
+`api/config.php` (`packages/form-engine/php/api/lib/Turnstile.php`). Bake the
+public site key at build time: `NEXT_PUBLIC_TURNSTILE_SITE_KEY=... npm run build:ftp`.
+
 ## Note on serverless
 
 Storage writes to the local filesystem, which is ephemeral on Vercel and similar

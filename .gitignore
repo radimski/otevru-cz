@@ -11,6 +11,12 @@ next-env.d.ts
 
 # production
 dist/
+ftp/
+
+# FTP deploy tooling — local only (Cloudflare build does not use these)
+scripts/build-ftp.mjs
+scripts/ftp-root.htaccess
+packages/form-engine/php/
 
 # misc
 .DS_Store

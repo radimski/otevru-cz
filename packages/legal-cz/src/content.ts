@@ -145,7 +145,7 @@ export function buildCookieSections(): Section[] {
         },
         {
           kind: "p",
-          text: "Analytické a marketingové nástroje se neaktivují dříve, než udělíte souhlas. Při nasazení Google Analytics nebo Google Ads je nutné nastavit také Consent Mode v2.",
+          text: "Analytické a marketingové nástroje se neaktivují dříve, než udělíte souhlas. Pro měření návštěvnosti můžeme použít Cloudflare Web Analytics; při nasazení Google Analytics nebo Google Ads je nutné nastavit také Consent Mode v2.",
         },
       ],
     },

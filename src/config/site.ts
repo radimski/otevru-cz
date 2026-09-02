@@ -46,9 +46,29 @@ export const otevruConfig = {
     "Ve standardní pracovní době vyjíždíme na nouzové otevírání v Moravskoslezském kraji. Mimo provozní dobu domluvíme postup telefonicky.",
   serviceArea:
     "Působíme ve Sviadnově, Frýdku-Místku, Ostravě a okolí — v nouzi dojedeme k vám.",
-  trust: [
-    { value: "Assa Abloy", label: "Autorizovaný partner" },
-    { value: "Mul-T-Lock", label: "Certifikované systémy" },
+  partners: [
+    {
+      id: "assa-abloy",
+      name: "ASSA ABLOY",
+      label: "Autorizovaný partner",
+      logo: "/partners/assa-abloy.svg",
+      logoDark: "/partners/assa-abloy-dark.svg",
+      width: 160,
+      height: 36,
+      url: "https://www.assaabloy.com/cz/cs",
+    },
+    {
+      id: "multlock",
+      name: "Mul-T-Lock",
+      label: "Certifikované systémy",
+      logo: "/partners/multlock.svg",
+      logoDark: "/partners/multlock-dark.svg",
+      width: 168,
+      height: 36,
+      url: "https://www.multlock.com/",
+    },
+  ] as const,
+  trustStats: [
     { value: "07:00–18:00", label: "Každý den včetně víkendů" },
     { value: "MS kraj", label: "Výjezdy v nouzi" },
   ] as const,
@@ -96,7 +116,6 @@ export const otevruConfig = {
     title: "Yale Linus — chytrý zámek bez klíče",
     text: "Montáž a poradenství k bezklíčovému systému. Zeptejte se telefonicky nebo přes formulář.",
   },
-  partners: ["Assa Abloy", "Mul-T-Lock"],
   services: [
     {
       title: "Nouzové otevírání",
