@@ -1,47 +1,16 @@
-# dependencies
-node_modules/
-.pnp
-.pnp.*
+# secrets
+api/config.php
+api/data/*
+!api/data/.gitkeep
+!api/data/.htaccess
 
-# next.js
-.next/
-out/
+# local-only (not on GitHub)
 build/
-next-env.d.ts
+export/
+HANDOVER.md
+DEPLOY.md
+RULEBOOK.md
 
-# production
-dist/
-ftp/
-
-# FTP deploy tooling — local only (Cloudflare build does not use these)
-scripts/build-ftp.mjs
-scripts/ftp-root.htaccess
-packages/form-engine/php/
-
-# misc
 .DS_Store
+Thumbs.db
 *.pem
-
-# debug
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-.pnpm-debug.log*
-
-# env files
-.env
-.env*.local
-
-# vercel
-.vercel
-
-# typescript
-*.tsbuildinfo
-
-# editor / agent scratch
-terminals/
-
-# form engine data (submissions + outbox)
-.form-data/
-.open-next
-.wrangler
