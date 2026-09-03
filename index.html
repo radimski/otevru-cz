@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="styles.css">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Locksmith","name":"Patrik Panenka","url":"https://www.otevru.cz/","telephone":"+420606262118","email":"patrik@otevru.cz","address":{"@type":"PostalAddress","streetAddress":"O. Kišové 88","postalCode":"739 25","addressLocality":"Sviadnov","addressCountry":"CZ"},"areaServed":"Frýdek-Místek, Ostrava a okolí","geo":{"@type":"GeoCoordinates","latitude":49.6892,"longitude":18.3278},"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"07:00","closes":"18:00"}]}</script>
 </head>
-<body class="otevru-root otevru-v2026" data-form-endpoint="/api/form.php" data-turnstile-site-key="">
+<body class="otevru-root otevru-v2026" data-form-endpoint="/api/form.php" data-turnstile-site-key="__TURNSTILE_SITE_KEY__">
 <a class="otevru-skip" href="#obsah">Přeskočit na obsah</a>
 <div class="otevru-header-stack">
 <header class="otevru-header">
@@ -44,6 +44,7 @@
   </div>
   <div id="otevru-mobile-nav" class="otevru-section-dark show-below-md" hidden>
     <nav class="shell otevru-nav-mobile">
+      <a class="otevru-btn-orange otevru-mobile-call" href="tel:+420606262118">Zavolat +420 606 262 118</a>
       <a class="otevru-mobile-link" href="index.html">Úvod</a>
       <a class="otevru-mobile-link" href="index.html#sluzby">Služby</a>
       <a class="otevru-mobile-link" href="index.html#jak">Jak to funguje</a>
@@ -59,7 +60,6 @@
 </header>
 <div class="otevru-status-bar show-below-md" aria-label="Rychlé akce">
   <div class="shell otevru-status-bar-inner">
-    <a class="otevru-btn-orange otevru-status-call" href="tel:+420606262118">Zavolat</a>
     <button type="button" class="otevru-menu-btn otevru-status-menu" data-nav-toggle aria-expanded="false" aria-controls="otevru-mobile-nav">Menu</button>
     <span class="open-status open-status-bar" data-open-status role="status">
       <span class="open-status-dot is-open" aria-hidden="true"></span>
@@ -130,9 +130,9 @@
       </div>
       <p class="otevru-trust-label">Autorizovaný partner</p>
     </a>
-    <a class="otevru-trust-card" href="https://www.multlock.com/" target="_blank" rel="noopener noreferrer">
+    <a class="otevru-trust-card" href="https://www.multlock.cz/" target="_blank" rel="noopener noreferrer">
       <div class="otevru-partner-logo-wrap">
-        <img class="otevru-partner-logo" src="partners/multlock.svg" alt="Mul-T-Lock" width="200" height="44">
+        <img class="otevru-partner-logo" src="partners/multlock.png" alt="Mul-T-Lock" width="200" height="44">
       </div>
       <p class="otevru-trust-label">Certifikované systémy</p>
     </a>
@@ -233,7 +233,7 @@
         </li>
         <li class="otevru-partner-strip-item">
           <div class="otevru-partner-logo-wrap">
-            <img class="otevru-partner-logo" src="partners/multlock.svg" alt="Mul-T-Lock" width="200" height="44">
+            <img class="otevru-partner-logo" src="partners/multlock.png" alt="Mul-T-Lock" width="200" height="44">
           </div>
           <p class="otevru-partner-strip-label">Certifikované systémy</p>
         </li>

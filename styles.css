@@ -50,22 +50,21 @@ button{font:inherit;cursor:pointer;background:none;border:0;padding:0;color:inhe
 .otevru-status-bar-inner{
   display:flex;
   align-items:center;
-  gap:.5rem;
-  padding-block:.4rem;
-  min-height:2.25rem;
-}
-.otevru-status-call{
-  flex:1;
-  min-height:2rem;
-  padding:.45rem .85rem;
-  font-size:.8125rem;
-  border-radius:.375rem;
-  white-space:nowrap;
+  justify-content:space-between;
+  gap:.75rem;
+  padding-block:.35rem;
+  min-height:2.15rem;
 }
 .otevru-status-menu{
   flex-shrink:0;
-  min-height:2rem;
-  padding:.45rem .75rem;
+  min-height:1.85rem;
+  padding:.35rem .8rem;
+}
+.otevru-mobile-call{
+  width:100%;
+  min-height:2.75rem;
+  margin-bottom:.35rem;
+  border-radius:.5rem;
 }
 .open-status-bar{
   margin-left:auto;
@@ -1307,17 +1306,21 @@ a.otevru-trust-card:hover {
 .otevru-partner-logo-wrap {
   display: flex;
   align-items: center;
-  height: 2.75rem;
+  justify-content: flex-start;
+  height: 3.1rem;
   width: 100%;
-  max-width: 11.5rem;
+  max-width: 12.5rem;
+  padding: 0.4rem 0.55rem;
+  border-radius: 0.55rem;
+  background: #fff;
 }
 
 .otevru-trust-card .otevru-partner-logo {
   display: block;
   width: 100%;
   height: 100%;
-  max-width: 11.5rem;
-  max-height: 2.75rem;
+  max-width: 12.5rem;
+  max-height: 2.35rem;
   object-fit: contain;
   object-position: left center;
 }
@@ -1776,15 +1779,15 @@ a.otevru-trust-card:hover {
 }
 
 .otevru-partner-strip-item .otevru-partner-logo-wrap {
-  max-width: 11.5rem;
+  max-width: 12.5rem;
 }
 
 .otevru-partner-strip-item .otevru-partner-logo {
   display: block;
   width: 100%;
   height: 100%;
-  max-width: 11.5rem;
-  max-height: 2.75rem;
+  max-width: 12.5rem;
+  max-height: 2.35rem;
   object-fit: contain;
   object-position: left center;
 }
