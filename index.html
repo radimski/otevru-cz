@@ -77,17 +77,211 @@
         <a class="otevru-btn-outline-lime min-h-12 px-6 py-3" href="kontakt.html">Napsat poptávku</a>
       </div>
     </div>
-    <aside class="otevru-hero-panel otevru-hero-card">
-      <p class="otevru-eyebrow otevru-eyebrow--panel">Pohotovost</p>
-      <a class="otevru-phone-lg" href="tel:+420606262118">+420 606 262 118</a>
-      <span class="open-status open-status-nav mt-3" data-open-status role="status">
-  <span class="open-status-dot is-open" aria-hidden="true"></span>
-  <span class="open-status-label">Otevřeno</span>
-  <span class="open-status-detail"></span>
-</span>
-      <p class="mt-3 text-sm white-70">Po–Ne 07:00–18:00</p>
-      <p class="mt-4 border-t-soft text-sm leading-6 white-70">V provozní době vyjíždíme k nouzovému otevření v Moravskoslezském kraji. Mimo ni se ozvěte telefonicky — domluvíme další postup.</p>
-    </aside>
+    <figure class="otevru-lock-embed otevru-lock-embed--hero" data-lock-demo="hero">
+      <div class="otevru-lock-layout">
+        <div class="otevru-lock-stage">
+          <svg class="otevru-lock-svg" viewBox="0 0 520 220" preserveAspectRatio="xMidYMid meet" role="img" aria-labelledby="lock-demo-title lock-demo-desc">
+            <title id="lock-demo-title">Technický řez cylindrickou vložkou</title>
+            <desc id="lock-demo-desc">Řez A–A a pohled B: správný klíč srovná stavítka na dělicí rovině, otočení rotoru stáhne závoru.</desc>
+
+            <defs>
+              <pattern id="lock-section-hatch" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+                <line x1="0" y1="0" x2="0" y2="4" stroke="#111" stroke-width="0.65"/>
+              </pattern>
+              <pattern id="lock-plug-hatch" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)">
+                <line x1="0" y1="0" x2="0" y2="4" stroke="#111" stroke-width="0.45"/>
+              </pattern>
+              <pattern id="lock-paper-grid" width="20" height="20" patternUnits="userSpaceOnUse">
+                <path d="M20 0H0V20" fill="none" stroke="#c8c8c8" stroke-width="0.4"/>
+              </pattern>
+              <clipPath id="lock-motion-clip">
+                <rect x="12" y="12" width="496" height="196"/>
+              </clipPath>
+              <marker id="lock-arrow" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto">
+                <path d="M0 0 L5 2.5 L0 5 Z" fill="#111"/>
+              </marker>
+              <linearGradient id="lock-driver-metal" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0" stop-color="#8c8c88"/>
+                <stop offset="0.5" stop-color="#5e5e5a"/>
+                <stop offset="1" stop-color="#4a4a48"/>
+              </linearGradient>
+              <linearGradient id="lock-keypin-metal" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0" stop-color="#eceae4"/>
+                <stop offset="0.5" stop-color="#d4d0c6"/>
+                <stop offset="1" stop-color="#b8b4aa"/>
+              </linearGradient>
+            </defs>
+
+            <rect width="520" height="220" fill="#f4f4f2"/>
+            <rect width="520" height="220" fill="url(#lock-paper-grid)"/>
+            <rect x="6" y="6" width="508" height="208" fill="none" stroke="#111" stroke-width="1.25"/>
+            <rect x="10" y="10" width="500" height="200" fill="none" stroke="#111" stroke-width="0.5"/>
+
+            <g class="lock-mechanism" transform="translate(0, 17)">
+            <!-- Cutting plane A–A -->
+            <g stroke="#111" stroke-width="1.1" fill="none">
+              <path d="M84 24 h14 M91 24 v152 M84 176 h14"/>
+              <text x="91" y="16" text-anchor="middle" dominant-baseline="middle" fill="#111" stroke="none" font-size="8" font-family="ui-monospace, Consolas, monospace" font-weight="700">A</text>
+              <text x="91" y="188" text-anchor="middle" dominant-baseline="middle" fill="#111" stroke="none" font-size="8" font-family="ui-monospace, Consolas, monospace" font-weight="700">A</text>
+            </g>
+
+            <!-- Shell (stator) — clearance gap at the shear, not flush with the plug -->
+            <g stroke="#111">
+              <path fill="url(#lock-section-hatch)" stroke-width="1.1" d="M106 24 h252 v73 H106 Z"/>
+              <path fill="url(#lock-section-hatch)" stroke-width="1.1" d="M106 143 h252 v29 H106 Z"/>
+              <g fill="#f4f4f2" stroke-width="0.8">
+                <rect x="142.5" y="30" width="15" height="67"/>
+                <rect x="178.5" y="30" width="15" height="67"/>
+                <rect x="214.5" y="30" width="15" height="67"/>
+                <rect x="250.5" y="30" width="15" height="67"/>
+                <rect x="286.5" y="30" width="15" height="67"/>
+              </g>
+            </g>
+
+            <g clip-path="url(#lock-motion-clip)">
+              <!-- Plug sits in a visible bore gap (dělicí rovina is the clearance, not a shared edge) -->
+              <g class="lock-plug-body" stroke="#111">
+                <rect class="lock-plug" x="107.5" y="99" width="249" height="42" fill="url(#lock-plug-hatch)" stroke-width="1.2"/>
+                <rect x="107.5" y="111" width="249" height="30" fill="#f4f4f2" stroke-width="0.65"/>
+                <g fill="#f4f4f2" stroke-width="0.75">
+                  <rect x="142.5" y="99" width="15" height="12"/>
+                  <rect x="178.5" y="99" width="15" height="12"/>
+                  <rect x="214.5" y="99" width="15" height="12"/>
+                  <rect x="250.5" y="99" width="15" height="12"/>
+                  <rect x="286.5" y="99" width="15" height="12"/>
+                </g>
+              </g>
+
+              <!-- Springs stay anchored at chamber top and compress; only kolíky translate -->
+              <g class="lock-drivers">
+                <g class="lock-pin-stack lock-pin-0" style="--lift:15">
+                  <path class="lock-spring" d="M150 32 l2.8 3.5 -5.6 7 5.6 7 -5.6 7 5.6 7 -5.6 7 5.6 7 -2.8 3.5" fill="none" stroke="#111" stroke-width="0.85"/>
+                  <g class="lock-driver-col">
+                    <path class="lock-driver" fill="url(#lock-driver-metal)" d="M147.5 83.5 A2.5 2.5 0 0 1 152.5 83.5 V98 H147.5 Z"/>
+                    <line class="lock-pin-axis" x1="150" y1="83" x2="150" y2="97"/>
+                  </g>
+                </g>
+                <g class="lock-pin-stack lock-pin-1" style="--lift:7">
+                  <path class="lock-spring" d="M186 32 l2.8 3.5 -5.6 7 5.6 7 -5.6 7 5.6 7 -5.6 7 5.6 7 -2.8 3.5" fill="none" stroke="#111" stroke-width="0.85"/>
+                  <g class="lock-driver-col">
+                    <path class="lock-driver" fill="url(#lock-driver-metal)" d="M183.5 83.5 A2.5 2.5 0 0 1 188.5 83.5 V98 H183.5 Z"/>
+                    <line class="lock-pin-axis" x1="186" y1="83" x2="186" y2="97"/>
+                  </g>
+                </g>
+                <g class="lock-pin-stack lock-pin-2" style="--lift:3">
+                  <path class="lock-spring" d="M222 32 l2.8 3.5 -5.6 7 5.6 7 -5.6 7 5.6 7 -5.6 7 5.6 7 -2.8 3.5" fill="none" stroke="#111" stroke-width="0.85"/>
+                  <g class="lock-driver-col">
+                    <path class="lock-driver" fill="url(#lock-driver-metal)" d="M219.5 83.5 A2.5 2.5 0 0 1 224.5 83.5 V98 H219.5 Z"/>
+                    <line class="lock-pin-axis" x1="222" y1="83" x2="222" y2="97"/>
+                  </g>
+                </g>
+                <g class="lock-pin-stack lock-pin-3" style="--lift:11">
+                  <path class="lock-spring" d="M258 32 l2.8 3.5 -5.6 7 5.6 7 -5.6 7 5.6 7 -5.6 7 5.6 7 -2.8 3.5" fill="none" stroke="#111" stroke-width="0.85"/>
+                  <g class="lock-driver-col">
+                    <path class="lock-driver" fill="url(#lock-driver-metal)" d="M255.5 83.5 A2.5 2.5 0 0 1 260.5 83.5 V98 H255.5 Z"/>
+                    <line class="lock-pin-axis" x1="258" y1="83" x2="258" y2="97"/>
+                  </g>
+                </g>
+                <g class="lock-pin-stack lock-pin-4" style="--lift:19">
+                  <path class="lock-spring" d="M294 32 l2.8 3.5 -5.6 7 5.6 7 -5.6 7 5.6 7 -5.6 7 5.6 7 -2.8 3.5" fill="none" stroke="#111" stroke-width="0.85"/>
+                  <g class="lock-driver-col">
+                    <path class="lock-driver" fill="url(#lock-driver-metal)" d="M291.5 83.5 A2.5 2.5 0 0 1 296.5 83.5 V98 H291.5 Z"/>
+                    <line class="lock-pin-axis" x1="294" y1="83" x2="294" y2="97"/>
+                  </g>
+                </g>
+              </g>
+
+              <g class="lock-key-assembly">
+                <g class="lock-key">
+                  <path class="lock-key-profile" fill="#9a8758" stroke="#111" stroke-width="1.25" stroke-linejoin="round" d="M10 104 H42 V112 H88 V113 L139 113 L150 125 L161 113 L168 113 L175 113 L186 133 L197 113 L204 113 L211 113 L222 137 L233 113 L240 113 L247 113 L258 129 L269 113 L276 113 L283 113 L294 121 L305 113 H326 L334 120 V140 H42 V142 H10 C5 142 1 132 1 122 C1 112 5 104 10 104 Z"/>
+                  <circle class="lock-key-profile" cx="14" cy="120" r="4" fill="#f4f4f2" stroke="#111" stroke-width="1"/>
+                </g>
+              </g>
+
+              <!-- Stavítka on top of the key so chamfered tips stay visible in the cuts -->
+              <g class="lock-keypins">
+                <g class="lock-keypin-col lock-pin-0" style="--lift:15">
+                  <path class="lock-keypin" fill="url(#lock-keypin-metal)" d="M147.5 98 H152.5 V120 Q150 126 147.5 120 Z"/>
+                  <line class="lock-pin-axis" x1="150" y1="99" x2="150" y2="118"/>
+                </g>
+                <g class="lock-keypin-col lock-pin-1" style="--lift:7">
+                  <path class="lock-keypin" fill="url(#lock-keypin-metal)" d="M183.5 98 H188.5 V128 Q186 134 183.5 128 Z"/>
+                  <line class="lock-pin-axis" x1="186" y1="99" x2="186" y2="126"/>
+                </g>
+                <g class="lock-keypin-col lock-pin-2" style="--lift:3">
+                  <path class="lock-keypin" fill="url(#lock-keypin-metal)" d="M219.5 98 H224.5 V132 Q222 138 219.5 132 Z"/>
+                  <line class="lock-pin-axis" x1="222" y1="99" x2="222" y2="130"/>
+                </g>
+                <g class="lock-keypin-col lock-pin-3" style="--lift:11">
+                  <path class="lock-keypin" fill="url(#lock-keypin-metal)" d="M255.5 98 H260.5 V124 Q258 130 255.5 124 Z"/>
+                  <line class="lock-pin-axis" x1="258" y1="99" x2="258" y2="122"/>
+                </g>
+                <g class="lock-keypin-col lock-pin-4" style="--lift:19">
+                  <path class="lock-keypin" fill="url(#lock-keypin-metal)" d="M291.5 98 H296.5 V117 Q294 123 291.5 117 Z"/>
+                  <line class="lock-pin-axis" x1="294" y1="99" x2="294" y2="115"/>
+                </g>
+              </g>
+
+              <!-- Cylinder / key axis (otočení okolo této osy) -->
+              <line class="lock-axis" x1="8" y1="120" x2="372" y2="120" stroke="#111" stroke-width="0.55" stroke-dasharray="3 2" opacity="0.55"/>
+
+              <line class="lock-shear" x1="108" y1="98" x2="356" y2="98" stroke="#111" stroke-width="1.45" stroke-dasharray="5 2.5"/>
+              <path d="M108 94 v8 M356 94 v8" stroke="#111" stroke-width="1" fill="none"/>
+
+              <!-- Case race + strike pocket (static). Bolt throw is 32px into the jamb. -->
+              <g class="lock-strike" stroke="#111">
+                <path d="M388 110 H424 M388 130 H424" fill="none" stroke-width="0.85"/>
+                <path fill="url(#lock-section-hatch)" stroke-width="1.05" d="M424 108 H470 V132 H424 V130 H456 V110 H424 Z"/>
+                <rect x="424" y="110" width="32" height="20" fill="#f4f4f2" stroke-width="0.8"/>
+              </g>
+
+              <!-- Bolt thrown into the strike; left edge overlaps the cam. Retracts translateX(-32). -->
+              <g class="lock-cam">
+                <path fill="#6e6e6a" stroke="#111" stroke-width="1.1" d="M380 112 H456 V128 H380 V124 H388 V116 H380 Z"/>
+              </g>
+
+              <!-- Tailpiece + cam lobe sit in the bolt slot (drawn on top) -->
+              <g class="lock-cam-pivot">
+                <rect class="lock-tailpiece" x="356.5" y="115" width="16" height="10" rx="5" fill="url(#lock-plug-hatch)" stroke="#111" stroke-width="1.05"/>
+                <circle cx="372" cy="120" r="10" fill="url(#lock-plug-hatch)" stroke="#111" stroke-width="1.1"/>
+                <circle cx="372" cy="120" r="2.4" fill="#111" stroke="none"/>
+                <g class="lock-cam-arm">
+                  <path d="M372 116 h11 a4 4 0 0 1 0 8 H372 Z" fill="#3d3d3d" stroke="#111" stroke-width="0.9"/>
+                </g>
+              </g>
+
+              <!-- Pohled B: kolík stays at 12 o’clock in the shell; stavítko + key turn with the rotor -->
+              <g class="lock-endview" transform="translate(424 14)">
+                <rect x="0" y="0" width="80" height="90" fill="#f4f4f2" stroke="#111" stroke-width="1"/>
+                <text x="40" y="12" text-anchor="middle" fill="#111" font-size="6" font-family="ui-monospace, Consolas, monospace" font-weight="700">POHLED B</text>
+                <g transform="translate(40 49)">
+                  <circle r="28" fill="url(#lock-section-hatch)" stroke="#111" stroke-width="1.1"/>
+                  <rect class="lock-end-driver" x="-2.3" y="-26.5" width="4.6" height="9.2" rx="2.3" fill="#3d3d3d" stroke="#111" stroke-width="0.7"/>
+                  <circle r="17.2" fill="none" stroke="#111" stroke-width="0.55"/>
+                  <g class="lock-end-rotor">
+                    <circle r="16" fill="url(#lock-plug-hatch)" stroke="#111" stroke-width="1.1"/>
+                    <rect class="lock-end-keyway" x="-3.3" y="-15.5" width="6.6" height="31" fill="#f4f4f2" stroke="#111" stroke-width="0.85"/>
+                    <g class="lock-end-key">
+                      <rect x="-3.3" y="-15.5" width="6.6" height="31" fill="#9a8758" stroke="#111" stroke-width="0.95"/>
+                      <path d="M0 -15.5 L2.4 -11.2 H-2.4 Z" fill="#9a8758" stroke="#111" stroke-width="0.7" stroke-linejoin="round"/>
+                    </g>
+                    <rect class="lock-end-keypin" x="-2.3" y="-15.5" width="4.6" height="9.5" rx="1.2" fill="#e8e2d6" stroke="#111" stroke-width="0.7"/>
+                    <circle r="1.6" fill="#111" stroke="none"/>
+                  </g>
+                  <path class="lock-end-arrow" d="M20 14 A24 24 0 0 0 20 -14" fill="none" stroke="#111" stroke-width="1.35" marker-end="url(#lock-arrow)"/>
+                  <text y="36" text-anchor="middle" fill="#111" font-size="5" font-family="ui-monospace, Consolas, monospace" font-weight="700">90°</text>
+                </g>
+              </g>
+            </g>
+
+            <g class="lock-annotations" aria-hidden="true" fill="#111" font-family="ui-monospace, Consolas, monospace" pointer-events="none">
+              <text class="lock-dim" x="18" y="188" font-size="7" font-weight="600">Řez A–A</text>
+            </g>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </figure>
   </div>
 </section>
 
@@ -122,21 +316,23 @@
       <h2 class="otevru-section-title otevru-section-title--on-dark">Od hovoru k otevření</h2>
       <p class="otevru-section-lead otevru-section-lead--on-dark">Při nouzovém otevření volejte hned. Montáže a ostatní poptávky vyřídíme telefonicky nebo přes formulář.</p>
     </div>
-    <ol class="otevru-steps-grid"><li class="otevru-card otevru-card-step rounded-lg p-6">
-  <span class="otevru-step-num" aria-hidden="true">01</span>
-  <h3 class="mt-4 text-xl font-bold slate">Zavoláte</h3>
-  <p class="mt-3 text-sm leading-6 muted">Popíšete situaci — zabouchnuté dveře, výměnu zámku, trezor nebo montáž.</p>
-</li>
-<li class="otevru-card otevru-card-step rounded-lg p-6">
-  <span class="otevru-step-num" aria-hidden="true">02</span>
-  <h3 class="mt-4 text-xl font-bold slate">Přijedeme</h3>
-  <p class="mt-3 text-sm leading-6 muted">Domluvíme termín a místo. U nouze jedeme přednostně.</p>
-</li>
-<li class="otevru-card otevru-card-step rounded-lg p-6">
-  <span class="otevru-step-num" aria-hidden="true">03</span>
-  <h3 class="mt-4 text-xl font-bold slate">Hotovo</h3>
-  <p class="mt-3 text-sm leading-6 muted">Otevřeme, opravíme nebo namontujeme — šetrně a čistě.</p>
-</li></ol>
+    <ol class="otevru-steps-grid">
+      <li class="otevru-card otevru-card-step rounded-lg p-6">
+        <span class="otevru-step-num" aria-hidden="true">01</span>
+        <h3 class="mt-4 text-xl font-bold slate">Zavoláte</h3>
+        <p class="mt-3 text-sm leading-6 muted">Popíšete situaci — zabouchnuté dveře, výměnu zámku, trezor nebo montáž.</p>
+      </li>
+      <li class="otevru-card otevru-card-step rounded-lg p-6">
+        <span class="otevru-step-num" aria-hidden="true">02</span>
+        <h3 class="mt-4 text-xl font-bold slate">Přijedeme</h3>
+        <p class="mt-3 text-sm leading-6 muted">Domluvíme termín a místo. U nouze jedeme přednostně.</p>
+      </li>
+      <li class="otevru-card otevru-card-step rounded-lg p-6">
+        <span class="otevru-step-num" aria-hidden="true">03</span>
+        <h3 class="mt-4 text-xl font-bold slate">Hotovo</h3>
+        <p class="mt-3 text-sm leading-6 muted">Otevřeme, opravíme nebo namontujeme — šetrně a čistě.</p>
+      </li>
+    </ol>
   </div>
 </section>
 

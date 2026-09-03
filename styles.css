@@ -168,9 +168,28 @@ button{font:inherit;cursor:pointer;background:none;border:0;padding:0;color:inhe
 .space-y-6>*+*{margin-top:1.5rem}
 .space-y-8>*+*{margin-top:2rem}
 
-.otevru-hero-grid{display:grid;gap:2.5rem;padding-block:3.5rem}
+.otevru-hero-grid{
+  display:grid;
+  gap:1.5rem;
+  padding-block:2.25rem 2.5rem;
+  align-items:center;
+  justify-items:stretch;
+}
+.otevru-hero-grid > *{
+  min-width:0;
+}
 @media (min-width:1024px){
-  .otevru-hero-grid{grid-template-columns:1.15fr .85fr;align-items:center;padding-block:5rem}
+  /* Header and hero share the same full-bleed edges (logo left, Kontakt right). */
+  .otevru-header .otevru-section-lime > .shell,
+  .otevru-hero > .shell.otevru-hero-grid{
+    width:100%;
+  }
+  .otevru-hero-grid{
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+    align-items:center;
+    gap:clamp(1.5rem, 3vw, 2.5rem);
+    padding-block:2.75rem 3rem;
+  }
 }
 .otevru-hero-cta{display:flex;flex-direction:column;gap:.75rem;margin-top:2rem}
 @media (min-width:640px){.otevru-hero-cta{flex-direction:row;align-items:center}}
@@ -1217,8 +1236,8 @@ a.otevru-trust-card:hover {
 
 .otevru-v2026 .otevru-hero-grid,
 .otevru-root.otevru-v2026 .otevru-hero-grid {
-  padding-block: clamp(3rem, 8vw, 6rem);
-  gap: clamp(2rem, 5vw, 3.5rem);
+  padding-block: clamp(2rem, 5vw, 3.25rem);
+  gap: clamp(1.25rem, 3vw, 2rem);
 }
 
 .otevru-v2026 .otevru-hero-panel,
@@ -1794,6 +1813,280 @@ a.otevru-trust-card:hover {
 
 .otevru-partner-strip-item .otevru-partner-logo-wrap {
   max-width: none;
+}
+
+/* ——— Lock cutaway (hero) ——— */
+.otevru-lock-embed {
+  margin: 0;
+  padding: 0;
+  border: none;
+  overflow: hidden;
+}
+.otevru-lock-embed--hero {
+  width: 100%;
+  min-width: 0;
+  align-self: center;
+  justify-self: stretch;
+}
+.otevru-lock-embed--hero .otevru-lock-layout,
+.otevru-lock-embed--hero .otevru-lock-stage {
+  width: 100%;
+}
+
+.otevru-lock-layout {
+  display: grid;
+  gap: 0.5rem;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+}
+
+.otevru-lock-stage {
+  margin: 0;
+  padding: 0;
+  border-radius: 0;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: #f4f4f2;
+  overflow: hidden;
+  isolation: isolate;
+  perspective: 900px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.28);
+}
+
+.otevru-lock-svg {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  overflow: visible;
+  background: #f4f4f2;
+  aspect-ratio: 520 / 220;
+  transform-style: preserve-3d;
+  --lock-turn-ease: cubic-bezier(0.45, 0.05, 0.25, 1);
+  --lock-axis-y: 137px;
+}
+
+.otevru-lock-svg .lock-shear {
+  stroke: #111;
+  stroke-width: 1.15;
+  stroke-dasharray: 5 2.5;
+}
+
+.otevru-lock-svg .lock-key,
+.otevru-lock-svg .lock-key-assembly,
+.otevru-lock-svg .lock-driver-col,
+.otevru-lock-svg .lock-keypin-col,
+.otevru-lock-svg .lock-end-rotor,
+.otevru-lock-svg .lock-cam,
+.otevru-lock-svg .lock-cam-arm {
+  transform-box: view-box;
+  transform-origin: 0 0;
+}
+
+/* Key twists around its long axis; stavítka stay in the řez */
+.otevru-lock-svg .lock-key-assembly {
+  transform-origin: 180px var(--lock-axis-y);
+  transform-style: preserve-3d;
+}
+
+/* Pohled B — same plug rotation as the cam (CSS positive = CW on screen) */
+.otevru-lock-svg .lock-end-rotor {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+/* Vačka at the tip — same physical turn as Pohled B */
+.otevru-lock-svg .lock-cam-arm {
+  transform-origin: 372px var(--lock-axis-y);
+}
+
+.otevru-lock-svg .lock-driver {
+  stroke: #111;
+  stroke-width: 0.9;
+  stroke-linejoin: miter;
+}
+.otevru-lock-svg .lock-pin-axis {
+  stroke: #111;
+  stroke-width: 0.4;
+  stroke-dasharray: 1.1 1.1;
+  opacity: 0.4;
+}
+.otevru-lock-svg .lock-spring {
+  transform-box: fill-box;
+  transform-origin: center top;
+}
+.otevru-lock-svg .lock-keypin-col,
+.otevru-lock-svg .lock-driver-col,
+.otevru-lock-svg .lock-spring {
+  transition-property: transform;
+  transition-duration: 0.3s;
+  transition-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.otevru-lock-svg .lock-keypin-col.is-relaxing,
+.otevru-lock-svg .lock-driver-col.is-relaxing,
+.otevru-lock-svg .lock-spring.is-relaxing {
+  transition-duration: 0.15s;
+  transition-timing-function: cubic-bezier(0.22, 1.7, 0.36, 1);
+}
+/* Tips sit in the V; stavítka paint after the key so the chamfer stays visible */
+.otevru-lock-svg .lock-keypin {
+  stroke: #111;
+  stroke-width: 0.7;
+  stroke-linejoin: round;
+  paint-order: stroke fill;
+}
+.otevru-lock-svg .lock-keypins {
+  pointer-events: none;
+}
+.otevru-lock-svg .lock-key {
+  paint-order: stroke fill;
+}
+.otevru-lock-svg .lock-end-key {
+  opacity: 0;
+}
+
+/* Idle */
+.otevru-lock-embed:not(.is-playing) .lock-key {
+  transform: translateX(-220px);
+}
+.otevru-lock-embed:not(.is-playing) .lock-key-assembly {
+  transform: rotateX(0deg);
+}
+.otevru-lock-embed:not(.is-playing) .lock-driver-col,
+.otevru-lock-embed:not(.is-playing) .lock-keypin-col {
+  transform: translateY(calc(var(--lift, 10) * 1px));
+  transition: none;
+}
+.otevru-lock-embed:not(.is-playing) .lock-spring {
+  transform: scaleY(calc((81 + var(--lift, 10) - 32) / 49));
+  transition: none;
+}
+.otevru-lock-embed:not(.is-playing) .lock-keypins {
+  opacity: 1;
+}
+.otevru-lock-embed:not(.is-playing) .lock-end-key {
+  opacity: 0;
+}
+.otevru-lock-embed:not(.is-playing) .lock-end-rotor,
+.otevru-lock-embed:not(.is-playing) .lock-cam-arm {
+  transform: rotate(0deg);
+}
+.otevru-lock-embed:not(.is-playing) .lock-cam {
+  transform: translateX(0);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Key + pins are driven in JS from tip contact — keeps them aligned */
+  .otevru-lock-embed.is-playing.is-js-pins .lock-key,
+  .otevru-lock-embed.is-playing.is-js-pins .lock-keypin-col,
+  .otevru-lock-embed.is-playing.is-js-pins .lock-driver-col,
+  .otevru-lock-embed.is-playing.is-js-pins .lock-spring,
+  .otevru-lock-embed.is-playing.is-js-pins .lock-end-key,
+  .otevru-lock-embed.is-playing.is-js-pins .lock-keypins {
+    animation: none !important;
+  }
+  .otevru-lock-embed.is-playing .lock-key-assembly {
+    animation: lock-key-axis-spin 10s var(--lock-turn-ease, cubic-bezier(0.45, 0.05, 0.25, 1)) infinite;
+  }
+  .otevru-lock-embed.is-playing .lock-shear {
+    animation: lock-shear-pulse 10s ease-in-out infinite;
+  }
+  .otevru-lock-embed.is-playing .lock-end-rotor {
+    animation: lock-turn-bow 10s var(--lock-turn-ease, cubic-bezier(0.45, 0.05, 0.25, 1)) infinite;
+  }
+  .otevru-lock-embed.is-playing .lock-cam-arm {
+    animation: lock-turn-tip 10s var(--lock-turn-ease, cubic-bezier(0.45, 0.05, 0.25, 1)) infinite;
+  }
+  .otevru-lock-embed.is-playing .lock-cam {
+    animation: lock-cam-cycle 10s var(--lock-turn-ease, cubic-bezier(0.45, 0.05, 0.25, 1)) infinite;
+  }
+  .otevru-lock-embed.is-playing .lock-end-arrow {
+    animation: lock-end-arrow 10s var(--lock-turn-ease, cubic-bezier(0.45, 0.05, 0.25, 1)) infinite;
+  }
+}
+
+@keyframes lock-key-axis-spin {
+  0%, 50% { transform: rotateX(0deg); }
+  58%, 70% { transform: rotateX(90deg); }
+  78%, 100% { transform: rotateX(0deg); }
+}
+
+@keyframes lock-shear-pulse {
+  0%, 36%, 80%, 100% {
+    stroke: #111;
+    stroke-width: 1.15;
+  }
+  42%, 50% {
+    stroke: #000;
+    stroke-width: 2.1;
+  }
+  58%, 70% {
+    stroke: #111;
+    stroke-width: 1.35;
+  }
+}
+
+@keyframes lock-turn-bow {
+  0%, 50% { transform: rotate(0deg); }
+  58%, 70% { transform: rotate(-90deg); }
+  78%, 100% { transform: rotate(0deg); }
+}
+
+@keyframes lock-turn-tip {
+  0%, 50% { transform: rotate(0deg); }
+  58%, 70% { transform: rotate(-90deg); }
+  78%, 100% { transform: rotate(0deg); }
+}
+
+@keyframes lock-cam-cycle {
+  0%, 50% { transform: translateX(0); }
+  58%, 70% { transform: translateX(-32px); }
+  78%, 100% { transform: translateX(0); }
+}
+
+@keyframes lock-end-arrow {
+  0%, 50% { stroke-width: 1.1; opacity: 0.45; }
+  58%, 70% { stroke-width: 1.8; opacity: 1; }
+  78%, 100% { stroke-width: 1.1; opacity: 0.45; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .otevru-lock-svg .lock-keypin-col,
+  .otevru-lock-svg .lock-driver-col,
+  .otevru-lock-svg .lock-spring {
+    transition: none;
+  }
+  .otevru-lock-embed .lock-key {
+    transform: translateX(0);
+  }
+  .otevru-lock-embed .lock-end-key {
+    opacity: 1;
+  }
+  .otevru-lock-embed .lock-driver-col {
+    transform: translateY(-3px);
+  }
+  .otevru-lock-embed .lock-spring {
+    transform: scaleY(0.94);
+  }
+  .otevru-lock-embed .lock-keypin-col {
+    transform: translateY(0);
+  }
+  .otevru-lock-embed .lock-keypins {
+    opacity: 1;
+  }
+  .otevru-lock-embed .lock-shear {
+    stroke: #000;
+    stroke-width: 2;
+  }
+  .otevru-lock-embed .lock-end-rotor {
+    transform: rotate(-90deg);
+  }
+  .otevru-lock-embed .lock-cam {
+    transform: translateX(-32px);
+  }
+  .otevru-lock-embed .lock-cam-arm {
+    transform: rotate(-90deg);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
