@@ -30,6 +30,11 @@
           <span class="hide-below-sm">+420 606 262 118</span>
           <span class="show-below-sm">Zavolat</span>
         </a>
+        <button type="button" class="otevru-menu-btn show-below-md" data-nav-toggle aria-expanded="false" aria-controls="otevru-mobile-nav">Menu</button>
+        <span class="open-status open-status-header show-below-md" data-open-status role="status">
+          <span class="open-status-dot is-open" aria-hidden="true"></span>
+          <span class="open-status-label">Otevřeno</span>
+        </span>
       </div>
     </div>
   </div>
@@ -58,16 +63,6 @@
     </nav>
   </div>
 </header>
-<div class="otevru-status-bar show-below-md" aria-label="Rychlé akce">
-  <div class="shell otevru-status-bar-inner">
-    <button type="button" class="otevru-menu-btn otevru-status-menu" data-nav-toggle aria-expanded="false" aria-controls="otevru-mobile-nav">Menu</button>
-    <span class="open-status open-status-bar" data-open-status role="status">
-      <span class="open-status-dot is-open" aria-hidden="true"></span>
-      <span class="open-status-label">Otevřeno</span>
-      <span class="open-status-detail"></span>
-    </span>
-  </div>
-</div>
 </div>
 <div id="obsah" class="otevru-main">
 
@@ -119,31 +114,6 @@
   <h3 class="otevru-panic-step-title">Počkejte na technika</h3>
   <p class="otevru-panic-step-text">Domluvíme čas příjezdu a připravíme vhodné vybavení.</p>
 </li></ol>
-  </div>
-</section>
-
-<section class="otevru-section-dark otevru-trust otevru-bg-pattern otevru-bg-mesh-dark" aria-label="Důvěryhodnost">
-  <div class="shell otevru-trust-grid">
-    <a class="otevru-trust-card" href="https://www.assaabloy.com/cz/cs" target="_blank" rel="noopener noreferrer">
-      <div class="otevru-partner-logo-wrap">
-        <img class="otevru-partner-logo" src="partners/assa-abloy.svg" alt="ASSA ABLOY" width="200" height="44">
-      </div>
-      <p class="otevru-trust-label">Autorizovaný partner</p>
-    </a>
-    <a class="otevru-trust-card" href="https://www.multlock.cz/" target="_blank" rel="noopener noreferrer">
-      <div class="otevru-partner-logo-wrap">
-        <img class="otevru-partner-logo" src="partners/multlock.png" alt="Mul-T-Lock" width="200" height="44">
-      </div>
-      <p class="otevru-trust-label">Certifikované systémy</p>
-    </a>
-    <div class="otevru-trust-card otevru-trust-stat">
-      <p class="otevru-trust-value">07:00–18:00</p>
-      <p class="otevru-trust-label">Každý den včetně víkendů</p>
-    </div>
-    <div class="otevru-trust-card otevru-trust-stat">
-      <p class="otevru-trust-value otevru-trust-value--region">Moravskoslezský</p>
-      <p class="otevru-trust-label">kraj · výjezdy v nouzi</p>
-    </div>
   </div>
 </section>
 
@@ -225,17 +195,21 @@
     <div class="otevru-hero-panel otevru-hero-card">
       <p class="otevru-eyebrow otevru-eyebrow--panel">Certifikace a zázemí</p>
       <ul class="otevru-partner-strip otevru-partner-strip--stacked mt-6">
-        <li class="otevru-partner-strip-item">
-          <div class="otevru-partner-logo-wrap">
-            <img class="otevru-partner-logo" src="partners/assa-abloy.svg" alt="ASSA ABLOY" width="200" height="44">
-          </div>
-          <p class="otevru-partner-strip-label">Autorizovaný partner</p>
+        <li>
+          <a class="otevru-partner-strip-item" href="https://www.assaabloy.com/cz/cs" target="_blank" rel="noopener noreferrer">
+            <div class="otevru-partner-logo-wrap">
+              <img class="otevru-partner-logo" src="partners/assa-abloy.svg" alt="ASSA ABLOY" width="200" height="44">
+            </div>
+            <p class="otevru-partner-strip-label">Autorizovaný partner</p>
+          </a>
         </li>
-        <li class="otevru-partner-strip-item">
-          <div class="otevru-partner-logo-wrap">
-            <img class="otevru-partner-logo" src="partners/multlock.png" alt="Mul-T-Lock" width="200" height="44">
-          </div>
-          <p class="otevru-partner-strip-label">Certifikované systémy</p>
+        <li>
+          <a class="otevru-partner-strip-item" href="https://www.multlock.cz/" target="_blank" rel="noopener noreferrer">
+            <div class="otevru-partner-logo-wrap">
+              <img class="otevru-partner-logo" src="partners/multlock.png" alt="Mul-T-Lock" width="200" height="44">
+            </div>
+            <p class="otevru-partner-strip-label">Certifikované systémy</p>
+          </a>
         </li>
       </ul>
       <p class="mt-8 text-sm leading-6 white-75">Působíme ve Sviadnově, Frýdku-Místku, Ostravě a okolí — v nouzi dojedeme k vám.</p>
