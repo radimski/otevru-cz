@@ -194,14 +194,20 @@ button{font:inherit;cursor:pointer;background:none;border:0;padding:0;color:inhe
 @media (min-width:640px){.otevru-hero-title{font-size:3rem}}
 @media (min-width:1024px){.otevru-hero-title{font-size:3.4rem}}
 .otevru-hero-title .lime{color:var(--otevru-lime)}
+.otevru-hero-title .otevru-wordmark{
+  display:inline-flex;
+  align-items:baseline;
+  white-space:nowrap;
+  color:var(--otevru-lime);
+  letter-spacing:-.045em;
+}
 .otevru-hero-tld{
-  display:inline-block;
-  margin-left:.12em;
-  font-size:.32em;
-  font-weight:700;
-  letter-spacing:.04em;
-  vertical-align:super;
+  font-size:.46em;
+  font-weight:800;
+  letter-spacing:-.05em;
   line-height:1;
+  margin-left:.05em;
+  transform:translateY(.08em);
 }
 .otevru-phone-lg{display:block;margin-top:1rem;font-size:1.5rem;font-weight:700;letter-spacing:-.025em;color:#fff}
 .otevru-phone-lg:hover{color:var(--otevru-lime)}
@@ -1340,16 +1346,16 @@ a.otevru-trust-card:hover {
 }
 
 .otevru-offer-tag {
-  display: inline-block;
-  margin-top: 0.5rem;
-  padding: 0.22rem 0.6rem;
-  border-radius: 999px;
-  font-size: 0.6875rem;
+  display: block;
+  margin-top: 0.4rem;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  font-size: 0.75rem;
   font-weight: 600;
-  letter-spacing: 0.01em;
-  color: rgba(255, 255, 255, 0.55);
-  background: rgba(172, 245, 61, 0.06);
-  border: 1px solid rgba(172, 245, 61, 0.16);
+  letter-spacing: 0.02em;
+  color: rgba(172, 245, 61, 0.78);
 }
 
 .otevru-v2026 .otevru-panic-inner,
