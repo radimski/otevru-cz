@@ -194,6 +194,15 @@ button{font:inherit;cursor:pointer;background:none;border:0;padding:0;color:inhe
 @media (min-width:640px){.otevru-hero-title{font-size:3rem}}
 @media (min-width:1024px){.otevru-hero-title{font-size:3.4rem}}
 .otevru-hero-title .lime{color:var(--otevru-lime)}
+.otevru-hero-tld{
+  display:inline-block;
+  margin-left:.12em;
+  font-size:.32em;
+  font-weight:700;
+  letter-spacing:.04em;
+  vertical-align:super;
+  line-height:1;
+}
 .otevru-phone-lg{display:block;margin-top:1rem;font-size:1.5rem;font-weight:700;letter-spacing:-.025em;color:#fff}
 .otevru-phone-lg:hover{color:var(--otevru-lime)}
 .border-t-soft{border-top:1px solid rgba(255,255,255,.15);padding-top:1rem}
