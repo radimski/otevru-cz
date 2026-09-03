@@ -1,4 +1,7 @@
+# Cloudflare Pages static headers. functions/_middleware.js sets the same values
+# if this file is skipped by a non-static build.
 /*
+
   X-Content-Type-Options: nosniff
   X-Frame-Options: DENY
   Referrer-Policy: strict-origin-when-cross-origin

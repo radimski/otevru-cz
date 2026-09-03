@@ -12,15 +12,9 @@ Cloudflare Pages — static files from repo root, no build step:
 
 **https://otevru-cz.pages.dev**
 
-Production: **https://www.otevru.cz**
+Production: **https://www.otevru.cz** (Aruba — not updated by git push)
 
-## FTP
-
-```bash
-node build/export.mjs
-```
-
-Upload contents of `export/`.
+securityheaders.com scans production. Headers live in `.htaccess`, `web.config`, `index.php`, and Cloudflare `_headers` / `functions/_middleware.js`. They only appear on www after FTP upload of `export/`.
 
 ## Cloudflare Pages
 
