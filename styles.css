@@ -234,14 +234,6 @@ button{font:inherit;cursor:pointer;background:none;border:0;padding:0;color:inhe
 @media (min-width:1024px){.otevru-footer-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
 .btn-reset{text-align:left;text-decoration:underline;text-underline-offset:2px;font-size:inherit}
 
-.otevru-call-fab{
-  position:fixed;z-index:40;bottom:1.25rem;right:1.25rem;
-  border-radius:999px;padding:.75rem 1.25rem;font-size:.875rem;font-weight:700;
-  box-shadow:0 10px 25px rgba(40,43,52,.25);
-}
-@media (min-width:640px){.otevru-call-fab{display:none}}
-@media (max-width:639px){.otevru-call-fab{bottom:5.5rem}}
-
 .otevru-contact-actions{display:flex;flex-direction:column;gap:.75rem;margin-top:2rem}
 @media (min-width:640px){.otevru-contact-actions{flex-direction:row;align-items:center}}
 .otevru-contact-grid{display:grid;gap:1.5rem;margin-top:3rem}
@@ -679,17 +671,6 @@ html {
 
 .otevru-header {
   box-shadow: none;
-}
-
-.otevru-call-fab {
-  bottom: 1.25rem;
-  right: 1.25rem;
-}
-
-@media (max-width: 639px) {
-  .otevru-call-fab {
-    bottom: 5.5rem;
-  }
 }
 
 .otevru-form-card {
@@ -1516,12 +1497,6 @@ a.otevru-trust-card:hover {
 .otevru-root.otevru-v2026 footer.otevru-section-dark {
   background: #181b22;
   border-top: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-.otevru-v2026 .otevru-call-fab,
-.otevru-root.otevru-v2026 .otevru-call-fab {
-  border-radius: 999px;
-  box-shadow: 0 12px 32px rgba(255, 136, 0, 0.4);
 }
 
 .otevru-v2026 .cookie-panel,
