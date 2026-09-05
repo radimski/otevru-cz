@@ -25,6 +25,9 @@ DirectoryIndex index.php index.html
   # /kontakt -> kontakt.html (via the PHP wrapper)
   RewriteCond %{DOCUMENT_ROOT}/$1.html -f
   RewriteRule ^(.+?)/?$ html-headers.php?file=$1.html [L]
+
+  # Unknown paths → branded 404
+  RewriteRule ^ html-headers.php?file=404.html&code=404 [L]
 </IfModule>
 
 <IfModule mod_authz_core.c>
