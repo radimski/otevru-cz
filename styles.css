@@ -93,11 +93,6 @@ button{font:inherit;cursor:pointer;background:none;border:0;padding:0;color:inhe
     padding:.4rem .75rem;
     font-size:.75rem;
   }
-  .otevru-header-actions .open-status.show-below-md{
-    display:inline-flex!important;
-    font-size:.75rem;
-    white-space:nowrap;
-  }
 }
 @media (min-width:640px){.otevru-header-actions{gap:.75rem}}
 .otevru-btn-compact{display:inline-flex;align-items:center;justify-content:center;border-radius:.375rem;padding:.5rem .75rem;font-size:.75rem;font-weight:700;min-height:44px;min-width:44px}
@@ -118,10 +113,12 @@ button{font:inherit;cursor:pointer;background:none;border:0;padding:0;color:inhe
   .show-below-sm{display:none!important}
 }
 .hide-below-md{display:none!important}
+.otevru-call-short{display:inline}
 @media (min-width:768px){
   .show-below-md{display:none!important}
   .hide-below-md-block{display:block!important}
   .hide-below-md{display:inline-flex!important}
+  .otevru-call-short{display:none!important}
 }
 
 .otevru-btn-orange,.otevru-btn-blue,.otevru-btn-outline-lime,.otevru-btn-lime,.otevru-btn-slate{
@@ -294,42 +291,14 @@ button{font:inherit;cursor:pointer;background:none;border:0;padding:0;color:inhe
 .cookie-btn{display:inline-flex;align-items:center;justify-content:center;padding:.5rem .75rem;font-size:.875rem;border-radius:.375rem;min-height:44px}
 .cookie-opt{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-top:.75rem;min-height:44px}
 
-.otevru-call-bar{
-  display:none;
-}
 @media (max-width:767px){
-  :root{--otevru-call-bar:48px}
-  body.otevru-root{
-    padding-bottom:calc(var(--otevru-call-bar) + env(safe-area-inset-bottom, 0px));
-  }
-  html{scroll-padding-bottom:calc(var(--otevru-call-bar) + env(safe-area-inset-bottom, 0px))}
-  .otevru-call-bar{
-    display:block;
-    position:fixed;
-    left:0;
-    right:0;
-    bottom:0;
-    z-index:45;
-    background:var(--otevru-orange);
-    box-shadow:0 -6px 20px rgba(40,43,52,.18);
-  }
-  .otevru-call-bar a{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    width:100%;
-    min-height:44px;
-    padding:.55rem 1rem calc(.55rem + env(safe-area-inset-bottom, 0px));
-    color:#fff;
-    font-size:1rem;
-    font-weight:700;
-    letter-spacing:-.01em;
-  }
-  .cookie-banner{
-    bottom:calc(var(--otevru-call-bar) + env(safe-area-inset-bottom, 0px));
-    padding:.5rem;
-  }
+  .cookie-banner{padding:.5rem}
   .cookie-simple{padding:.75rem;gap:.5rem}
+  .otevru-header-actions .otevru-btn-compact{
+    display:inline-flex!important;
+    padding:.4rem .8rem;
+    font-size:.8125rem;
+  }
 }
 
 .otevru-maps-link,
