@@ -38,21 +38,21 @@
   /* Default copy. Every string is overridable per form via data-msg-*, which is
    * how the SK/PL/EN builds stay translated without shipping three scripts. */
   var FALLBACK = {
-    sending: 'Odosielam…',
-    success: 'Ďakujeme, správu sme dostali.',
-    error: 'Formulár sa nepodarilo odoslať. Skúste to prosím znova.',
-    required: 'Vyplňte prosím povinné polia.',
-    email: 'Zadajte platnú e-mailovú adresu.',
-    tel: 'Zadajte platné telefónne číslo.',
-    date: 'Zadajte platný dátum.',
-    min: 'Táto hodnota je príliš malá alebo krátka.',
-    max: 'Táto hodnota je príliš veľká alebo dlhá.',
-    option: 'Vyberte prosím jednu z ponúkaných možností.',
-    pattern: 'Hodnota nemá správny tvar.',
-    type: 'Hodnota nemá správny tvar.',
-    rate: 'Formulár ste odoslali príliš veľa krát. Skúste to prosím neskôr.',
-    offline: 'Vyzerá to, že ste offline. Skontrolujte pripojenie a skúste znova.',
-    captcha: 'Potvrďte prosím, že nie ste robot, a skúste to znova.'
+    sending: 'Odesíláme…',
+    success: 'Děkujeme, zprávu jsme dostali.',
+    error: 'Formulář se nepodařilo odeslat. Zkuste to prosím znova.',
+    required: 'Vyplňte prosím povinná pole.',
+    email: 'Zadejte platnou e-mailovou adresu.',
+    tel: 'Zadejte platné telefonní číslo.',
+    date: 'Zadejte platné datum.',
+    min: 'Tato hodnota je příliš malá nebo krátká.',
+    max: 'Tato hodnota je příliš velká nebo dlouhá.',
+    option: 'Vyberte prosím jednu z nabízených možností.',
+    pattern: 'Hodnota nemá správný tvar.',
+    type: 'Hodnota nemá správný tvar.',
+    rate: 'Formulář jste odeslali příliš mnohokrát. Zkuste to prosím později.',
+    offline: 'Vypadá to, že jste offline. Zkontrolujte připojení a zkuste znova.',
+    captcha: 'Potvrďte prosím, že nejste robot, a zkuste to znova.'
   };
 
   var forms = document.querySelectorAll('[data-form]');
