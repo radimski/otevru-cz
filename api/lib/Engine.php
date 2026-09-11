@@ -139,6 +139,12 @@ final class FE_Engine
             return array('ok' => true, 'id' => $id, 'mail' => 'deferred');
         }
 
+        try {
+            $mailer->sendAutoreply($form, $values, $meta);
+        } catch (FE_Exception $e) {
+            $this->storage->log('autoreply failed for ' . $id . ': ' . $e->getMessage());
+        }
+
         return array('ok' => true, 'id' => $id, 'mail' => $transport);
     }
 

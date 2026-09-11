@@ -62,7 +62,6 @@ final class FE_Mailer
             'MIME-Version' => '1.0',
             'Content-Type' => 'multipart/alternative; boundary="' . $boundary . '"',
             'X-Mailer'     => 'form-engine',
-            'Auto-Submitted' => 'auto-generated',
         );
         if ($cc) {
             $headers['Cc'] = implode(', ', $cc);
@@ -100,6 +99,107 @@ final class FE_Mailer
         }
 
         $this->viaMailFunction($to, $subject, $headers, $body);
+        return 'mail';
+    }
+
+    /**
+     * Best-effort visitor confirmation. A bounce must never fail the submission.
+     *
+     * @return string transport used, or skipped
+     */
+    public function sendAutoreply(array $form, array $values, array $meta)
+    {
+        $auto = isset($form['autoreply']) && is_array($form['autoreply']) ? $form['autoreply'] : array();
+        if (empty($auto['enabled'])) {
+            return 'skipped';
+        }
+
+        $field = isset($auto['toField']) ? (string) $auto['toField'] : '';
+        if ($field === '' || empty($values[$field])) {
+            return 'skipped';
+        }
+        $visitor = (string) $values[$field];
+        if (!filter_var($visitor, FILTER_VALIDATE_EMAIL)) {
+            return 'skipped';
+        }
+
+        $lang = isset($meta['lang']) ? strtolower((string) $meta['lang']) : 'cs';
+        $lang = $lang === '' ? 'cs' : substr($lang, 0, 2);
+        $texts = isset($auto['texts']) && is_array($auto['texts']) ? $auto['texts'] : array();
+        $copy = isset($texts[$lang]) && is_array($texts[$lang])
+            ? $texts[$lang]
+            : (isset($texts['cs']) && is_array($texts['cs']) ? $texts['cs'] : array());
+        if (!$copy) {
+            return 'skipped';
+        }
+
+        $from = trim((string) $this->config->path('mail.from', ''));
+        if ($from === '' || !filter_var($from, FILTER_VALIDATE_EMAIL)) {
+            return 'skipped';
+        }
+        $fromName = $this->headerSafe($this->config->path('mail.fromName', ''));
+        $office = $this->addresses(isset($form['to']) ? $form['to'] : array());
+        $officeReply = $office ? $office[0] : $from;
+
+        $subject = $this->headerSafe($this->fillTemplate(isset($copy['subject']) ? $copy['subject'] : '', $values));
+        $intro = $this->fillTemplate(isset($copy['intro']) ? $copy['intro'] : '', $values);
+        $footer = $this->fillTemplate(isset($copy['footer']) ? $copy['footer'] : '', $values);
+        $text = trim($intro . "\r\n\r\n" . $footer);
+        if ($text === '') {
+            return 'skipped';
+        }
+
+        $esc = function ($s) {
+            return htmlspecialchars((string) $s, ENT_QUOTES, 'UTF-8');
+        };
+        $html = '<!doctype html><html><body style="margin:0;background:#f6f7f9;font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif">'
+            . '<div style="max-width:640px;margin:0 auto;padding:24px">'
+            . '<div style="background:#fff;border-radius:12px;padding:24px;border:1px solid #e5e7eb">'
+            . '<p style="margin:0;font-size:15px;line-height:1.6;color:#111827">' . nl2br($esc($intro)) . '</p>'
+            . ($footer !== '' ? '<p style="margin:18px 0 0;font-size:13px;line-height:1.6;color:#6b7280">' . nl2br($esc($footer)) . '</p>' : '')
+            . '</div></div></body></html>';
+
+        $boundary = 'fe-' . bin2hex(random_bytes(12));
+        $headers = array(
+            'From'            => ($fromName !== '' ? $this->encodeWord($fromName) . ' ' : '') . '<' . $from . '>',
+            'To'              => $visitor,
+            'Reply-To'        => $officeReply,
+            'Date'            => date('r'),
+            'Message-ID'      => '<' . $meta['id'] . '-c@' . $this->domainOf($from) . '>',
+            'MIME-Version'    => '1.0',
+            'Content-Type'    => 'multipart/alternative; boundary="' . $boundary . '"',
+            'X-Mailer'        => 'form-engine',
+            'Auto-Submitted'  => 'auto-replied',
+        );
+
+        $body = "This is a message in MIME format.\r\n\r\n"
+              . '--' . $boundary . "\r\n"
+              . "Content-Type: text/plain; charset=UTF-8\r\n"
+              . "Content-Transfer-Encoding: base64\r\n\r\n"
+              . chunk_split(base64_encode($text), 76, "\r\n")
+              . '--' . $boundary . "\r\n"
+              . "Content-Type: text/html; charset=UTF-8\r\n"
+              . "Content-Transfer-Encoding: base64\r\n\r\n"
+              . chunk_split(base64_encode($html), 76, "\r\n")
+              . '--' . $boundary . "--\r\n";
+
+        $smtpHost = (string) $this->config->path('mail.smtp.host', '');
+        $transport = $this->config->path('mail.transport', 'auto');
+        $useSmtp = $transport === 'smtp' || ($transport === 'auto' && $smtpHost !== '');
+
+        if ($useSmtp) {
+            try {
+                $this->viaSmtp($from, array($visitor), $headers, $body, $subject);
+                return 'smtp';
+            } catch (FE_Exception $e) {
+                $this->storage->log('autoreply SMTP failed: ' . $e->getMessage());
+                if ($transport === 'smtp') {
+                    throw $e;
+                }
+            }
+        }
+
+        $this->viaMailFunction(array($visitor), $subject, $headers, $body);
         return 'mail';
     }
 
@@ -165,7 +265,7 @@ final class FE_Mailer
 
         $out[] = '';
         $out[] = str_repeat('-', 40);
-        $out[] = 'Odoslané: ' . $meta['at'];
+        $out[] = 'Odesláno: ' . $meta['at'];
         if (!empty($meta['page'])) {
             $out[] = 'Stránka: ' . $meta['page'];
         }
@@ -221,7 +321,7 @@ final class FE_Mailer
 
             $value = $values[$name];
             if (is_bool($value)) {
-                $value = $value ? 'áno' : 'nie';
+                $value = $value ? 'ano' : 'ne';
             }
             if ($value === '' || $value === null) {
                 continue;
@@ -246,7 +346,7 @@ final class FE_Mailer
         return preg_replace_callback('/\{([A-Za-z0-9_]+)\}/', function ($m) use ($values) {
             $v = isset($values[$m[1]]) ? $values[$m[1]] : '';
             if (is_bool($v)) {
-                $v = $v ? 'áno' : 'nie';
+                $v = $v ? 'ano' : 'ne';
             }
             return (string) $v;
         }, (string) $template);

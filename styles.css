@@ -303,16 +303,33 @@ button{font:inherit;cursor:pointer;background:none;border:0;padding:0;color:inhe
 
 .otevru-maps-link,
 .otevru-contact-line{
-  display:flex;
+  display:inline-flex;
   align-items:center;
   min-height:44px;
+  text-decoration:none;
 }
-.otevru-maps-link:hover,
-.otevru-maps-link:focus-visible,
-.otevru-contact-line:hover,
-.otevru-contact-line:focus-visible{
+.otevru-contact-text{
   text-decoration:underline;
-  text-underline-offset:3px;
+  text-underline-offset:.2em;
+  text-decoration-thickness:1px;
+}
+.otevru-maps-link:hover .otevru-contact-text,
+.otevru-maps-link:focus-visible .otevru-contact-text,
+.otevru-contact-line:hover .otevru-contact-text,
+.otevru-contact-line:focus-visible .otevru-contact-text{
+  text-decoration-thickness:2px;
+}
+.otevru-copied-toast{
+  position:fixed;
+  z-index:80;
+  pointer-events:none;
+  padding:.35rem .6rem;
+  border-radius:.375rem;
+  background:var(--otevru-dark);
+  color:#fff;
+  font-size:.8125rem;
+  font-weight:600;
+  box-shadow:0 6px 20px rgba(40,43,52,.28);
 }
 .otevru-footer-links{
   margin-top:.75rem;
@@ -571,6 +588,8 @@ html {
   font-size: max(1rem, 16px);
   font-weight: 400;
   color: var(--otevru-charcoal);
+  caret-color: var(--otevru-blue);
+  accent-color: var(--otevru-blue);
   background: #fff;
   border: 1px solid rgba(72, 77, 85, 0.25);
   border-radius: 4px;
@@ -586,6 +605,14 @@ html {
   outline: 2px solid var(--otevru-blue);
   outline-offset: 1px;
   border-color: var(--otevru-blue);
+}
+
+.otevru-form input:-webkit-autofill,
+.otevru-form textarea:-webkit-autofill,
+.otevru-form select:-webkit-autofill {
+  -webkit-text-fill-color: var(--otevru-charcoal);
+  box-shadow: 0 0 0 1000px #fff inset;
+  caret-color: var(--otevru-blue);
 }
 
 .otevru-form [aria-invalid="true"] {

@@ -328,10 +328,55 @@
     }
   }
 
+  function isDesktopPointer() {
+    return (
+      window.matchMedia("(hover: hover) and (pointer: fine)").matches &&
+      window.matchMedia("(min-width: 768px)").matches
+    );
+  }
+
+  function showCopiedToast(x, y) {
+    var existing = document.querySelector("[data-copied-toast]");
+    if (existing && existing.parentNode) existing.parentNode.removeChild(existing);
+    var chip = document.createElement("span");
+    chip.setAttribute("data-copied-toast", "");
+    chip.className = "otevru-copied-toast";
+    chip.textContent = "Zkopírováno";
+    chip.style.left = Math.max(8, x + 12) + "px";
+    chip.style.top = Math.max(8, y + 12) + "px";
+    document.body.appendChild(chip);
+    window.setTimeout(function () {
+      if (chip.parentNode) chip.parentNode.removeChild(chip);
+    }, 1600);
+  }
+
+  function bindMailtoCopy() {
+    document.addEventListener("click", function (e) {
+      var link = e.target.closest("a[href^='mailto:']");
+      if (!link) return;
+      if (!isDesktopPointer()) return;
+      var href = link.getAttribute("href") || "";
+      var address = href.replace(/^mailto:/i, "").split("?")[0];
+      if (!address) return;
+      e.preventDefault();
+      var x = e.clientX;
+      var y = e.clientY;
+      function done() {
+        showCopiedToast(x, y);
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(address).then(done).catch(done);
+      } else {
+        done();
+      }
+    });
+  }
+
   ready(function () {
     paint();
     bindNav();
     bindLockDemo(document.querySelector('[data-lock-demo="hero"]'));
+    bindMailtoCopy();
     setInterval(paint, 60000);
   });
 })();

@@ -52,7 +52,8 @@
     type: 'Hodnota nemá správný tvar.',
     rate: 'Formulář jste odeslali příliš mnohokrát. Zkuste to prosím později.',
     offline: 'Vypadá to, že jste offline. Zkontrolujte připojení a zkuste znova.',
-    captcha: 'Potvrďte prosím, že nejste robot, a zkuste to znova.'
+    captcha: 'Potvrďte prosím, že nejste robot, a zkuste to znova.',
+    turnstile: 'Potvrďte prosím, že nejste robot, a zkuste to znova.'
   };
 
   var forms = document.querySelectorAll('[data-form]');
@@ -246,7 +247,7 @@
     }
 
     if (!hasTurnstileToken(form)) {
-      say(state, 'error', state.msg.captcha);
+      say(state, 'error', state.msg.turnstile || state.msg.captcha);
       return;
     }
 
@@ -305,6 +306,10 @@
     setPending(state, false);
     say(state, 'ok', state.msg.success);
 
+    if (typeof state.form.reset === 'function') {
+      state.form.reset();
+    }
+
     // Hide the inputs rather than the whole form, so the status message the
     // visitor just earned stays on screen and keeps its aria-live region.
     var fields = state.form.querySelectorAll('input, select, textarea, button');
@@ -351,7 +356,7 @@
 
     if (code === 'captcha') {
       resetTurnstile(state);
-      say(state, 'error', state.msg.captcha);
+      say(state, 'error', state.msg.turnstile || state.msg.captcha);
       return;
     }
 
