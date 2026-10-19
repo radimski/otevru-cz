@@ -1,5 +1,5 @@
 /*
- * Demo režim pro náhled webu na *.workers.dev (Redeye T Solutions).
+ * Demo režim pro náhled webu na *.workers.dev (Redeye).
  *
  * Co dělá, jen na Cloudflare (FTP export na ostrý hosting tuhle složku nebere):
  *   - zakáže indexování (hlavička X-Robots-Tag a meta robots),
@@ -10,7 +10,7 @@
  * a .assetsignore (nebo z wrangler.jsonc odebrat "main" a "run_worker_first").
  */
 
-const OWNER = 'Redeye T Solutions';
+const OWNER = 'Redeye';
 const OWNER_URL = 'https://redeye.radim-pajurek.workers.dev/';
 
 const CSS = `.rdm-demo{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:.25rem .75rem;margin:0;padding:.55rem 1rem;background:#0e0f12;color:#f2f2f2;font:500 14px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;text-align:center;border-bottom:2px solid #e3342f;position:relative;z-index:2147483000}
