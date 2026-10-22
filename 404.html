@@ -9,10 +9,9 @@
 <meta name="robots" content="noindex">
 <link rel="canonical" href="https://www.otevru.cz/404.html">
 <link rel="icon" href="favicon.ico">
-<link rel="preload" href="fonts/dm-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="fonts/dm-sans-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="fonts/dm-sans-latin-ext-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="fonts/dm-sans-latin-ext-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/barlow-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/barlowcondensed-700-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/barlowcondensed-700-latinext.woff2" as="font" type="font/woff2" crossorigin>
 <meta property="og:type" content="website">
 <meta property="og:locale" content="cs_CZ">
 <meta property="og:site_name" content="OTEVRU.cz">
@@ -26,7 +25,7 @@
 <link rel="stylesheet" href="fonts.css">
 <link rel="stylesheet" href="styles.css">
 </head>
-<body class="otevru-root otevru-v2026" data-form-endpoint="/api/form.php" data-turnstile-site-key="__TURNSTILE_SITE_KEY__">
+<body class="otevru-root otevru-v2026 otevru-v2027" data-form-endpoint="/api/form.php" data-turnstile-site-key="__TURNSTILE_SITE_KEY__">
 <a class="otevru-skip" href="#obsah">Přeskočit na obsah</a>
 <div class="otevru-header-stack">
 <header class="otevru-header">
@@ -35,6 +34,13 @@
       <a href="/" class="otevru-logo-link">
         <img class="otevru-logo" src="img/logo.png" width="295" height="60" alt="OTEVRU.cz — zámečnická pohotovost">
       </a>
+      <nav class="otevru-nav-desktop hide-below-md" aria-label="Hlavní">
+        <a class="otevru-nav-link" href="/">Úvod</a>
+        <a class="otevru-nav-link" href="/#sluzby">Služby</a>
+        <a class="otevru-nav-link" href="/#jak">Jak to funguje</a>
+        <a class="otevru-nav-link" href="/#o-nas">O nás</a>
+        <a class="otevru-nav-link" href="/kontakt">Kontakt</a>
+      </nav>
       <div class="otevru-header-actions">
         <span class="open-status open-status-header hide-below-md" data-open-status role="status">
   <span class="open-status-dot is-open" aria-hidden="true"></span>
@@ -48,15 +54,6 @@
         <button type="button" class="otevru-menu-btn show-below-md" data-nav-toggle aria-expanded="false" aria-controls="otevru-mobile-nav">Menu</button>
       </div>
     </div>
-  </div>
-  <div class="otevru-section-dark hide-below-md-block">
-    <nav class="shell otevru-nav-desktop" aria-label="Hlavní">
-      <a class="otevru-nav-link" href="/">Úvod</a>
-      <a class="otevru-nav-link" href="/#sluzby">Služby</a>
-      <a class="otevru-nav-link" href="/#jak">Jak to funguje</a>
-      <a class="otevru-nav-link" href="/#o-nas">O nás</a>
-      <a class="otevru-nav-link" href="/kontakt">Kontakt</a>
-    </nav>
   </div>
   <div id="otevru-mobile-nav" class="otevru-section-dark show-below-md" hidden>
     <nav class="shell otevru-nav-mobile">
@@ -89,6 +86,13 @@
 </div>
 </div>
 <footer class="otevru-section-dark">
+  <div class="shell otevru-footer-call">
+    <div>
+      <p class="otevru-footer-call-label">Pohotovost · Po–Ne 07:00–18:00</p>
+      <a class="otevru-footer-phone" href="tel:+420606262118">+420 606 262 118</a>
+    </div>
+    <a class="otevru-btn-orange min-h-12 px-6 py-3" href="tel:+420606262118">Zavolat</a>
+  </div>
   <div class="shell otevru-footer-grid">
     <div>
       <p class="text-lg font-bold tracking-tight text-white">OTEVRU.cz</p>
@@ -108,7 +112,6 @@
       <p class="otevru-title lime">Kontakt</p>
       <a class="otevru-contact-line mt-3 font-semibold text-white hover-lime" href="tel:+420606262118"><span class="otevru-contact-text">+420 606 262 118</span></a>
       <a class="otevru-contact-line text-sm hover-lime" href="mailto:patrik@otevru.cz"><span class="otevru-contact-text">patrik@otevru.cz</span></a>
-      <a class="otevru-btn-orange mt-5 min-h-12 px-6 py-3" href="tel:+420606262118">Zavolat</a>
     </div>
     <nav aria-label="Právní informace">
       <p class="otevru-title lime">Informace</p>

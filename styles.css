@@ -1,4 +1,4 @@
-/* Typography loaded via fonts.css (self-hosted DM Sans) */
+/* Typography loaded via fonts.css (self-hosted Barlow + Barlow Condensed) */
 
 /* Layout utilities — replace former Tailwind helpers used by the React layout */
 *,*::before,*::after{box-sizing:border-box}
@@ -14,7 +14,7 @@ body.otevru-root{
   min-height:100%;
   display:flex;
   flex-direction:column;
-  font-family:"DM Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-family:"Barlow",system-ui,-apple-system,"Segoe UI",sans-serif;
   -webkit-font-smoothing:antialiased;
   -moz-osx-font-smoothing:grayscale;
   color:var(--otevru-charcoal);
@@ -2188,3 +2188,433 @@ a.otevru-trust-card:hover {
     transform: none;
   }
 }
+
+/* ============================================================
+   2027 — brand colours of the vans (lime, graphite, blue, white),
+   Barlow / Barlow Condensed, flat surfaces, motion in motion.js.
+   Scoped to .otevru-v2027 so it wins over every layer above.
+   ============================================================ */
+.otevru-root.otevru-v2027 {
+  --v27-lime: #acf53d;
+  --v27-lime-hover: #c3ff6a;
+  --v27-graphite: #282b34;
+  --v27-graphite-2: #32363f;
+  --v27-blue: #004c93;
+  --v27-ink: #23262d;
+  --v27-ink-2: #575c66;
+  --v27-line: #e2e4e8;
+  --v27-soft: #f3f4f6;
+  --v27-display: "Barlow Condensed", "Arial Narrow", system-ui, sans-serif;
+  --v27-text: "Barlow", system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-family: var(--v27-text);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  color: var(--v27-ink);
+  background: #fff;
+}
+.otevru-root.otevru-v2027 :focus-visible { outline: 2px solid var(--v27-blue); outline-offset: 3px; }
+.otevru-root.otevru-v2027 .otevru-section-dark :focus-visible,
+.otevru-root.otevru-v2027 .otevru-hero :focus-visible,
+.otevru-root.otevru-v2027 .otevru-now :focus-visible { outline-color: var(--v27-lime); }
+
+/* Drop the decorative layers of the 2026 look: patterns, meshes, accent bars, glows. */
+.otevru-root.otevru-v2027 .otevru-bg-pattern::after,
+.otevru-root.otevru-v2027 .otevru-bg-pattern::before,
+.otevru-root.otevru-v2027 .otevru-section-accent::before,
+.otevru-root.otevru-v2027 .otevru-hero::before,
+.otevru-root.otevru-v2027 .otevru-hero::after { content: none; display: none; }
+.otevru-root.otevru-v2027 .otevru-bg-pattern,
+.otevru-root.otevru-v2027 [class*="otevru-bg-mesh"] { background-image: none; }
+
+/* Type */
+.otevru-root.otevru-v2027 h1,
+.otevru-root.otevru-v2027 h2,
+.otevru-root.otevru-v2027 h3,
+.otevru-root.otevru-v2027 .text-4xl,
+.otevru-root.otevru-v2027 .otevru-section-title {
+  font-family: var(--v27-display);
+  font-weight: 700;
+  letter-spacing: -0.005em;
+}
+.otevru-root.otevru-v2027 .otevru-section-title {
+  margin: 0;
+  font-size: clamp(2.25rem, 4.2vw, 3.5rem);
+  line-height: 1;
+  color: var(--v27-ink);
+  text-transform: none;
+}
+.otevru-root.otevru-v2027 .otevru-section-head { max-width: none; margin: 0 0 2.5rem; text-align: left; }
+.otevru-root.otevru-v2027 .otevru-section-lead { margin-top: 1rem; max-width: 38ch; color: var(--v27-ink-2); font-size: 1.0625rem; }
+.otevru-root.otevru-v2027 .otevru-eyebrow {
+  display: block;
+  margin: 0 0 0.85rem;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  font: 600 0.875rem/1 var(--v27-text);
+  letter-spacing: 0.06em;
+  text-transform: none;
+  color: var(--v27-ink-2);
+}
+.otevru-root.otevru-v2027 .otevru-eyebrow::before,
+.otevru-root.otevru-v2027 .otevru-eyebrow::after { content: none; }
+.otevru-root.otevru-v2027 .otevru-section-pad { padding-block: 5.5rem; }
+@media (max-width: 767px) { .otevru-root.otevru-v2027 .otevru-section-pad { padding-block: 4rem; } }
+.otevru-root.otevru-v2027 .shell { width: min(74rem, 100%); }
+.otevru-root.otevru-v2027 .muted { color: var(--v27-ink-2); }
+.otevru-root.otevru-v2027 .otevru-text { color: var(--v27-ink); }
+.otevru-root.otevru-v2027 .otevru-text-muted { color: var(--v27-ink-2); }
+.otevru-root.otevru-v2027 .otevru-inline-link {
+  font-weight: 600;
+  color: var(--v27-blue);
+  text-decoration: underline;
+  text-decoration-color: var(--v27-lime);
+  text-decoration-thickness: 3px;
+  text-underline-offset: 4px;
+}
+
+/* Buttons: lime is the call colour, no orange, no glow. */
+.otevru-root.otevru-v2027 .otevru-btn-orange,
+.otevru-root.otevru-v2027 .otevru-btn-lime {
+  gap: 0.6rem;
+  border: 0;
+  border-radius: 10px;
+  background: var(--v27-lime);
+  color: var(--v27-graphite);
+  font: 600 1.0625rem/1.1 var(--v27-text);
+  box-shadow: none;
+  text-shadow: none;
+  transition: background-color 0.2s, transform 0.2s;
+}
+.otevru-root.otevru-v2027 .otevru-btn-orange:hover,
+.otevru-root.otevru-v2027 .otevru-btn-lime:hover { background: var(--v27-lime-hover); transform: translateY(-1px); color: var(--v27-graphite); }
+.otevru-root.otevru-v2027 .otevru-btn-outline-lime,
+.otevru-root.otevru-v2027 .otevru-btn-blue,
+.otevru-root.otevru-v2027 .otevru-btn-slate {
+  border-radius: 10px;
+  font: 600 1.0625rem/1.1 var(--v27-text);
+  box-shadow: none;
+}
+.otevru-root.otevru-v2027 .otevru-btn-outline-lime {
+  border: 0;
+  background: transparent;
+  color: #fff;
+  box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, 0.45);
+}
+.otevru-root.otevru-v2027 .otevru-btn-outline-lime:hover { box-shadow: inset 0 0 0 1.5px #fff; background: transparent; color: #fff; }
+.otevru-root.otevru-v2027 .otevru-btn-blue { background: var(--v27-blue); color: #fff; }
+
+/* Header: one lime bar like the vans, menu inside it. */
+.otevru-root.otevru-v2027 .otevru-header-stack { box-shadow: none; border-bottom: 1px solid rgba(40, 43, 52, 0.18); }
+.otevru-root.otevru-v2027 .otevru-header .otevru-section-lime { background: var(--v27-lime); background-image: none; }
+.otevru-root.otevru-v2027 .otevru-header-bar { gap: 1.5rem; padding-block: 0.6rem; min-height: 4.25rem; }
+.otevru-root.otevru-v2027 .otevru-header .otevru-section-lime > .shell { width: min(74rem, 100%); }
+.otevru-root.otevru-v2027 .otevru-logo-link { flex: 0 0 auto; }
+.otevru-root.otevru-v2027 .otevru-nav-desktop { margin-left: auto; gap: 1.75rem; padding: 0; }
+.otevru-root.otevru-v2027 .otevru-nav-desktop .otevru-nav-link {
+  position: relative;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--v27-graphite);
+  font: 500 1rem/1 var(--v27-text);
+}
+.otevru-root.otevru-v2027 .otevru-nav-desktop .otevru-nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0.55rem;
+  height: 2px;
+  background: var(--v27-graphite);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s;
+}
+.otevru-root.otevru-v2027 .otevru-nav-desktop .otevru-nav-link:hover::after,
+.otevru-root.otevru-v2027 .otevru-nav-desktop .otevru-nav-link[aria-current="page"]::after { transform: scaleX(1); }
+.otevru-root.otevru-v2027 .otevru-header .open-status-header { color: var(--v27-graphite); background: none; border: 0; padding: 0; }
+.otevru-root.otevru-v2027 .otevru-header .open-status-header .open-status-detail { color: rgba(40, 43, 52, 0.75); }
+.otevru-root.otevru-v2027 .otevru-header .otevru-btn-compact {
+  background: var(--v27-graphite);
+  color: #fff;
+  border-radius: 10px;
+  font-size: 0.9375rem;
+  padding: 0.55rem 1rem;
+}
+.otevru-root.otevru-v2027 .otevru-header .otevru-btn-compact:hover { background: var(--v27-blue); color: #fff; }
+.otevru-root.otevru-v2027 .otevru-menu-btn {
+  border: 1.5px solid var(--v27-graphite);
+  background: transparent;
+  color: var(--v27-graphite);
+  border-radius: 10px;
+  font-weight: 600;
+}
+.otevru-root.otevru-v2027 .otevru-header #otevru-mobile-nav.otevru-section-dark { background: var(--v27-graphite); }
+.otevru-root.otevru-v2027 .otevru-mobile-call { border-radius: 10px; }
+@media (min-width: 768px) and (max-width: 1023px) {
+  .otevru-root.otevru-v2027 .otevru-nav-desktop { gap: 1.1rem; }
+  .otevru-root.otevru-v2027 .otevru-header .open-status-header { display: none !important; }
+}
+
+/* Hero: flat graphite, Condensed headline, lime wordmark. */
+.otevru-root.otevru-v2027 .otevru-hero {
+  background: var(--v27-graphite);
+  background-image: none;
+  color: #fff;
+  border: 0;
+}
+.otevru-root.otevru-v2027 .otevru-hero-grid { padding-block: 4.5rem 5rem; gap: 3.5rem; }
+@media (max-width: 1023px) { .otevru-root.otevru-v2027 .otevru-hero-grid { padding-block: 2.5rem 3rem; gap: 2.25rem; } }
+.otevru-root.otevru-v2027 .otevru-eyebrow--hero { color: #b1b4b9; margin-bottom: 0.5rem; }
+.otevru-root.otevru-v2027 .otevru-hero-hours { margin: 0; color: #b1b4b9; font: 500 0.9375rem/1.4 var(--v27-text); background: none; border: 0; padding: 0; }
+.otevru-root.otevru-v2027 .otevru-hero-title {
+  margin-top: 1.25rem;
+  font-size: clamp(2.9rem, 5.8vw, 5.25rem);
+  line-height: 0.95;
+  letter-spacing: -0.005em;
+  color: #fff;
+}
+.otevru-root.otevru-v2027 .otevru-hero-title { animation: none; } /* lines are revealed by motion.js */
+.otevru-root.otevru-v2027 .otevru-line { display: block; overflow: hidden; padding-bottom: 0.06em; margin-bottom: -0.06em; }
+.otevru-root.otevru-v2027 .otevru-line > span { display: inline-block; }
+.otevru-root.otevru-v2027 .otevru-hero-title .otevru-wordmark { color: var(--v27-lime); letter-spacing: 0; }
+.otevru-root.otevru-v2027 .otevru-hero-tld { font-size: 1em; font-weight: 700; letter-spacing: 0; margin: 0; transform: none; text-transform: lowercase; }
+.otevru-root.otevru-v2027 .otevru-hero-lede { margin: 1.5rem 0 0; max-width: 34ch; font-size: 1.25rem; line-height: 1.55; color: #d4d6da; }
+.otevru-root.otevru-v2027 .otevru-hero-cta { margin-top: 2rem; gap: 0.75rem; }
+@media (max-width: 639px) {
+  .otevru-root.otevru-v2027 .otevru-hero-cta .otevru-btn-orange.otevru-hero-call { box-shadow: none; border-radius: 10px; font-size: 1.15rem; }
+  .otevru-root.otevru-v2027 .otevru-hero-lede { font-size: 1.125rem; }
+}
+
+/* The real cutaway sits in a quiet graphite panel; lamp follows the rotor. */
+.otevru-root.otevru-v2027 .otevru-lock-embed--hero {
+  padding: 1.25rem;
+  border-radius: 18px;
+  background: var(--v27-graphite-2);
+}
+.otevru-root.otevru-v2027 .otevru-lock-layout { gap: 0; }
+.otevru-root.otevru-v2027 .otevru-lock-stage { border: 0; border-radius: 10px; box-shadow: none; }
+.otevru-lock-state {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 1rem 0 0;
+  font: 600 0.9375rem/1 "Barlow", system-ui, sans-serif;
+  color: #d4d6da;
+}
+.otevru-lock-lamp { width: 10px; height: 10px; border-radius: 50%; background: #e04545; transition: background-color 0.3s; }
+.is-unlocked .otevru-lock-lamp { background: #acf53d; }
+
+/* Livery stripe between hero and content — the van wrap, in motion. */
+.otevru-livery {
+  height: 30px;
+  background: repeating-linear-gradient(-58deg, #acf53d 0 64px, #282b34 64px 76px, #004c93 76px 140px, #282b34 140px 152px);
+}
+@media (max-width: 767px) { .otevru-livery { height: 22px; } }
+
+/* "Co dělat hned teď" — brand blue, line lights the steps. */
+.otevru-root.otevru-v2027 .otevru-now { background: var(--v27-blue); color: #fff; }
+.otevru-root.otevru-v2027 .otevru-now .otevru-eyebrow { color: #c9daee; }
+.otevru-root.otevru-v2027 .otevru-now .otevru-section-title { color: #fff; }
+.otevru-track { position: relative; height: 3px; background: rgba(255, 255, 255, 0.28); }
+.otevru-track i { position: absolute; inset: 0; background: #acf53d; transform-origin: left; transform: scaleX(1); }
+.otevru-motion .otevru-track i { transform: scaleX(0); }
+.otevru-root.otevru-v2027 .otevru-now .otevru-panic-grid { margin-top: 0; gap: 0; }
+.otevru-root.otevru-v2027 .otevru-now .otevru-panic-step {
+  padding: 1.75rem 2rem 0.5rem 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  color: #fff;
+}
+.otevru-root.otevru-v2027 .otevru-now .otevru-panic-step::before { content: none; }
+@media (min-width: 768px) {
+  .otevru-root.otevru-v2027 .otevru-now .otevru-panic-step + .otevru-panic-step { padding-left: 2rem; border-left: 1px solid rgba(255, 255, 255, 0.22); }
+}
+@media (max-width: 767px) {
+  .otevru-root.otevru-v2027 .otevru-now .otevru-panic-step { padding: 1.5rem 0; border-bottom: 1px solid rgba(255, 255, 255, 0.22); }
+}
+.otevru-root.otevru-v2027 .otevru-now .otevru-step-num {
+  display: inline-block;
+  width: auto;
+  height: auto;
+  padding: 0.45rem 0.65rem;
+  border-radius: 6px;
+  background: var(--v27-lime);
+  color: var(--v27-graphite);
+  font: 700 0.9375rem/1 var(--v27-text);
+  box-shadow: none;
+  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+}
+.otevru-motion .otevru-now .otevru-panic-step:not(.is-lit) .otevru-step-num {
+  background: transparent;
+  color: #fff;
+  box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, 0.55);
+}
+.otevru-root.otevru-v2027 .otevru-now .otevru-panic-step-title { margin: 1.1rem 0 0.5rem; font-size: 1.75rem; line-height: 1.05; color: #fff; }
+.otevru-root.otevru-v2027 .otevru-now .otevru-panic-step-text { margin: 0; color: #d6e2f0; font-size: 1.0625rem; }
+
+/* Services — numbered rows instead of icon cards. */
+.otevru-root.otevru-v2027 .otevru-services { background: #fff; }
+@media (min-width: 900px) {
+  .otevru-root.otevru-v2027 .otevru-section-head--split { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: end; }
+  .otevru-root.otevru-v2027 .otevru-section-head--split .otevru-section-lead { justify-self: end; margin: 0; }
+}
+.otevru-service-list { border-top: 1px solid #23262d; }
+.otevru-service {
+  display: grid;
+  grid-template-columns: 3.5rem minmax(0, 1fr) minmax(0, 1.2fr);
+  gap: 1.5rem;
+  align-items: center;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid #e2e4e8;
+}
+.otevru-service-num { font: 600 0.9375rem/1 "Barlow", system-ui, sans-serif; color: #575c66; }
+.otevru-root.otevru-v2027 .otevru-service h3 {
+  margin: 0;
+  display: inline;
+  font-size: 1.75rem;
+  line-height: 1.05;
+  color: var(--v27-ink);
+  background: linear-gradient(var(--v27-lime), var(--v27-lime)) no-repeat 0 100% / 0 4px;
+  transition: background-size 0.3s ease;
+}
+.otevru-root.otevru-v2027 .otevru-service:hover h3 { background-size: 100% 4px; }
+.otevru-service p { margin: 0; color: #575c66; }
+.otevru-root.otevru-v2027 .otevru-service .otevru-offer-tag {
+  display: table;
+  margin: 0.6rem 0 0;
+  padding: 0.35rem 0.55rem;
+  border: 0;
+  border-radius: 6px;
+  background: var(--v27-lime);
+  color: var(--v27-graphite);
+  font: 600 0.8125rem/1 var(--v27-text);
+  box-shadow: none;
+}
+@media (max-width: 767px) {
+  .otevru-service { grid-template-columns: 2.25rem minmax(0, 1fr); gap: 0.4rem 0.9rem; padding: 1.25rem 0; align-items: start; }
+  .otevru-service-num { padding-top: 0.45rem; }
+  .otevru-service p { grid-column: 2; font-size: 1rem; }
+  .otevru-root.otevru-v2027 .otevru-service h3 { font-size: 1.5rem; }
+}
+
+/* How it works — soft grey band, three plain columns. */
+.otevru-root.otevru-v2027 .otevru-how { background: var(--v27-soft); }
+.otevru-root.otevru-v2027 .otevru-how .otevru-steps-grid { margin-top: 0; gap: 0; border-top: 1px solid var(--v27-ink); }
+.otevru-how-step { padding: 1.75rem 2rem 0.5rem 0; }
+@media (min-width: 768px) { .otevru-how-step + .otevru-how-step { padding-left: 2rem; border-left: 1px solid #d5d8de; } }
+@media (max-width: 767px) { .otevru-how-step { padding: 1.5rem 0; border-bottom: 1px solid #d5d8de; } }
+.otevru-root.otevru-v2027 .otevru-how-step .otevru-step-num {
+  display: inline-block;
+  width: auto;
+  height: auto;
+  padding: 0.45rem 0.65rem;
+  border-radius: 6px;
+  background: var(--v27-graphite);
+  color: var(--v27-lime);
+  font: 700 0.9375rem/1 var(--v27-text);
+  box-shadow: none;
+}
+.otevru-root.otevru-v2027 .otevru-how-step h3 { margin: 1.1rem 0 0.5rem; font-size: 1.75rem; line-height: 1.05; color: var(--v27-ink); }
+.otevru-how-step p { margin: 0; color: #575c66; }
+
+/* About — white, partners on a light card. */
+.otevru-root.otevru-v2027 .otevru-about-v27 { background: #fff; }
+.otevru-root.otevru-v2027 .otevru-about-v27 .otevru-btn-orange { margin-top: 2rem; }
+.otevru-about-card { padding: 2rem; border-radius: 18px; background: #f3f4f6; }
+.otevru-root.otevru-v2027 .otevru-about-card .otevru-partner-strip { gap: 0.75rem; margin-top: 1.25rem; }
+.otevru-root.otevru-v2027 .otevru-about-card .otevru-partner-strip-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  border: 0;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: none;
+}
+.otevru-root.otevru-v2027 .otevru-about-card .otevru-partner-logo-wrap { background: none; border: 0; padding: 0; min-height: 0; box-shadow: none; }
+.otevru-root.otevru-v2027 .otevru-about-card .otevru-partner-logo { max-height: 2rem; width: auto; filter: none; }
+.otevru-root.otevru-v2027 .otevru-about-card .otevru-partner-strip-label { margin: 0; color: var(--v27-ink-2); font: 600 0.875rem/1.3 var(--v27-text); text-transform: none; letter-spacing: 0; }
+
+/* Footer: call band on top, graphite all the way. */
+.otevru-root.otevru-v2027 footer.otevru-section-dark { background: var(--v27-graphite); background-image: none; color: #d4d6da; border: 0; }
+.otevru-footer-call {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding-block: 4rem 2.5rem;
+  border-bottom: 1px solid #3d424c;
+}
+.otevru-footer-call-label { margin: 0; color: #b1b4b9; font: 600 0.875rem/1 "Barlow", system-ui, sans-serif; letter-spacing: 0.04em; }
+.otevru-root.otevru-v2027 .otevru-footer-phone {
+  display: block;
+  margin-top: 0.6rem;
+  font: 700 clamp(2.5rem, 5vw, 4rem)/1 var(--v27-display);
+  color: var(--v27-lime);
+  text-decoration: none;
+}
+.otevru-root.otevru-v2027 .otevru-footer-phone:hover { text-decoration: underline; text-decoration-thickness: 3px; text-underline-offset: 6px; }
+.otevru-root.otevru-v2027 .otevru-footer-grid { padding-block: 2.5rem 3rem; }
+.otevru-root.otevru-v2027 footer .otevru-title,
+.otevru-root.otevru-v2027 footer .otevru-title.lime {
+  display: block;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  color: #fff;
+  font: 600 0.9375rem/1.3 var(--v27-text);
+  letter-spacing: 0;
+  text-transform: none;
+}
+.otevru-root.otevru-v2027 footer .otevru-title::before,
+.otevru-root.otevru-v2027 footer .otevru-title::after { content: none; }
+.otevru-root.otevru-v2027 footer .hover-lime:hover { color: var(--v27-lime); }
+
+/* Subpages: same type, flat white/soft surfaces, quiet cards. */
+.otevru-root.otevru-v2027 .otevru-section-light { background: #fff; background-image: none; }
+.otevru-root.otevru-v2027:has(.otevru-main > .otevru-section-light) { background: #fff; }
+.otevru-root.otevru-v2027 .otevru-main .otevru-title {
+  display: block;
+  margin: 0 0 0.75rem;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  color: var(--v27-ink-2);
+  font: 600 0.875rem/1 var(--v27-text);
+  letter-spacing: 0.06em;
+  text-transform: none;
+}
+.otevru-root.otevru-v2027 .otevru-main .otevru-title::before,
+.otevru-root.otevru-v2027 .otevru-main .otevru-title::after { content: none; }
+.otevru-root.otevru-v2027 .otevru-main .text-4xl { font-size: clamp(2.25rem, 4.2vw, 3.5rem); line-height: 1; color: var(--v27-ink); }
+.otevru-root.otevru-v2027 .otevru-main .otevru-card {
+  border: 0;
+  border-radius: 18px;
+  background: var(--v27-soft);
+  box-shadow: none;
+}
+.otevru-root.otevru-v2027 .otevru-main .otevru-card:hover { transform: none; box-shadow: none; }
+.otevru-root.otevru-v2027 .otevru-form-card { border-top: 0; }
+.otevru-root.otevru-v2027 .legal-back { color: var(--v27-blue); }
+.otevru-root.otevru-v2027 .blue { color: var(--v27-blue); }
+.otevru-root.otevru-v2027 .slate,
+.otevru-root.otevru-v2027 .charcoal { color: var(--v27-ink); }
+.otevru-root.otevru-v2027 .otevru-now .otevru-panic-grid { background: none; border: 0; border-radius: 0; padding: 0; }
+.otevru-root.otevru-v2027 footer .otevru-footer-grid { align-items: start; }
+.otevru-root.otevru-v2027 footer .otevru-footer-grid > div > :first-child,
+.otevru-root.otevru-v2027 footer .otevru-footer-grid > nav > :first-child { margin-top: 0; }
+.otevru-root.otevru-v2027 footer .otevru-contact-line { display: flex; width: fit-content; }

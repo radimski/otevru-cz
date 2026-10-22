@@ -8,10 +8,9 @@
 <meta name="description" content="Zámečnická pohotovost ve Sviadnově, Frýdku-Místku a Ostravě. Nouzové otevírání, klíče, bezpečnostní dveře a trezory.">
 <link rel="canonical" href="https://www.otevru.cz/">
 <link rel="icon" href="favicon.ico">
-<link rel="preload" href="fonts/dm-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="fonts/dm-sans-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="fonts/dm-sans-latin-ext-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="fonts/dm-sans-latin-ext-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/barlow-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/barlowcondensed-700-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/barlowcondensed-700-latinext.woff2" as="font" type="font/woff2" crossorigin>
 <meta property="og:type" content="website">
 <meta property="og:locale" content="cs_CZ">
 <meta property="og:site_name" content="OTEVRU.cz">
@@ -30,7 +29,7 @@
 <link rel="stylesheet" href="styles.css">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Locksmith","name":"Patrik Panenka - zámečnická pohotovost","legalName":"Patrik Panenka","alternateName":"OTEVRU.cz","url":"https://www.otevru.cz/","image":"https://www.otevru.cz/img/og.jpg","telephone":"+420606262118","email":"patrik@otevru.cz","taxID":"CZ7401244928","identifier":{"@type":"PropertyValue","propertyID":"IČO","value":"73290939"},"address":{"@type":"PostalAddress","streetAddress":"O. Kišové 88","postalCode":"739 25","addressLocality":"Sviadnov","addressCountry":"CZ"},"areaServed":["Frýdek-Místek","Ostrava","Sviadnov"],"geo":{"@type":"GeoCoordinates","latitude":49.6892,"longitude":18.3278},"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"07:00","closes":"18:00"}]}</script>
 </head>
-<body class="otevru-root otevru-v2026" data-form-endpoint="/api/form.php" data-turnstile-site-key="__TURNSTILE_SITE_KEY__">
+<body class="otevru-root otevru-v2026 otevru-v2027" data-form-endpoint="/api/form.php" data-turnstile-site-key="__TURNSTILE_SITE_KEY__">
 <a class="otevru-skip" href="#obsah">Přeskočit na obsah</a>
 <div class="otevru-header-stack">
 <header class="otevru-header">
@@ -39,6 +38,13 @@
       <a href="/" class="otevru-logo-link">
         <img class="otevru-logo" src="img/logo.png" width="295" height="60" alt="OTEVRU.cz — zámečnická pohotovost">
       </a>
+      <nav class="otevru-nav-desktop hide-below-md" aria-label="Hlavní">
+        <a class="otevru-nav-link" href="/" aria-current="page">Úvod</a>
+        <a class="otevru-nav-link" href="/#sluzby">Služby</a>
+        <a class="otevru-nav-link" href="/#jak">Jak to funguje</a>
+        <a class="otevru-nav-link" href="/#o-nas">O nás</a>
+        <a class="otevru-nav-link" href="/kontakt">Kontakt</a>
+      </nav>
       <div class="otevru-header-actions">
         <span class="open-status open-status-header hide-below-md" data-open-status role="status">
   <span class="open-status-dot is-open" aria-hidden="true"></span>
@@ -52,15 +58,6 @@
         <button type="button" class="otevru-menu-btn show-below-md" data-nav-toggle aria-expanded="false" aria-controls="otevru-mobile-nav">Menu</button>
       </div>
     </div>
-  </div>
-  <div class="otevru-section-dark hide-below-md-block">
-    <nav class="shell otevru-nav-desktop" aria-label="Hlavní">
-      <a class="otevru-nav-link" href="/" aria-current="page">Úvod</a>
-      <a class="otevru-nav-link" href="/#sluzby">Služby</a>
-      <a class="otevru-nav-link" href="/#jak">Jak to funguje</a>
-      <a class="otevru-nav-link" href="/#o-nas">O nás</a>
-      <a class="otevru-nav-link" href="/kontakt">Kontakt</a>
-    </nav>
   </div>
   <div id="otevru-mobile-nav" class="otevru-section-dark show-below-md" hidden>
     <nav class="shell otevru-nav-mobile">
@@ -86,8 +83,8 @@
     <div>
       <p class="otevru-eyebrow otevru-eyebrow--hero">Sviadnov · Frýdek-Místek · Ostrava</p>
       <p class="otevru-hero-hours">Po–Ne 07:00–18:00</p>
-      <h1 class="otevru-hero-title">Zabouchli jste si dveře?<br><span class="lime otevru-wordmark">OTEVRU<span class="otevru-hero-tld">.cz</span></span></h1>
-      <p class="mt-5 max-w-xl text-lg leading-8 white-85">Nouzové otevírání, klíče, bezpečnostní dveře a trezory. Šetrně a na místě.</p>
+      <h1 class="otevru-hero-title"><span class="otevru-line"><span>Zabouchli jste si</span></span> <span class="otevru-line"><span>dveře?</span></span> <span class="otevru-line"><span class="otevru-wordmark">OTEVRU<span class="otevru-hero-tld">.cz</span></span></span></h1>
+      <p class="otevru-hero-lede">Nouzové otevírání, klíče, bezpečnostní dveře a trezory. Šetrně a na místě.</p>
       <div class="otevru-hero-cta">
         <a class="otevru-btn-orange min-h-12 px-6 py-3 otevru-hero-call" href="tel:+420606262118"><span class="hide-below-sm">Zavolat +420 606 262 118</span><span class="show-below-sm">Zavolat</span></a>
         <a class="otevru-btn-outline-lime min-h-12 px-6 py-3" href="/kontakt">Napsat poptávku</a>
@@ -296,17 +293,20 @@
             </g>
           </svg>
         </div>
+        <p class="otevru-lock-state" aria-hidden="true"><span class="otevru-lock-lamp"></span><span class="otevru-lock-state-text">Zamčeno</span></p>
       </div>
     </figure>
   </div>
 </section>
+<div class="otevru-livery" aria-hidden="true"></div>
 
-<section class="otevru-section-deep otevru-panic otevru-section-accent otevru-accent-orange otevru-bg-pattern otevru-bg-mesh-dark" aria-label="Nouzové otevírání">
-  <div class="shell otevru-panic-inner">
+<section class="otevru-now" aria-label="Nouzové otevírání">
+  <div class="shell otevru-section-pad">
     <div class="otevru-section-head">
-      <p class="otevru-eyebrow otevru-eyebrow--orange-on-dark">Nouzové otevírání</p>
-      <h2 class="otevru-section-title otevru-section-title--on-dark">Co dělat hned teď</h2>
+      <p class="otevru-eyebrow">Nouzové otevírání</p>
+      <h2 class="otevru-section-title">Co dělat hned teď</h2>
     </div>
+    <div class="otevru-track" aria-hidden="true"><i></i></div>
     <ol class="otevru-panic-grid"><li class="otevru-panic-step">
   <span class="otevru-step-num" aria-hidden="true">01</span>
   <h3 class="otevru-panic-step-title">Zachovejte klid</h3>
@@ -325,90 +325,93 @@
   </div>
 </section>
 
-<section id="jak" class="otevru-section-deep otevru-section-accent otevru-accent-blue otevru-bg-pattern otevru-bg-mesh-dark">
+<section id="jak" class="otevru-how">
   <div class="shell otevru-section-pad">
     <div class="otevru-section-head">
-      <p class="otevru-eyebrow otevru-eyebrow--on-dark">Jak to funguje</p>
-      <h2 class="otevru-section-title otevru-section-title--on-dark">Od hovoru k otevření</h2>
-      <p class="otevru-section-lead otevru-section-lead--on-dark">Při nouzovém otevření volejte hned. Montáže a ostatní poptávky vyřídíme telefonicky nebo přes formulář.</p>
+      <p class="otevru-eyebrow">Jak to funguje</p>
+      <h2 class="otevru-section-title">Od hovoru k otevření</h2>
+      <p class="otevru-section-lead">Při nouzovém otevření volejte hned. Montáže a ostatní poptávky vyřídíme telefonicky nebo přes formulář.</p>
     </div>
     <ol class="otevru-steps-grid">
-      <li class="otevru-card otevru-card-step rounded-lg p-6">
+      <li class="otevru-how-step">
         <span class="otevru-step-num" aria-hidden="true">01</span>
-        <h3 class="mt-4 text-xl font-bold slate">Zavoláte</h3>
-        <p class="mt-3 text-sm leading-6 muted">Popíšete situaci — zabouchnuté dveře, výměnu zámku, trezor nebo montáž.</p>
+        <h3>Zavoláte</h3>
+        <p>Popíšete situaci — zabouchnuté dveře, výměnu zámku, trezor nebo montáž.</p>
       </li>
-      <li class="otevru-card otevru-card-step rounded-lg p-6">
+      <li class="otevru-how-step">
         <span class="otevru-step-num" aria-hidden="true">02</span>
-        <h3 class="mt-4 text-xl font-bold slate">Přijedeme</h3>
-        <p class="mt-3 text-sm leading-6 muted">Domluvíme termín a místo. U nouze jedeme přednostně.</p>
+        <h3>Přijedeme</h3>
+        <p>Domluvíme termín a místo. U nouze jedeme přednostně.</p>
       </li>
-      <li class="otevru-card otevru-card-step rounded-lg p-6">
+      <li class="otevru-how-step">
         <span class="otevru-step-num" aria-hidden="true">03</span>
-        <h3 class="mt-4 text-xl font-bold slate">Hotovo</h3>
-        <p class="mt-3 text-sm leading-6 muted">Otevřeme, opravíme nebo namontujeme — šetrně a čistě.</p>
+        <h3>Hotovo</h3>
+        <p>Otevřeme, opravíme nebo namontujeme — šetrně a čistě.</p>
       </li>
     </ol>
   </div>
 </section>
 
-<section id="sluzby" class="otevru-section-deep otevru-section-deep--shift otevru-section-accent otevru-accent-lime otevru-bg-pattern otevru-bg-mesh-dark">
+<section id="sluzby" class="otevru-services">
   <div class="shell otevru-section-pad">
-    <div class="otevru-section-head">
-      <p class="otevru-eyebrow otevru-eyebrow--on-dark">Služby</p>
-      <h2 class="otevru-section-title otevru-section-title--on-dark">Co pro vás uděláme</h2>
-      <p class="otevru-section-lead otevru-section-lead--on-dark">Od nouzového otevření po montáž zabezpečení na míru.</p>
+    <div class="otevru-section-head otevru-section-head--split">
+      <div>
+        <p class="otevru-eyebrow">Služby</p>
+        <h2 class="otevru-section-title">Co pro vás uděláme</h2>
+      </div>
+      <p class="otevru-section-lead">Od nouzového otevření po montáž zabezpečení na míru.</p>
     </div>
-    <div class="otevru-services-grid"><article class="otevru-card rounded-lg p-6">
-  <span class="otevru-icon-badge"><svg class="otevru-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="1.5" stroke-width="2"/><path d="M8 11V8a4 4 0 0 1 7.5-2" stroke-width="2" stroke-linecap="round"/></svg></span>
-  <h3 class="mt-4 text-lg font-bold slate">Nouzové otevírání</h3>
-  <p class="mt-2 text-sm leading-6 muted">Byty, domy i auta. Otevíráme tak, aby zámek a dveře zůstaly co nejméně poškozené.</p>
-</article>
-<article class="otevru-card rounded-lg p-6" id="klucova-sluzba">
-  <span class="otevru-icon-badge"><svg class="otevru-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="7.5" cy="12" r="4.5"/><circle cx="7.5" cy="12" r="1.5"/><path d="M12 10.75h9.25v2.6h-2.15V16h-2.2v-2.65h-1.7V15H13.5v-1.65H12z" stroke-linejoin="round"/></svg></span>
-  <h3 class="mt-4 text-lg font-bold slate">Klíčová služba</h3>
-  <p class="otevru-offer-tag">Yale Linus — ptejte se na akci</p>
-  <p class="mt-2 text-sm leading-6 muted">Výroba klíčů, autoklíče a bezklíčové systémy včetně Yale Linus.</p>
-</article>
-<article class="otevru-card rounded-lg p-6">
-  <span class="otevru-icon-badge"><svg class="otevru-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="6" y="3" width="12" height="18" rx="1" stroke-width="2"/><circle cx="14.5" cy="12" r="1.1" fill="currentColor"/></svg></span>
-  <h3 class="mt-4 text-lg font-bold slate">Bezpečnostní dveře</h3>
-  <p class="mt-2 text-sm leading-6 muted">Výběr, montáž a servis bezpečnostních i protipožárních dveří.</p>
-</article>
-<article class="otevru-card rounded-lg p-6">
-  <span class="otevru-icon-badge"><svg class="otevru-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="1.5" stroke-width="2"/><circle cx="12" cy="12" r="3" stroke-width="2"/><path d="M12 9V7M12 17v-2M9 12H7M17 12h-2" stroke-width="2" stroke-linecap="round"/></svg></span>
-  <h3 class="mt-4 text-lg font-bold slate">Trezory a sejfy</h3>
-  <p class="mt-2 text-sm leading-6 muted">Montáž do zdi, servis, repase, stěhování i trezory na zbraně.</p>
-</article>
-<article class="otevru-card rounded-lg p-6">
-  <span class="otevru-icon-badge"><svg class="otevru-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18v3h3l6.3-6.3a4 4 0 0 0 5.4-5.4l-2.1 2.1-3.3-3.3 2.1-2.1z" stroke-width="2" stroke-linejoin="round"/></svg></span>
-  <h3 class="mt-4 text-lg font-bold slate">Opravy po vloupání</h3>
-  <p class="mt-2 text-sm leading-6 muted">Výměna zámků, vložek, kování a zárubní po poškození objektu.</p>
-</article>
-<article class="otevru-card rounded-lg p-6">
-  <span class="otevru-icon-badge"><svg class="otevru-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 10.5L12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1v-9.5z" stroke-width="2" stroke-linejoin="round"/></svg></span>
-  <h3 class="mt-4 text-lg font-bold slate">Komplexní zabezpečení</h3>
-  <p class="mt-2 text-sm leading-6 muted">Mříže, závory, samozavírače a systém generálního klíče.</p>
-</article></div>
+    <ul class="otevru-service-list">
+      <li class="otevru-service">
+        <span class="otevru-service-num" aria-hidden="true">01</span>
+        <div class="otevru-service-name"><h3>Nouzové otevírání</h3></div>
+        <p>Byty, domy i auta. Otevíráme tak, aby zámek a dveře zůstaly co nejméně poškozené.</p>
+      </li>
+      <li class="otevru-service" id="klucova-sluzba">
+        <span class="otevru-service-num" aria-hidden="true">02</span>
+        <div class="otevru-service-name"><h3>Klíčová služba</h3><span class="otevru-offer-tag">Yale Linus — ptejte se na akci</span></div>
+        <p>Výroba klíčů, autoklíče a bezklíčové systémy včetně Yale Linus.</p>
+      </li>
+      <li class="otevru-service">
+        <span class="otevru-service-num" aria-hidden="true">03</span>
+        <div class="otevru-service-name"><h3>Bezpečnostní dveře</h3></div>
+        <p>Výběr, montáž a servis bezpečnostních i protipožárních dveří.</p>
+      </li>
+      <li class="otevru-service">
+        <span class="otevru-service-num" aria-hidden="true">04</span>
+        <div class="otevru-service-name"><h3>Trezory a sejfy</h3></div>
+        <p>Montáž do zdi, servis, repase, stěhování i trezory na zbraně.</p>
+      </li>
+      <li class="otevru-service">
+        <span class="otevru-service-num" aria-hidden="true">05</span>
+        <div class="otevru-service-name"><h3>Opravy po vloupání</h3></div>
+        <p>Výměna zámků, vložek, kování a zárubní po poškození objektu.</p>
+      </li>
+      <li class="otevru-service">
+        <span class="otevru-service-num" aria-hidden="true">06</span>
+        <div class="otevru-service-name"><h3>Komplexní zabezpečení</h3></div>
+        <p>Mříže, závory, samozavírače a systém generálního klíče.</p>
+      </li>
+    </ul>
   </div>
 </section>
 
-<section id="o-nas" class="otevru-section-blue otevru-about otevru-bg-pattern otevru-bg-mesh-blue">
+<section id="o-nas" class="otevru-about-v27">
   <div class="shell otevru-section-pad otevru-about-grid">
     <div>
-      <p class="otevru-eyebrow otevru-eyebrow--hero">O nás</p>
-      <h2 class="otevru-section-title text-white">Otevřeme šetrně a přijedeme za vámi</h2>
-      <p class="mt-4 max-w-xl leading-7 white-85">Otevíráme bez zbytečného poškození zámků a konstrukcí. Poradíme se zabezpečením a připravíme nabídku podle vašich požadavků. Není to na vteřiny? <a class="lime font-semibold underline" href="/kontakt">Napište poptávku</a>.</p>
-      <p class="mt-4 text-sm leading-6 white-65">Před návštěvou prosím zavolejte — technici jsou často v terénu na zakázkách.</p>
+      <p class="otevru-eyebrow">O nás</p>
+      <h2 class="otevru-section-title">Otevřeme šetrně a přijedeme za vámi</h2>
+      <p class="mt-4 max-w-xl leading-7 otevru-text">Otevíráme bez zbytečného poškození zámků a konstrukcí. Poradíme se zabezpečením a připravíme nabídku podle vašich požadavků. Není to na vteřiny? <a class="otevru-inline-link" href="/kontakt">Napište poptávku</a>.</p>
+      <p class="mt-4 text-sm leading-6 otevru-text-muted">Před návštěvou prosím zavolejte — technici jsou často v terénu na zakázkách.</p>
       <a class="otevru-btn-orange mt-8 min-h-12 px-6 py-3" href="tel:+420606262118">Zavolat +420 606 262 118</a>
     </div>
-    <div class="otevru-hero-panel otevru-hero-card">
-      <p class="otevru-eyebrow otevru-eyebrow--panel">Certifikace a zázemí</p>
+    <div class="otevru-about-card">
+      <p class="otevru-eyebrow">Certifikace a zázemí</p>
       <ul class="otevru-partner-strip otevru-partner-strip--stacked mt-6">
         <li>
           <a class="otevru-partner-strip-item" href="https://www.assaabloy.com/cz/cs" target="_blank" rel="noopener noreferrer">
             <div class="otevru-partner-logo-wrap">
-              <img class="otevru-partner-logo" src="partners/assa-abloy.svg" alt="Logo autorizovaného partnera ASSA ABLOY" width="200" height="44" loading="lazy" decoding="async">
+              <img class="otevru-partner-logo" src="partners/assa-abloy-dark.svg" alt="Logo autorizovaného partnera ASSA ABLOY" width="200" height="44" loading="lazy" decoding="async">
             </div>
             <p class="otevru-partner-strip-label">Autorizovaný partner</p>
           </a>
@@ -422,16 +425,23 @@
           </a>
         </li>
       </ul>
-      <p class="mt-8 text-sm leading-6 white-75">Provozovna ve Sviadnově. V nouzi přijedeme za vámi.</p>
-      <p class="mt-3 text-sm white-70">Provoz: Po–Ne 07:00–18:00</p>
+      <p class="mt-8 text-sm leading-6 otevru-text">Provozovna ve Sviadnově. V nouzi přijedeme za vámi.</p>
+      <p class="mt-3 text-sm otevru-text">Provoz: Po–Ne 07:00–18:00</p>
       <!-- TODO(b5): reálná fotka provozovny / výjezdu, až ji dodá provozovatel -->
-      <a class="otevru-maps-link mt-1 text-sm white-70 hover-lime" href="https://maps.google.com/?q=O.%20Ki%C5%A1ov%C3%A9%2088%2C%20739%2025%20Sviadnov" target="_blank" rel="noopener noreferrer"><span class="otevru-contact-text">O. Kišové 88, 739 25 Sviadnov</span></a>
+      <a class="otevru-maps-link mt-1 text-sm otevru-text" href="https://maps.google.com/?q=O.%20Ki%C5%A1ov%C3%A9%2088%2C%20739%2025%20Sviadnov" target="_blank" rel="noopener noreferrer"><span class="otevru-contact-text">O. Kišové 88, 739 25 Sviadnov</span></a>
     </div>
   </div>
 </section>
 
 </div>
 <footer class="otevru-section-dark">
+  <div class="shell otevru-footer-call">
+    <div>
+      <p class="otevru-footer-call-label">Pohotovost · Po–Ne 07:00–18:00</p>
+      <a class="otevru-footer-phone" href="tel:+420606262118">+420 606 262 118</a>
+    </div>
+    <a class="otevru-btn-orange min-h-12 px-6 py-3" href="tel:+420606262118">Zavolat</a>
+  </div>
   <div class="shell otevru-footer-grid">
     <div>
       <p class="text-lg font-bold tracking-tight text-white">OTEVRU.cz</p>
@@ -451,7 +461,6 @@
       <p class="otevru-title lime">Kontakt</p>
       <a class="otevru-contact-line mt-3 font-semibold text-white hover-lime" href="tel:+420606262118"><span class="otevru-contact-text">+420 606 262 118</span></a>
       <a class="otevru-contact-line text-sm hover-lime" href="mailto:patrik@otevru.cz"><span class="otevru-contact-text">patrik@otevru.cz</span></a>
-      <a class="otevru-btn-orange mt-5 min-h-12 px-6 py-3" href="tel:+420606262118">Zavolat</a>
     </div>
     <nav aria-label="Právní informace">
       <p class="otevru-title lime">Informace</p>
@@ -464,5 +473,8 @@
   </div>
 </footer>
 <script src="main.js" defer></script>
+<script src="vendor/gsap.min.js" defer></script>
+<script src="vendor/ScrollTrigger.min.js" defer></script>
+<script src="motion.js" defer></script>
 </body>
 </html>

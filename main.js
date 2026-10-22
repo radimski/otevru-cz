@@ -131,6 +131,7 @@
     var springs = stage.querySelectorAll(".lock-spring");
     var stacks = stage.querySelectorAll(".lock-pin-stack");
     var endKey = stage.querySelector(".lock-end-key");
+    var stateText = stage.querySelector(".otevru-lock-state-text");
     var reduce =
       window.matchMedia &&
       window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -273,15 +274,25 @@
       else if (p >= 0.58 && p <= 0.7) turnT = 1;
       else if (p > 0.7 && p < 0.78) turnT = 1 - smoothstep((p - 0.7) / 0.08);
       applyPose(tx, turnT, p >= 0.78);
+      setUnlocked(turnT > 0.5);
+    }
+
+    /* Lamp under the cutaway: green while the rotor is turned. */
+    function setUnlocked(open) {
+      if (stage.classList.contains("is-unlocked") === open) return;
+      stage.classList.toggle("is-unlocked", open);
+      if (stateText) stateText.textContent = open ? "Odemčeno" : "Zamčeno";
     }
 
     function resetIdle() {
       applyPose(KEY_OUT, 0, false);
+      setUnlocked(false);
     }
 
     if (reduce) {
       stage.classList.add("is-playing", "is-js-pins");
       applyPose(0, 1, false);
+      setUnlocked(true);
       return;
     }
 
