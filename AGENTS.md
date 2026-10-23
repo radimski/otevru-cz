@@ -10,3 +10,8 @@ Read before any work in this repo:
 ## This project's deviations from the standard layout
 
 Flat layout: `index.html`, `build/`, `export/`, `api/` all live directly at repo root, not the `site/`+`build/` split the rulebook names as its preferred default. This is actually the pattern in most of the fleet (otevru-cz, civil-cz, kinles-cz, kolmo-kafe all do it this way) — only vodotop-fm follows the documented split. Worth reconciling in the rulebook itself rather than treating each repo as its own one-off exception; flagged here, not fixed.
+
+## Design a texty
+
+- Při jakékoli práci na vzhledu (layout, barvy, typografie, obrázky, animace) použij skill `redeye-webdesign`.
+- Při jakékoli práci na textech (nadpisy, služby, CTA, SEO stránky, nabídky, audity) použij skill `redeye-copywriting`.
