@@ -1970,8 +1970,7 @@ a.otevru-trust-card:hover {
 .otevru-lock-svg .lock-driver-col,
 .otevru-lock-svg .lock-keypin-col,
 .otevru-lock-svg .lock-end-rotor,
-.otevru-lock-svg .lock-cam,
-.otevru-lock-svg .lock-cam-arm {
+.otevru-lock-svg .lock-end-bolt {
   transform-box: view-box;
   transform-origin: 0 0;
 }
@@ -1988,9 +1987,17 @@ a.otevru-trust-card:hover {
   transform-origin: center;
 }
 
-/* Vačka at the tip — same physical turn as Pohled B */
-.otevru-lock-svg .lock-cam-arm {
-  transform-origin: 372px var(--lock-axis-y);
+/* Everything that sits in the plug turns about the key axis, like the key itself:
+   in Řez A–A it folds out of the section plane. */
+.otevru-lock-svg .lock-keypins,
+.otevru-lock-svg .lock-cam-lobe {
+  transform-box: view-box;
+  transform-origin: 180px var(--lock-axis-y);
+}
+/* Pohled B cam turns with the rotor about the axis (its box is centred on it) */
+.otevru-lock-svg .lock-end-cam {
+  transform-box: fill-box;
+  transform-origin: center;
 }
 
 .otevru-lock-svg .lock-driver {
@@ -2008,18 +2015,14 @@ a.otevru-trust-card:hover {
   transform-box: fill-box;
   transform-origin: center top;
 }
+/* Pins are placed every frame from the key profile in main.js; a CSS transition
+   would make them lag behind the key and sink into it. */
 .otevru-lock-svg .lock-keypin-col,
 .otevru-lock-svg .lock-driver-col,
-.otevru-lock-svg .lock-spring {
-  transition-property: transform;
-  transition-duration: 0.3s;
-  transition-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-.otevru-lock-svg .lock-keypin-col.is-relaxing,
-.otevru-lock-svg .lock-driver-col.is-relaxing,
-.otevru-lock-svg .lock-spring.is-relaxing {
-  transition-duration: 0.15s;
-  transition-timing-function: cubic-bezier(0.22, 1.7, 0.36, 1);
+.otevru-lock-svg .lock-spring,
+.otevru-lock-svg .lock-end-driver,
+.otevru-lock-svg .lock-end-keypin {
+  transition: none;
 }
 /* Tips sit in the V; stavítka paint after the key so the chamfer stays visible */
 .otevru-lock-svg .lock-keypin {
@@ -2061,11 +2064,19 @@ a.otevru-trust-card:hover {
   opacity: 0;
 }
 .otevru-lock-embed:not(.is-playing) .lock-end-rotor,
-.otevru-lock-embed:not(.is-playing) .lock-cam-arm {
+.otevru-lock-embed:not(.is-playing) .lock-end-cam {
   transform: rotate(0deg);
 }
-.otevru-lock-embed:not(.is-playing) .lock-cam {
+.otevru-lock-embed:not(.is-playing) .lock-keypins,
+.otevru-lock-embed:not(.is-playing) .lock-cam-lobe {
+  transform: rotateX(0deg);
+}
+.otevru-lock-embed:not(.is-playing) .lock-end-bolt {
   transform: translateX(0);
+}
+.otevru-lock-embed:not(.is-playing) .lock-end-driver,
+.otevru-lock-embed:not(.is-playing) .lock-end-keypin {
+  transform: translateY(4px);
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -2074,8 +2085,7 @@ a.otevru-trust-card:hover {
   .otevru-lock-embed.is-playing.is-js-pins .lock-keypin-col,
   .otevru-lock-embed.is-playing.is-js-pins .lock-driver-col,
   .otevru-lock-embed.is-playing.is-js-pins .lock-spring,
-  .otevru-lock-embed.is-playing.is-js-pins .lock-end-key,
-  .otevru-lock-embed.is-playing.is-js-pins .lock-keypins {
+  .otevru-lock-embed.is-playing.is-js-pins .lock-end-key {
     animation: none !important;
   }
   .otevru-lock-embed.is-playing .lock-key-assembly {
@@ -2087,11 +2097,18 @@ a.otevru-trust-card:hover {
   .otevru-lock-embed.is-playing .lock-end-rotor {
     animation: lock-turn-bow 10s var(--lock-turn-ease, cubic-bezier(0.45, 0.05, 0.25, 1)) infinite;
   }
-  .otevru-lock-embed.is-playing .lock-cam-arm {
-    animation: lock-turn-tip 10s var(--lock-turn-ease, cubic-bezier(0.45, 0.05, 0.25, 1)) infinite;
+  .otevru-lock-embed.is-playing .lock-keypins,
+  .otevru-lock-embed.is-playing .lock-cam-lobe {
+    animation: lock-key-axis-spin 10s var(--lock-turn-ease, cubic-bezier(0.45, 0.05, 0.25, 1)) infinite;
   }
-  .otevru-lock-embed.is-playing .lock-cam {
-    animation: lock-cam-cycle 10s var(--lock-turn-ease, cubic-bezier(0.45, 0.05, 0.25, 1)) infinite;
+  .otevru-lock-embed.is-playing .lock-plug-holes {
+    animation: lock-holes-out 10s var(--lock-turn-ease, cubic-bezier(0.45, 0.05, 0.25, 1)) infinite;
+  }
+  .otevru-lock-embed.is-playing .lock-end-cam {
+    animation: lock-turn-bow 10s var(--lock-turn-ease, cubic-bezier(0.45, 0.05, 0.25, 1)) infinite;
+  }
+  .otevru-lock-embed.is-playing .lock-end-bolt {
+    animation: lock-bolt-cycle 10s var(--lock-turn-ease, cubic-bezier(0.45, 0.05, 0.25, 1)) infinite;
   }
   .otevru-lock-embed.is-playing .lock-end-arrow {
     animation: lock-end-arrow 10s var(--lock-turn-ease, cubic-bezier(0.45, 0.05, 0.25, 1)) infinite;
@@ -2125,16 +2142,18 @@ a.otevru-trust-card:hover {
   78%, 100% { transform: rotate(0deg); }
 }
 
-@keyframes lock-turn-tip {
-  0%, 50% { transform: rotate(0deg); }
-  58%, 70% { transform: rotate(-90deg); }
-  78%, 100% { transform: rotate(0deg); }
+/* The bolt leaves the strike as the cam lobe swings from 6 to 3 o’clock */
+@keyframes lock-bolt-cycle {
+  0%, 50% { transform: translateX(0); }
+  58%, 70% { transform: translateX(14px); }
+  78%, 100% { transform: translateX(0); }
 }
 
-@keyframes lock-cam-cycle {
-  0%, 50% { transform: translateX(0); }
-  58%, 70% { transform: translateX(-32px); }
-  78%, 100% { transform: translateX(0); }
+/* Pin holes in the plug turn out of the section plane with it */
+@keyframes lock-holes-out {
+  0%, 50% { opacity: 1; }
+  56%, 72% { opacity: 0; }
+  78%, 100% { opacity: 1; }
 }
 
 @keyframes lock-end-arrow {
@@ -2156,10 +2175,14 @@ a.otevru-trust-card:hover {
     opacity: 1;
   }
   .otevru-lock-embed .lock-driver-col {
-    transform: translateY(-3px);
+    transform: translateY(0);
   }
   .otevru-lock-embed .lock-spring {
-    transform: scaleY(0.94);
+    transform: scaleY(1);
+  }
+  .otevru-lock-embed .lock-end-driver,
+  .otevru-lock-embed .lock-end-keypin {
+    transform: translateY(0);
   }
   .otevru-lock-embed .lock-keypin-col {
     transform: translateY(0);
@@ -2171,14 +2194,12 @@ a.otevru-trust-card:hover {
     stroke: #000;
     stroke-width: 2;
   }
-  .otevru-lock-embed .lock-end-rotor {
+  .otevru-lock-embed .lock-end-rotor,
+  .otevru-lock-embed .lock-end-cam {
     transform: rotate(-90deg);
   }
-  .otevru-lock-embed .lock-cam {
-    transform: translateX(-32px);
-  }
-  .otevru-lock-embed .lock-cam-arm {
-    transform: rotate(-90deg);
+  .otevru-lock-embed .lock-end-bolt {
+    transform: translateX(14px);
   }
 }
 

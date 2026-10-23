@@ -156,7 +156,7 @@
               <g class="lock-plug-body" stroke="#111">
                 <rect class="lock-plug" x="107.5" y="99" width="249" height="42" fill="url(#lock-plug-hatch)" stroke-width="1.2"/>
                 <rect x="107.5" y="111" width="249" height="30" fill="#f4f4f2" stroke-width="0.65"/>
-                <g fill="#f4f4f2" stroke-width="0.75">
+                <g class="lock-plug-holes" fill="#f4f4f2" stroke-width="0.75">
                   <rect x="142.5" y="99" width="15" height="12"/>
                   <rect x="178.5" y="99" width="15" height="12"/>
                   <rect x="214.5" y="99" width="15" height="12"/>
@@ -206,7 +206,7 @@
 
               <g class="lock-key-assembly">
                 <g class="lock-key">
-                  <path class="lock-key-profile" fill="#9a8758" stroke="#111" stroke-width="1.25" stroke-linejoin="round" d="M10 104 H42 V112 H88 V113 L139 113 L150 125 L161 113 L168 113 L175 113 L186 133 L197 113 L204 113 L211 113 L222 137 L233 113 L240 113 L247 113 L258 129 L269 113 L276 113 L283 113 L294 121 L305 113 H326 L334 120 V140 H42 V142 H10 C5 142 1 132 1 122 C1 112 5 104 10 104 Z"/>
+                  <path class="lock-key-profile" fill="#9a8758" stroke="#111" stroke-width="1.25" stroke-linejoin="round" d="M10 104 H42 V112 H100 V106 H105.5 V113 L139 113 L150 125 L161 113 L168 113 L175 113 L186 133 L197 113 L204 113 L211 113 L222 137 L233 113 L240 113 L247 113 L258 129 L269 113 L276 113 L283 113 L294 121 L305 113 H326 L334 120 V140 H42 V142 H10 C5 142 1 132 1 122 C1 112 5 104 10 104 Z"/>
                   <circle class="lock-key-profile" cx="14" cy="120" r="4" fill="#f4f4f2" stroke="#111" stroke-width="1"/>
                 </g>
               </g>
@@ -241,33 +241,37 @@
               <line class="lock-shear" x1="108" y1="98" x2="356" y2="98" stroke="#111" stroke-width="1.45" stroke-dasharray="5 2.5"/>
               <path d="M108 94 v8 M356 94 v8" stroke="#111" stroke-width="1" fill="none"/>
 
-              <!-- Case race + strike pocket (static). Bolt throw is 32px into the jamb. -->
-              <g class="lock-strike" stroke="#111">
-                <path d="M388 110 H424 M388 130 H424" fill="none" stroke-width="0.85"/>
-                <path fill="url(#lock-section-hatch)" stroke-width="1.05" d="M424 108 H470 V132 H424 V130 H456 V110 H424 Z"/>
-                <rect x="424" y="110" width="32" height="20" fill="#f4f4f2" stroke-width="0.8"/>
-              </g>
-
-              <!-- Bolt thrown into the strike; left edge overlaps the cam. Retracts translateX(-32). -->
-              <g class="lock-cam">
-                <path fill="#6e6e6a" stroke="#111" stroke-width="1.1" d="M380 112 H456 V128 H380 V124 H388 V116 H380 Z"/>
-              </g>
-
-              <!-- Tailpiece + cam lobe sit in the bolt slot (drawn on top) -->
+              <!-- Tailpiece + cam (vačka). The lobe points down in the section plane and
+                   turns about the key axis with the plug, so here it folds towards the viewer. -->
               <g class="lock-cam-pivot">
                 <rect class="lock-tailpiece" x="356.5" y="115" width="16" height="10" rx="5" fill="url(#lock-plug-hatch)" stroke="#111" stroke-width="1.05"/>
+                <g class="lock-cam-lobe">
+                  <path d="M368 120 V142 a4 4 0 0 0 8 0 V120 Z" fill="#3d3d3d" stroke="#111" stroke-width="0.9"/>
+                </g>
                 <circle cx="372" cy="120" r="10" fill="url(#lock-plug-hatch)" stroke="#111" stroke-width="1.1"/>
                 <circle cx="372" cy="120" r="2.4" fill="#111" stroke="none"/>
-                <g class="lock-cam-arm">
-                  <path d="M372 116 h11 a4 4 0 0 1 0 8 H372 Z" fill="#3d3d3d" stroke="#111" stroke-width="0.9"/>
-                </g>
               </g>
 
-              <!-- Pohled B: kolík stays at 12 o’clock in the shell; stavítko + key turn with the rotor -->
-              <g class="lock-endview" transform="translate(424 14)">
-                <rect x="0" y="0" width="80" height="90" fill="#f4f4f2" stroke="#111" stroke-width="1"/>
-                <text x="40" y="12" text-anchor="middle" fill="#111" font-size="6" font-family="ui-monospace, Consolas, monospace" font-weight="700">POHLED B</text>
-                <g transform="translate(40 49)">
+              <!-- Pohled B looks along the key axis, so the door plane is the drawing plane:
+                   the bolt moves sideways here, pushed by the cam lobe as the rotor turns. -->
+              <g class="lock-endview" transform="translate(392 20)">
+                <rect x="0" y="0" width="114" height="132" fill="#f4f4f2" stroke="#111" stroke-width="1"/>
+                <text x="57" y="11" text-anchor="middle" fill="#111" font-size="6" font-family="ui-monospace, Consolas, monospace" font-weight="700">POHLED B</text>
+                <!-- Strike in the frame (static) -->
+                <path class="lock-end-strike" fill="url(#lock-section-hatch)" stroke="#111" stroke-width="1" d="M3 86 H19 V90 H8 V106 H19 V110 H3 Z"/>
+                <!-- Bolt: thrown into the strike when locked, slides 14 right when the cam turns -->
+                <g class="lock-end-bolt">
+                  <rect x="9" y="92" width="58" height="12" fill="#6e6e6a" stroke="#111" stroke-width="1"/>
+                </g>
+                <text x="66" y="118" text-anchor="middle" fill="#111" font-size="5" font-family="ui-monospace, Consolas, monospace" font-weight="700">ZÁVORA</text>
+                <g transform="translate(57 56)">
+                  <!-- Cam lobe sits behind the cylinder face, so only the part beyond the shell shows.
+                       The invisible circle centres its box on the axis for the rotation. -->
+                  <g class="lock-end-cam">
+                    <circle r="42" fill="none" stroke="none"/>
+                    <path d="M-4 17 V38 a4 4 0 0 0 8 0 V17 Z" fill="#3d3d3d" stroke="#111" stroke-width="0.9"/>
+                  </g>
+                  <circle r="28" fill="#f4f4f2"/>
                   <circle r="28" fill="url(#lock-section-hatch)" stroke="#111" stroke-width="1.1"/>
                   <rect class="lock-end-driver" x="-2.3" y="-26.5" width="4.6" height="9.2" rx="2.3" fill="#3d3d3d" stroke="#111" stroke-width="0.7"/>
                   <circle r="17.2" fill="none" stroke="#111" stroke-width="0.55"/>
@@ -282,7 +286,7 @@
                     <circle r="1.6" fill="#111" stroke="none"/>
                   </g>
                   <path class="lock-end-arrow" d="M20 14 A24 24 0 0 0 20 -14" fill="none" stroke="#111" stroke-width="1.35" marker-end="url(#lock-arrow)"/>
-                  <text y="36" text-anchor="middle" fill="#111" font-size="5" font-family="ui-monospace, Consolas, monospace" font-weight="700">90°</text>
+                  <text x="36" y="-22" text-anchor="middle" fill="#111" font-size="5" font-family="ui-monospace, Consolas, monospace" font-weight="700">90°</text>
                 </g>
               </g>
             </g>

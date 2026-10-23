@@ -131,6 +131,8 @@
     var springs = stage.querySelectorAll(".lock-spring");
     var stacks = stage.querySelectorAll(".lock-pin-stack");
     var endKey = stage.querySelector(".lock-end-key");
+    var endDriver = stage.querySelector(".lock-end-driver");
+    var endKeypin = stage.querySelector(".lock-end-keypin");
     var stateText = stage.querySelector(".otevru-lock-state-text");
     var reduce =
       window.matchMedia &&
@@ -145,8 +147,10 @@
       [10, 104],
       [42, 104],
       [42, 112],
-      [88, 112],
-      [88, 113],
+      [100, 112],
+      [100, 106],
+      [105.5, 106],
+      [105.5, 113],
       [139, 113],
       [150, 125],
       [161, 113],
@@ -170,7 +174,8 @@
       [334, 120],
     ];
     var CYCLE_MS = 10000;
-    var DRIVER_TUCK = 3;
+    /* Pohled B: without the key the kolík drops this far into the rotor. */
+    var END_DROP = 4;
     var SPRING_TOP = 32;
     var DRIVER_TOP0 = 81;
     var SPRING_NAT = DRIVER_TOP0 - SPRING_TOP;
@@ -238,32 +243,23 @@
       return s;
     }
 
-    function applyStack(i, dy, turnT, relaxing) {
-      if (keypins[i]) {
-        keypins[i].classList.toggle("is-relaxing", relaxing);
-        keypins[i].style.transform = "translateY(" + dy + "px)";
-      }
-      /* Kolíky follow the stack. Once seated, they stay in the shell on the plug OD. */
-      var dLift = dy;
-      if (Math.abs(dy) < 0.75) dLift = -DRIVER_TUCK * turnT;
-      if (drivers[i]) {
-        drivers[i].classList.toggle("is-relaxing", relaxing);
-        drivers[i].style.transform = "translateY(" + dLift + "px)";
-      }
-      if (springs[i]) {
-        springs[i].classList.toggle("is-relaxing", relaxing);
-        springs[i].style.transform = "scaleY(" + springScale(dLift) + ")";
-      }
+    /* Kolíky follow the stack; once seated they rest on the plug OD while it turns. */
+    function applyStack(i, dy) {
+      if (keypins[i]) keypins[i].style.transform = "translateY(" + dy + "px)";
+      if (drivers[i]) drivers[i].style.transform = "translateY(" + dy + "px)";
+      if (springs[i]) springs[i].style.transform = "scaleY(" + springScale(dy) + ")";
     }
 
-    function applyPose(tx, turnT, relaxing) {
+    function applyPose(tx) {
       if (key) key.style.transform = "translateX(" + tx + "px)";
-      if (endKey) {
-        var inAmt = Math.max(0, Math.min(1, (tx - KEY_OUT) / (0 - KEY_OUT)));
-        endKey.style.opacity = String(inAmt);
-      }
+      var inAmt = Math.max(0, Math.min(1, (tx - KEY_OUT) / (0 - KEY_OUT)));
+      if (endKey) endKey.style.opacity = String(inAmt);
+      /* Pohled B: the stack sits across the shear circle until the key is fully in. */
+      var drop = END_DROP * (1 - smoothstep(inAmt));
+      if (endDriver) endDriver.style.transform = "translateY(" + drop + "px)";
+      if (endKeypin) endKeypin.style.transform = "translateY(" + drop + "px)";
       for (var i = 0; i < keypins.length; i++) {
-        applyStack(i, pinDy(i, tx), turnT, relaxing);
+        applyStack(i, pinDy(i, tx));
       }
     }
 
@@ -273,7 +269,7 @@
       if (p >= 0.5 && p < 0.58) turnT = smoothstep((p - 0.5) / 0.08);
       else if (p >= 0.58 && p <= 0.7) turnT = 1;
       else if (p > 0.7 && p < 0.78) turnT = 1 - smoothstep((p - 0.7) / 0.08);
-      applyPose(tx, turnT, p >= 0.78);
+      applyPose(tx);
       setUnlocked(turnT > 0.5);
     }
 
@@ -285,13 +281,13 @@
     }
 
     function resetIdle() {
-      applyPose(KEY_OUT, 0, false);
+      applyPose(KEY_OUT);
       setUnlocked(false);
     }
 
     if (reduce) {
       stage.classList.add("is-playing", "is-js-pins");
-      applyPose(0, 1, false);
+      applyPose(0);
       setUnlocked(true);
       return;
     }
