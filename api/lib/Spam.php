@@ -17,9 +17,11 @@ final class FE_Spam
     public static $honeypots = array('_website', '_company_url');
 
     /**
-     * Rejects a request whose Origin or Referer is present but points at a host
-     * we do not serve. Absent headers are allowed through — curl and some
-     * privacy tools omit them, and the signed token already covers that case.
+     * Rejects a request whose Origin or Referer points at a host we do not
+     * serve. A POST must carry one of them: every browser sends Origin on a
+     * fetch() POST, so only a script leaves both out. A GET without them is
+     * let through — some privacy tools strip Referer from plain requests, and
+     * the token it gets is rate-limited and useless without a browser's UA.
      *
      * @throws FE_Exception
      */
@@ -30,34 +32,47 @@ final class FE_Spam
         }
 
         $raw = '';
-        if (!empty($server['HTTP_ORIGIN'])) {
+        // "null" is what a browser sends when it will not reveal the origin.
+        if (!empty($server['HTTP_ORIGIN']) && $server['HTTP_ORIGIN'] !== 'null') {
             $raw = $server['HTTP_ORIGIN'];
         } elseif (!empty($server['HTTP_REFERER'])) {
             $raw = $server['HTTP_REFERER'];
         }
+
+        $method = isset($server['REQUEST_METHOD']) ? strtoupper($server['REQUEST_METHOD']) : 'GET';
         if ($raw === '') {
+            if ($method === 'POST') {
+                throw new FE_Exception('bad_request', 'POST without Origin or Referer.');
+            }
             return;
         }
 
         $host = parse_url($raw, PHP_URL_HOST);
-        if (!$host) {
-            return;
+        if (!$host || !self::hostAllowed($host, $allowed)) {
+            throw new FE_Exception('bad_request', 'Origin ' . ($host ? $host : $raw) . ' is not in allowedOrigins.');
         }
-        $host = strtolower($host);
+    }
 
+    /**
+     * A bare allowedOrigins entry matches the host and any subdomain of it, so
+     * one line covers example.sk and www.example.sk.
+     */
+    public static function hostAllowed($host, array $allowed)
+    {
+        $host = strtolower((string) $host);
+        if ($host === '') {
+            return false;
+        }
         foreach ($allowed as $candidate) {
-            $candidate = strtolower(trim($candidate));
+            $candidate = strtolower(trim((string) $candidate));
             if ($candidate === '') {
                 continue;
             }
-            // A bare entry matches the host and any subdomain of it, so one
-            // line covers example.sk and www.example.sk.
             if ($host === $candidate || substr($host, -strlen('.' . $candidate)) === '.' . $candidate) {
-                return;
+                return true;
             }
         }
-
-        throw new FE_Exception('bad_request', 'Origin ' . $host . ' is not in allowedOrigins.');
+        return false;
     }
 
     /**
@@ -98,7 +113,7 @@ final class FE_Spam
             }
 
             // A URL in a name or phone box is never a person being helpful.
-            if (($type === 'text' || $type === 'tel') && $name !== 'poznamka' && self::countLinks($value) > 0) {
+            if (($type === 'text' || $type === 'tel') && !in_array($name, array('poznamka', 'web'), true) && self::countLinks($value) > 0) {
                 $score += 4;
                 $reasons[] = 'link_in_' . $name;
             }

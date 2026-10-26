@@ -42,7 +42,9 @@ return array(
      * Better, if the host allows it: somewhere above the web root, e.g.
      *     dirname($_SERVER['DOCUMENT_ROOT']) . '/form-data'
      */
-    'dataDir' => __DIR__ . '/data',
+    // Empty = outside the webroot (<parent of webroot>/form-data), with
+    // api/data behind .htaccess as the fallback. See BUILD-README.
+    'dataDir' => '',
 
     /** Delete stored submissions older than this many days. 0 = keep forever. */
     'retentionDays' => 365,

@@ -36,7 +36,7 @@ final class FE_Engine
         FE_Spam::checkOrigin($server, (array) $this->config->get('allowedOrigins', array()));
 
         if ($method === 'GET') {
-            return $this->issueToken($get);
+            return $this->issueToken($server, $get);
         }
         if ($method !== 'POST') {
             throw new FE_Exception('bad_request', 'Use GET for a token or POST to submit.');
@@ -47,18 +47,37 @@ final class FE_Engine
 
     /* ---------------------------------------------------------------- tokens */
 
-    private function issueToken(array $get)
+    private function issueToken(array $server, array $get)
     {
         $formId = isset($get['form']) ? (string) $get['form'] : '';
         if (!$this->config->hasForm($formId)) {
             throw new FE_Exception('bad_form', 'Unknown form "' . $formId . '".');
         }
 
-        return array(
+        // Tokens are free to mint, so without this a script could stockpile
+        // thousands and spend them later at full speed.
+        $allowed = $this->storage->allow(
+            'token|' . $this->clientIp($server),
+            $this->config->get('tokenMaxPerHour'),
+            $this->config->get('tokenMaxPerDay')
+        );
+        if (!$allowed) {
+            throw new FE_Exception('rate_limited', 'Too many tokens requested from this address.');
+        }
+
+        $response = array(
             'ok'    => true,
-            'nonce' => FE_Token::issue($formId, $this->config->get('secret')),
+            'nonce' => FE_Token::issue($formId, $this->config->get('secret'), $this->binding($server)),
             'ttl'   => (int) $this->config->get('nonceTtl'),
         );
+
+        // Only the public half: never the secret, and nothing at all when off.
+        $turnstile = FE_Turnstile::publicConfig($this->config);
+        if (!empty($turnstile['siteKey'])) {
+            $response['turnstile'] = array('siteKey' => $turnstile['siteKey']);
+        }
+
+        return $response;
     }
 
     /* ----------------------------------------------------------- submissions */
@@ -75,14 +94,13 @@ final class FE_Engine
             isset($post['_nonce']) ? $post['_nonce'] : '',
             $formId,
             $this->config->get('secret'),
-            (int) $this->config->get('nonceTtl')
+            (int) $this->config->get('nonceTtl'),
+            $this->binding($server)
         );
 
         if (!$this->storage->consumeNonce($post['_nonce'], (int) $this->config->get('nonceTtl'))) {
             throw new FE_Exception('bad_nonce', 'This token has already been used.');
         }
-
-        FE_Turnstile::verify($post, $this->config, $this->clientIp($server));
 
         $values = FE_Validator::run($form['fields'], $post);
 
@@ -91,14 +109,25 @@ final class FE_Engine
 
         $ip = $this->clientIp($server);
         if (!$quarantined) {
+            // After the free checks: a honeypot hit never costs a call to
+            // Cloudflare, and quarantine is never mailed, so it needs none.
+            FE_Turnstile::verify($post, $this->config, $ip);
             $this->storage->checkRate($ip, $formId, (int) $form['maxPerHour'], (int) $form['maxPerDay']);
+        } elseif (!$this->storage->allow(
+            'spam|' . $ip . '|' . $formId,
+            $this->config->get('spamMaxPerHour'),
+            $this->config->get('spamMaxPerDay')
+        )) {
+            // Past its own allowance, quarantine stops writing to disk (the log
+            // included). Still "success": a bot learns nothing about the line.
+            return array('ok' => true, 'id' => 'not-stored');
         }
 
         $meta = array(
             'form'   => $formId,
             'at'     => date('Y-m-d H:i:s'),
             'atIso'  => date('c'),
-            'page'   => $this->cleanUrl(isset($post['_page']) ? $post['_page'] : ''),
+            'page'   => $this->pageUrl(isset($post['_page']) ? $post['_page'] : ''),
             'lang'   => preg_replace('/[^a-z\-]/i', '', substr((string) (isset($post['_lang']) ? $post['_lang'] : ''), 0, 5)),
             'ipHash' => $this->storage->hash($ip),
             'ua'     => substr((string) (isset($server['HTTP_USER_AGENT']) ? $server['HTTP_USER_AGENT'] : ''), 0, 200),
@@ -139,13 +168,17 @@ final class FE_Engine
             return array('ok' => true, 'id' => $id, 'mail' => 'deferred');
         }
 
+        // Best effort: a bounce or a throttled address is a log line, never
+        // an error for a visitor whose enquiry is already safe.
+        $confirmation = 'skipped';
         try {
-            $mailer->sendAutoreply($form, $values, $meta);
+            $confirmation = $mailer->sendConfirmation($form, $values, $meta);
         } catch (FE_Exception $e) {
-            $this->storage->log('autoreply failed for ' . $id . ': ' . $e->getMessage());
+            $this->storage->log('confirmation failed for ' . $id . ': ' . $e->getMessage());
+            $confirmation = 'failed';
         }
 
-        return array('ok' => true, 'id' => $id, 'mail' => $transport);
+        return array('ok' => true, 'id' => $id, 'mail' => $transport, 'confirmation' => $confirmation);
     }
 
     /* ---------------------------------------------------------------- helpers */
@@ -171,9 +204,24 @@ final class FE_Engine
         return isset($server['REMOTE_ADDR']) ? $server['REMOTE_ADDR'] : '0.0.0.0';
     }
 
-    private function cleanUrl($url)
+    /**
+     * The page the form was sent from, or '' when it is not one of ours. The
+     * value comes from the POST body, and it ends up as a link in the office
+     * mail — a phishing URL there would carry the site's own From address.
+     */
+    private function pageUrl($url)
     {
         $url = substr((string) $url, 0, 300);
-        return preg_match('#^https?://#i', $url) ? $url : '';
+        if (!preg_match('#^https?://#i', $url)) {
+            return '';
+        }
+        $host = parse_url($url, PHP_URL_HOST);
+        return $host && FE_Spam::hostAllowed($host, (array) $this->config->get('allowedOrigins', array())) ? $url : '';
+    }
+
+    /** What a token is bound to: the browser, not the network (see FE_Token). */
+    private function binding(array $server)
+    {
+        return isset($server['HTTP_USER_AGENT']) ? substr((string) $server['HTTP_USER_AGENT'], 0, 500) : '';
     }
 }

@@ -74,18 +74,32 @@ final class FE_Storage
      */
     public function checkRate($ip, $formId, $maxPerHour, $maxPerDay)
     {
+        if (!$this->allow('submit|' . $ip . '|' . $formId, $maxPerHour, $maxPerDay)) {
+            throw new FE_Exception('rate_limited', 'Too many submissions from this address.');
+        }
+    }
+
+    /**
+     * Counts one event under $key and says whether it fits the limits. An event
+     * over the limit is not counted, so a blocked caller does not dig deeper.
+     * A limit of 0 means no limit. The key is hashed before it touches disk.
+     */
+    public function allow($key, $maxPerHour, $maxPerDay)
+    {
+        $maxPerHour = (int) $maxPerHour;
+        $maxPerDay = (int) $maxPerDay;
         if ($maxPerHour <= 0 && $maxPerDay <= 0) {
-            return;
+            return true;
         }
 
         $now = time();
-        $file = $this->ensureDir($this->dir . '/rate') . '/' . $this->hash($ip . '|' . $formId) . '.json';
+        $file = $this->ensureDir($this->dir . '/rate') . '/' . $this->hash($key) . '.json';
 
         $fh = @fopen($file, 'c+b');
         if (!$fh) {
             // Storage trouble must not take the form down; log and let it pass.
             $this->log('rate limiter could not open ' . $file);
-            return;
+            return true;
         }
 
         @flock($fh, LOCK_EX);
@@ -116,9 +130,11 @@ final class FE_Storage
         @flock($fh, LOCK_UN);
         fclose($fh);
 
-        if ($over) {
-            throw new FE_Exception('rate_limited', 'Too many submissions from this address.');
-        }
+        $this->maybe(100, function () {
+            $this->pruneOlderThan($this->dir . '/rate', time() - 86400);
+        });
+
+        return !$over;
     }
 
     /* ---------------------------------------------------- single-use tokens */
@@ -149,7 +165,12 @@ final class FE_Storage
 
     /* --------------------------------------------------------- maintenance */
 
-    /** Deletes stored submissions past the retention window. */
+    /**
+     * Deletes stored submissions past the retention window, record by record.
+     * A month file whose newest line (its mtime) is past the cutoff goes whole;
+     * the month the cutoff falls in is rewritten without its expired lines, so
+     * nothing outlives retentionDays by up to a month.
+     */
     public function prune()
     {
         if ($this->retentionDays <= 0) {
@@ -165,13 +186,51 @@ final class FE_Storage
 
         foreach ((array) glob($root . '/*', GLOB_ONLYDIR) as $formDir) {
             foreach ((array) glob($formDir . '/*.jsonl') as $file) {
-                // Month files are only ever appended to, so the file's own
-                // mtime is the newest record in it. If that is past the cutoff,
-                // every line inside is too.
                 if (@filemtime($file) < $cutoff) {
                     @unlink($file);
+                    continue;
+                }
+                // Lines older than the cutoff can only sit in a file whose
+                // month starts before it.
+                $monthStart = strtotime(basename($file, '.jsonl') . '-01 00:00:00');
+                if ($monthStart !== false && $monthStart < $cutoff) {
+                    $this->pruneFile($file, $cutoff);
                 }
             }
+        }
+    }
+
+    private function pruneFile($file, $cutoff)
+    {
+        $fh = @fopen($file, 'c+b');
+        if (!$fh) {
+            return;
+        }
+        @flock($fh, LOCK_EX);
+        $kept = array();
+        $dropped = 0;
+        foreach (preg_split('/\r?\n/', (string) stream_get_contents($fh), -1, PREG_SPLIT_NO_EMPTY) as $line) {
+            $row = json_decode($line, true);
+            $at = is_array($row) && isset($row['atIso']) ? strtotime((string) $row['atIso']) : false;
+            if ($at === false && is_array($row) && isset($row['at'])) {
+                $at = strtotime((string) $row['at']);
+            }
+            // A line we cannot date is kept: losing a booking is the worse error.
+            if ($at !== false && $at < $cutoff) {
+                $dropped++;
+                continue;
+            }
+            $kept[] = $line;
+        }
+        if ($dropped > 0) {
+            ftruncate($fh, 0);
+            rewind($fh);
+            fwrite($fh, $kept ? implode("\n", $kept) . "\n" : '');
+        }
+        @flock($fh, LOCK_UN);
+        fclose($fh);
+        if (!$kept) {
+            @unlink($file);
         }
     }
 

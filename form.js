@@ -14,6 +14,11 @@
  *     <p data-form-status role="status" aria-live="polite" hidden></p>
  *   </form>
  *
+ * The status line is un-hidden on load and stays in the page, empty and
+ * visually collapsed, so screen readers register the live region before the
+ * first message lands in it (a region that appears with its text is not
+ * announced). After a successful send it takes focus.
+ *
  * The endpoint comes from <body data-form-endpoint="/api/form.php">, so the
  * same HTML works on the PHP host and on a Cloudflare preview by changing one
  * attribute.
@@ -28,6 +33,8 @@
   var ENDPOINT = body.getAttribute('data-form-endpoint') || '/api/form.php';
   var TURNSTILE_SITE_KEY = body.getAttribute('data-turnstile-site-key') || '';
   var TURNSTILE_THEME = body.getAttribute('data-turnstile-theme') || 'auto';
+  // Must match expectedAction in config.php; Siteverify reports it back.
+  var TURNSTILE_ACTION = body.getAttribute('data-turnstile-action') || 'contact';
   var turnstileLoader = null;
 
   /* Honeypots. These names are also listed in lib/Spam.php; keep them in step.
@@ -89,6 +96,7 @@
     };
 
     addHoneypots(form);
+    prepareStatus(state.status);
     setupTurnstile(state);
 
     // The token is fetched on first interaction, not on page load: a visitor who
@@ -154,7 +162,8 @@
         if (!turnstile || state.turnstileId != null) return;
         state.turnstileId = turnstile.render(mount, {
           sitekey: TURNSTILE_SITE_KEY,
-          theme: TURNSTILE_THEME
+          theme: TURNSTILE_THEME,
+          action: TURNSTILE_ACTION
         });
       })
       .catch(function () {
@@ -232,12 +241,22 @@
     // Let the browser do the first pass. It knows the visitor's language for
     // built-in messages and it is instant.
     if (typeof form.checkValidity === 'function' && !form.checkValidity()) {
-      var bad = form.querySelector(':invalid');
-      if (bad) {
-        markField(form, bad.name, state.msg.required);
-        focus(bad);
+      var invalids = form.querySelectorAll(':invalid');
+      var first = null;
+      var summary = null;
+      for (var vi = 0; vi < invalids.length; vi++) {
+        var bad = invalids[vi];
+        if (!bad.name) continue;
+        var text = messageFor(bad, state.msg);
+        markField(form, bad.name, text);
+        if (!first) first = bad;
+        // The status line says "fill in the required fields" only when one is
+        // actually empty; otherwise it repeats the first field's own problem.
+        if (bad.validity && bad.validity.valueMissing) summary = state.msg.required;
+        else if (!summary) summary = text;
       }
-      say(state, 'error', state.msg.required);
+      if (first) focus(first);
+      say(state, 'error', summary || state.msg.required);
       return;
     }
 
@@ -306,15 +325,21 @@
     setPending(state, false);
     say(state, 'ok', state.msg.success);
 
+    // Clear before disabling: a filled-in form under a thank-you line looks
+    // like nothing happened, and people send again.
     if (typeof state.form.reset === 'function') {
       state.form.reset();
     }
 
-    // Hide the inputs rather than the whole form, so the status message the
-    // visitor just earned stays on screen and keeps its aria-live region.
+    // Focus goes to the status line before anything is disabled, so it never
+    // falls back to <body> and a screen reader user hears the result. The
+    // button is aria-disabled, not disabled: a disabled control drops focus
+    // and leaves the tab order, and submit() already ignores it once done.
+    if (state.status) focus(state.status);
     var fields = state.form.querySelectorAll('input, select, textarea, button');
     for (var i = 0; i < fields.length; i++) {
-      fields[i].disabled = true;
+      if (fields[i].tagName === 'BUTTON') fields[i].setAttribute('aria-disabled', 'true');
+      else fields[i].disabled = true;
     }
     state.form.setAttribute('data-form-done', '');
 
@@ -337,14 +362,17 @@
 
     if (code === 'validation' && data.fields) {
       var first = null;
+      var summary = null;
       for (var name in data.fields) {
         if (!Object.prototype.hasOwnProperty.call(data.fields, name)) continue;
         var rule = data.fields[name];
         var text = state.msg[rule] || state.msg.required;
         var el = markField(state.form, name, text);
         if (!first) first = el;
+        if (rule === 'required') summary = state.msg.required;
+        else if (!summary) summary = text;
       }
-      say(state, 'error', state.msg.required);
+      say(state, 'error', summary || state.msg.required);
       if (first) focus(first);
       return;
     }
@@ -369,8 +397,26 @@
     state.pending = pending;
     if (!state.button) return;
 
-    state.button.disabled = pending;
+    // aria-disabled keeps the button focusable while the request runs, so
+    // focus is not thrown to <body>; submit() ignores clicks while pending.
+    state.button.setAttribute('aria-disabled', pending ? 'true' : 'false');
     state.button.setAttribute('aria-busy', pending ? 'true' : 'false');
+  }
+
+  /* Collapsed, not hidden: still in the accessibility tree, so the live
+   * region exists before its first message. Inline because the site CSS may
+   * give the status line padding or a background that would show while empty. */
+  var COLLAPSED = 'position:absolute;width:1px;height:1px;margin:-1px;padding:0;border:0;' +
+                  'overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap';
+
+  function prepareStatus(el) {
+    if (!el) return;
+    if (!el.getAttribute('role')) el.setAttribute('role', 'status');
+    if (!el.getAttribute('aria-live')) el.setAttribute('aria-live', 'polite');
+    if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '-1');
+    if (!el.textContent) el.style.cssText = COLLAPSED;
+    el.hidden = false;
+    el.classList.remove('hidden');
   }
 
   /** @param kind 'info' | 'ok' | 'error' — styled by the site's own CSS */
@@ -380,8 +426,27 @@
 
     el.textContent = text;
     el.setAttribute('data-state', kind);
+    el.style.cssText = '';
     el.hidden = false;
     el.classList.remove('hidden');
+  }
+
+  /** The visitor's actual problem, from the browser's own validity flags. */
+  function messageFor(field, msg) {
+    var v = field.validity;
+    if (!v || v.valueMissing) {
+      return field.tagName === 'SELECT' ? (msg.option || msg.required) : msg.required;
+    }
+    if (v.typeMismatch) {
+      if (field.type === 'email') return msg.email;
+      if (field.type === 'tel') return msg.tel;
+      return msg.type;
+    }
+    if (v.patternMismatch) return field.type === 'tel' ? msg.tel : msg.pattern;
+    if (v.tooShort || v.rangeUnderflow) return msg.min;
+    if (v.tooLong || v.rangeOverflow) return msg.max;
+    if (v.badInput) return field.type === 'date' ? msg.date : msg.type;
+    return msg.type;
   }
 
   function markField(form, name, text) {
@@ -400,10 +465,12 @@
       note.id = id;
       note.setAttribute('data-form-error', '');
       note.style.cssText = 'display:block;margin-top:.35rem;font-size:.8125rem;color:#b91c1c';
-      // After the field's own wrapper where there is one, so the message does
-      // not land between the label and the input.
-      var host = field.closest('label') || field.parentNode;
-      host.appendChild(note);
+      // After the label, never inside it: text inside a <label> becomes part
+      // of the field's accessible name, and with aria-describedby on top the
+      // error would be read twice.
+      var label = field.closest('label');
+      if (label) label.parentNode.insertBefore(note, label.nextSibling);
+      else field.parentNode.appendChild(note);
     }
 
     note.textContent = text;

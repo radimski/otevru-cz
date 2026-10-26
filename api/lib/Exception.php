@@ -1,29 +1,28 @@
 <?php
 /**
- * Every failure the engine can report to the browser. The code is what the
- * client switches on; the message is only shown when debug is on, because it
- * can describe server configuration.
+ * Failure reported to the browser. The code is what the client switches on;
+ * the message is only shown when debug is on.
  *
- * Codes: bad_request, bad_form, bad_nonce, too_fast, rate_limited, spam,
- *        validation, mail_failed, server
+ * Do not name a private property `$code` — that narrows Exception's protected
+ * `$code` and is a compile-time fatal on current PHP.
  */
 final class FE_Exception extends Exception
 {
     /** @var string */
-    private $code;
-    /** @var array field name => rule that failed */
+    private $err;
+    /** @var array */
     private $fields;
 
     public function __construct($code, $message = '', array $fields = array())
     {
         parent::__construct($message !== '' ? $message : $code);
-        $this->code = $code;
+        $this->err = $code;
         $this->fields = $fields;
     }
 
     public function errorCode()
     {
-        return $this->code;
+        return $this->err;
     }
 
     public function fields()
@@ -31,10 +30,9 @@ final class FE_Exception extends Exception
         return $this->fields;
     }
 
-    /** HTTP status that fits the failure, so monitoring and logs stay honest. */
     public function status()
     {
-        switch ($this->code) {
+        switch ($this->err) {
             case 'rate_limited':
                 return 429;
             case 'server':
