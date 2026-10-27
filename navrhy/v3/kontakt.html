@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Kontakt | Návrh 3: Polep | OTEVRU.cz</title>
+<meta name="description" content="Zámečnická pohotovost ve Sviadnově, Frýdku-Místku a Ostravě. Nouzové otevírání, klíče, bezpečnostní dveře a trezory.">
+<link rel="icon" href="../../favicon.ico">
+<link rel="stylesheet" href="../spolecne/fonts.css">
+<link rel="stylesheet" href="../../styles.css">
+<link rel="stylesheet" href="../spolecne/zaklad.css">
+<link rel="stylesheet" href="styl.css">
+</head>
+<body class="navrh navrh-v3" data-form-endpoint="/api/form.php">
+<a class="skip" href="#obsah">Přeskočit na obsah</a>
+<header class="hlavicka">
+  <div class="wrap hlavicka-in">
+    <a class="logo" href="./"><img src="../../img/logo.png" width="295" height="60" alt="OTEVRU.cz – Patrik Panenka, zámečnická pohotovost"></a>
+    <nav class="menu" aria-label="Hlavní">
+      <a href="./#sluzby">Služby</a><a href="./#jak">Jak to funguje</a><a href="./#otazky">Otázky</a><a href="kontakt.html">Kontakt</a>
+    </nav>
+    <span class="open-status stav" data-open-status role="status"><span class="open-status-dot is-open" aria-hidden="true"></span><span class="open-status-label">Otevřeno</span><span class="open-status-detail"></span></span>
+    <a class="btn btn-call btn-hlavicka" href="tel:+420606262118">Zavolat</a>
+  </div>
+</header>
+<main id="obsah">
+<section class="sekce kontakt">
+  <div class="wrap kontakt-in">
+    <div>
+      <p class="nadtitul">Kontakt</p>
+      <h1 class="titul">Kontakt zámečnické pohotovosti</h1>
+      <p class="kontakt-lede">Nejrychlejší je telefon. U nouzového otevření jedeme přednostně. Ostatní poptávky pošlete formulářem.</p>
+      <a class="btn btn-call" href="tel:+420606262118">Zavolat +420 606 262 118</a>
+      <dl class="kontakt-udaje">
+        <div><dt>E-mail</dt><dd><a href="mailto:patrik@otevru.cz">patrik@otevru.cz</a></dd></div>
+        <div><dt>Provozovna</dt><dd><a href="https://maps.google.com/?q=O.%20Ki%C5%A1ov%C3%A9%2088%2C%20739%2025%20Sviadnov" target="_blank" rel="noopener noreferrer">O. Kišové 88, 739 25 Sviadnov</a></dd></div>
+        <div><dt>Provozní doba</dt><dd>Po–Ne 07:00–18:00. Před návštěvou provozovny prosím zavolejte – technici jsou často v terénu na zakázkách.</dd></div>
+      </dl>
+    </div>
+    <div class="formular">
+      <h2>Poptávkový formulář</h2>
+      <p>Napište, co potřebujete. Ozveme se s návrhem a cenou.</p>
+      <!-- TODO(klient): do kdy se ozve na poptávku -->
+      <form class="otevru-form mt-6" data-form="poptavka" novalidate
+          data-msg-sending="Odesíláme…"
+          data-msg-success="Děkujeme, poptávku jsme přijali. Ozveme se vám co nejdříve."
+          data-msg-error="Formulář se nepodařilo odeslat. Zavolejte prosím na +420 606 262 118."
+          data-msg-required="Zkontrolujte prosím zvýrazněná pole."
+          data-msg-email="Zadejte platnou e-mailovou adresu."
+          data-msg-tel="Zadejte platné telefonní číslo."
+          data-msg-min="Tato hodnota je příliš krátká."
+          data-msg-max="Tato hodnota je příliš dlouhá."
+          data-msg-option="Vyberte prosím jednu z možností."
+          data-msg-pattern="Hodnota nemá správný tvar."
+          data-msg-type="Hodnota nemá správný tvar."
+          data-msg-date="Zadejte platné datum."
+          data-msg-rate="Poptávku jste odeslali příliš mnohokrát. Zkuste to prosím později."
+          data-msg-offline="Vypadá to, že jste offline. Zkontrolujte připojení a zkuste to znovu."
+          data-msg-captcha="Potvrďte prosím, že nejste robot, a zkuste to znovu."
+          data-msg-turnstile="Potvrďte prosím, že nejste robot, a zkuste to znovu.">
+          <div class="otevru-form-row">
+            <div class="otevru-form-field">
+              <label for="poptavka-jmeno">Jméno a příjmení <span aria-hidden="true">*</span></label>
+              <input id="poptavka-jmeno" type="text" name="jmeno" autocomplete="name" required minlength="2" maxlength="100">
+            </div>
+            <div class="otevru-form-field">
+              <label for="poptavka-telefon">Telefon <span aria-hidden="true">*</span></label>
+              <input id="poptavka-telefon" type="tel" name="telefon" autocomplete="tel" inputmode="tel" required maxlength="40">
+            </div>
+          </div>
+          <div class="otevru-form-field">
+            <label for="poptavka-sluzba">Typ poptávky <span aria-hidden="true">*</span></label>
+            <select id="poptavka-sluzba" name="sluzba" required autocomplete="off">
+              <option value="">Vyberte typ poptávky</option>
+              <option>Nouzové otevírání</option>
+              <option>Klíčová služba</option>
+              <option>Bezpečnostní dveře</option>
+              <option>Trezory a sejfy</option>
+              <option>Opravy po vloupání</option>
+              <option>Mříže, závory a generální klíč</option>
+              <option>Jiné</option>
+            </select>
+          </div>
+          <div class="otevru-form-field">
+            <label for="poptavka-email">E-mail</label>
+            <input id="poptavka-email" type="email" name="email" autocomplete="email" inputmode="email" maxlength="200">
+          </div>
+          <div class="otevru-form-field">
+            <label for="poptavka-zprava">Co potřebujete? <span aria-hidden="true">*</span></label>
+            <textarea id="poptavka-zprava" name="zprava" rows="5" required minlength="5" maxlength="4000" placeholder="Např. zabouchnuté dveře, výměna vložky…"></textarea>
+          </div>
+          <label class="otevru-consent" for="poptavka-souhlas">
+            <input id="poptavka-souhlas" type="checkbox" name="souhlas" required>
+            <span>Souhlasím se zpracováním osobních údajů za účelem vyřízení mé poptávky. Více v <a href="/ochrana-osobnich-udaju">zásadách ochrany osobních údajů</a>.</span>
+          </label>
+          <div data-turnstile class="otevru-turnstile"></div>
+          <button type="submit" data-form-submit class="btn btn-call otevru-form-submit">Odeslat poptávku</button>
+          <p class="otevru-form-status" data-form-status role="status" aria-live="polite" hidden></p>
+          <p class="otevru-form-note">V naléhavých případech <a href="tel:+420606262118">volejte +420 606 262 118</a>.</p>
+        </form>
+    </div>
+  </div>
+</section>
+</main>
+<footer class="paticka">
+  <div class="wrap">
+    <div class="paticka-volat">
+      <p class="paticka-label">Pohotovost · Po–Ne 07:00–18:00</p>
+      <a class="paticka-cislo" href="tel:+420606262118">+420 606 262 118</a>
+    </div>
+    <div class="paticka-sloupce">
+      <div><strong>OTEVRU.cz</strong>Patrik Panenka<br>IČO 73290939 · DIČ CZ7401244928<br>Podnikatel zapsaný v živnostenském rejstříku.</div>
+      <div><strong>Provozovna</strong><a href="https://maps.google.com/?q=O.%20Ki%C5%A1ov%C3%A9%2088%2C%20739%2025%20Sviadnov" target="_blank" rel="noopener noreferrer">O. Kišové 88, 739 25 Sviadnov</a><br>Po–Ne 07:00–18:00</div>
+      <div><strong>Kontakt</strong><a href="tel:+420606262118">+420 606 262 118</a><br><a href="mailto:patrik@otevru.cz">patrik@otevru.cz</a></div>
+      <nav aria-label="Právní informace"><strong>Informace</strong><a href="../../provozovatel.html">Provozovatel</a><br><a href="../../ochrana-osobnich-udaju.html">Ochrana osobních údajů</a><br><a href="../../cookies.html">Cookies</a></nav>
+    </div>
+  </div>
+</footer>
+<script src="../../main.js" defer></script>
+<script src="../spolecne/pohyb.js" defer></script>
+<script src="../../form.js" defer></script>
+</body>
+</html>

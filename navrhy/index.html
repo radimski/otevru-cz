@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Návrhy webu | OTEVRU.cz</title>
+<link rel="stylesheet" href="../fonts.css">
+<style>
+  :root { --lime: #acf53d; --graphite: #282b34; --blue: #004c93; --line: #3d424c; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--graphite); color: #fff; font: 400 1.0625rem/1.6 "Barlow", system-ui, sans-serif; }
+  .wrap { width: min(72rem, 100%); margin: 0 auto; padding: clamp(2rem, 6vw, 4rem) clamp(1rem, 4vw, 2.5rem); }
+  h1 { margin: 0; font: 700 clamp(2.4rem, 6vw, 4rem)/1 "Barlow Condensed", sans-serif; }
+  .lede { max-width: 56ch; color: #d4d6da; margin: 1rem 0 2.5rem; }
+  ol { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+  li a { display: grid; grid-template-columns: 4rem minmax(0, 1fr) auto; gap: 1.5rem; align-items: center; padding: 1.5rem 0; border-bottom: 1px solid var(--line); color: inherit; text-decoration: none; }
+  li a:hover h2 { color: var(--lime); }
+  li a:focus-visible { outline: 3px solid var(--lime); outline-offset: 4px; }
+  .n { font: 700 2.2rem/1 "Barlow Condensed", sans-serif; color: var(--lime); }
+  h2 { margin: 0; font: 700 1.8rem/1.1 "Barlow Condensed", sans-serif; transition: color .2s; }
+  p.zdroje { margin: .3rem 0 0; color: #b1b4b9; }
+  .barvy { display: flex; gap: 4px; }
+  .barvy i { width: 22px; height: 22px; border-radius: 4px; }
+  .pozn { margin-top: 2.5rem; color: #b1b4b9; font-size: .95rem; }
+  @media (max-width: 640px) { li a { grid-template-columns: 2.6rem minmax(0, 1fr); } .barvy { display: none; } }
+</style>
+</head>
+<body>
+<main class="wrap">
+  <h1>Návrhy webu OTEVRU.cz</h1>
+  <p class="lede">Čtyři verze se stejnými texty a stejnými barvami jako polep dodávek. Liší se písmem, rozvržením a tím, která barva převládá. Každá vychází ze 2–3 šablon z ThemeForestu, zdroje jsou v DESIGN.md.</p>
+  <ol>
+    <li><a href="v1/"><span class="n">1</span><div><h2>Pohotovostní linka</h2><p class="zdroje">Tmavá, telefon jako hlavní prvek. Z šablon HotLock a Lockey.</p></div><span class="barvy" aria-hidden="true"><i style="background:#282b34;outline:1px solid #555"></i><i style="background:#acf53d"></i></span></a></li>
+    <li><a href="v2/"><span class="n">2</span><div><h2>Noviny</h2><p class="zdroje">Bílá, obří nadpis, otáčející se razítko. Z šablon Shield a KeyMaster.</p></div><span class="barvy" aria-hidden="true"><i style="background:#fff"></i><i style="background:#004c93"></i></span></a></li>
+    <li><a href="v3/"><span class="n">3</span><div><h2>Polep</h2><p class="zdroje">Limetková jako auto, pruhy polepu, široké písmo. Z šablon Lockey a Locksmith.</p></div><span class="barvy" aria-hidden="true"><i style="background:#acf53d"></i><i style="background:#282b34;outline:1px solid #555"></i></span></a></li>
+    <li><a href="v4/"><span class="n">4</span><div><h2>Modrý výkres</h2><p class="zdroje">Modrá, velký řez vložkou, technické popisky. Z šablon Blocks a Smartkeiz.</p></div><span class="barvy" aria-hidden="true"><i style="background:#004c93"></i><i style="background:#acf53d"></i></span></a></li>
+  </ol>
+  <p class="pozn">Návrh je jen na ukázku. Formulář na localhostu poptávky neodesílá.</p>
+</main>
+</body>
+</html>
