@@ -65,6 +65,16 @@ export default {
     }
     headers.delete('Content-Length');
     headers.set('Cache-Control', 'public, max-age=0, must-revalidate');
+    // The /navrhy/ overview previews pages in same-origin iframes; production
+    // keeps DENY / frame-ancestors 'none' (this worker never runs there).
+    headers.set('X-Frame-Options', 'SAMEORIGIN');
+    const csp = headers.get('Content-Security-Policy');
+    if (csp) {
+      headers.set('Content-Security-Policy', csp
+        .replace("frame-ancestors 'none'", "frame-ancestors 'self'")
+        .replace('frame-src https://challenges.cloudflare.com', "frame-src 'self' https://challenges.cloudflare.com"));
+    }
+    const framed = request.headers.get('Sec-Fetch-Dest') === 'iframe';
 
     const out = new Response(res.body, { status: res.status, statusText: res.statusText, headers });
     return new HTMLRewriter()
@@ -74,7 +84,7 @@ export default {
           el.append('<meta name="robots" content="noindex, nofollow"><link rel="stylesheet" href="/__demo/demo.css">', { html: true });
         },
       })
-      .on('body', { element(el) { el.prepend(BANNER, { html: true }); } })
+      .on('body', { element(el) { if (!framed) el.prepend(BANNER, { html: true }); } })
       .on('form button[type="submit"], form button:not([type]), form input[type="submit"]', {
         element(el) {
           el.setAttribute('disabled', '');

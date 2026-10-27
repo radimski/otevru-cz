@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="cs">
 <head>
 <meta charset="utf-8">
@@ -7,36 +7,128 @@
 <title>Návrhy webu | OTEVRU.cz</title>
 <link rel="stylesheet" href="../fonts.css">
 <style>
-  :root { --lime: #acf53d; --graphite: #282b34; --blue: #004c93; --line: #3d424c; }
-  * { box-sizing: border-box; }
-  body { margin: 0; background: var(--graphite); color: #fff; font: 400 1.0625rem/1.6 "Barlow", system-ui, sans-serif; }
-  .wrap { width: min(72rem, 100%); margin: 0 auto; padding: clamp(2rem, 6vw, 4rem) clamp(1rem, 4vw, 2.5rem); }
-  h1 { margin: 0; font: 700 clamp(2.4rem, 6vw, 4rem)/1 "Barlow Condensed", sans-serif; }
-  .lede { max-width: 56ch; color: #d4d6da; margin: 1rem 0 2.5rem; }
-  ol { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
-  li a { display: grid; grid-template-columns: 4rem minmax(0, 1fr) auto; gap: 1.5rem; align-items: center; padding: 1.5rem 0; border-bottom: 1px solid var(--line); color: inherit; text-decoration: none; }
-  li a:hover h2 { color: var(--lime); }
-  li a:focus-visible { outline: 3px solid var(--lime); outline-offset: 4px; }
-  .n { font: 700 2.2rem/1 "Barlow Condensed", sans-serif; color: var(--lime); }
-  h2 { margin: 0; font: 700 1.8rem/1.1 "Barlow Condensed", sans-serif; transition: color .2s; }
-  p.zdroje { margin: .3rem 0 0; color: #b1b4b9; }
-  .barvy { display: flex; gap: 4px; }
-  .barvy i { width: 22px; height: 22px; border-radius: 4px; }
-  .pozn { margin-top: 2.5rem; color: #b1b4b9; font-size: .95rem; }
-  @media (max-width: 640px) { li a { grid-template-columns: 2.6rem minmax(0, 1fr); } .barvy { display: none; } }
+:root { --lime: #acf53d; --graphite: #282b34; --graphite-2: #1f2229; --blue: #004c93; --line: #3d424c; --muted: #b1b4b9; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--graphite); color: #fff; font: 1rem/1.55 "Barlow", system-ui, sans-serif; }
+header { width: min(1280px, calc(100% - 32px)); margin: 0 auto; padding: 40px 0 8px; }
+h1 { margin: 0 0 6px; font: 700 clamp(2rem, 4.4vw, 3rem)/1 "Barlow Condensed", sans-serif; }
+header p { margin: 0; color: #d4d6da; max-width: 72ch; }
+
+/* Přepínač zobrazení: počítač + mobil / jen mobil */
+.tabs { display: flex; gap: 8px; margin-top: 20px; }
+.tabs button { min-height: 44px; padding: 0 18px; border: 1px solid var(--lime); border-radius: 10px; background: none; color: #fff; font: 600 .95rem "Barlow", sans-serif; cursor: pointer; }
+.tabs button[aria-pressed="true"] { background: var(--lime); color: var(--graphite); }
+.tabs button:focus-visible, .open:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+
+main { width: min(1280px, calc(100% - 32px)); margin: 0 auto; padding: 24px 0 64px; display: grid; gap: 56px; }
+.design { display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: start; padding-top: 32px; border-top: 1px solid var(--line); }
+.design h2 { margin: 0 0 6px; font: 700 1.9rem/1.1 "Barlow Condensed", sans-serif; }
+.design h2 span { color: var(--lime); }
+.design p { margin: 0 0 16px; color: #d4d6da; max-width: 56ch; }
+.design .zdroj { color: var(--muted); font-size: .9rem; margin-top: -8px; }
+.open { display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px; border-radius: 10px; background: var(--lime); color: var(--graphite); text-decoration: none; font-weight: 600; }
+
+/* Náhled z počítače: stránka v šířce 1440 px zmenšená do sloupce */
+.desk { margin-top: 20px; border: 1px solid var(--line); background: #fff; border-radius: 10px; overflow: hidden; }
+.desk-bar { display: flex; gap: 6px; padding: 10px 12px; background: var(--graphite-2); }
+.desk-bar i { width: 10px; height: 10px; border-radius: 50%; background: #4a4f5a; }
+.desk-view { position: relative; width: 100%; aspect-ratio: 1440 / 860; overflow: hidden; }
+.desk-view iframe { position: absolute; left: 0; top: 0; width: 1440px; height: 860px; border: 0; transform-origin: 0 0; }
+
+/* Náhled z mobilu: skutečná šířka 375 px v rámečku telefonu */
+.phone { width: 300px; flex: none; padding: 12px; background: #0d0e11; border-radius: 44px; position: relative; }
+.phone::before { content: ""; position: absolute; top: 20px; left: 50%; width: 76px; height: 20px; margin-left: -38px; border-radius: 12px; background: #000; z-index: 2; }
+.screen { position: relative; width: 276px; height: 598px; border-radius: 34px; overflow: hidden; background: #fff; }
+.screen iframe { position: absolute; left: 0; top: 0; width: 375px; height: 812px; border: 0; transform: scale(.736); transform-origin: 0 0; }
+.phone-cap { text-align: center; color: var(--muted); font-size: .85rem; margin-top: 10px; }
+
+body.only-phone .desk { display: none; }
+@media (max-width: 900px) {
+  .design { grid-template-columns: 1fr; }
+  .desk { display: none; }
+  .phone { margin: 0 auto; }
+  .tabs { display: none; }
+}
 </style>
 </head>
 <body>
-<main class="wrap">
-  <h1>Návrhy webu OTEVRU.cz</h1>
-  <p class="lede">Čtyři verze se stejnými texty a stejnými barvami jako polep dodávek. Liší se písmem, rozvržením a tím, která barva převládá. Každá vychází ze 2–3 šablon z ThemeForestu, zdroje jsou v DESIGN.md.</p>
-  <ol>
-    <li><a href="v1/"><span class="n">1</span><div><h2>Pohotovostní linka</h2><p class="zdroje">Tmavá, telefon jako hlavní prvek. Z šablon HotLock a Lockey.</p></div><span class="barvy" aria-hidden="true"><i style="background:#282b34;outline:1px solid #555"></i><i style="background:#acf53d"></i></span></a></li>
-    <li><a href="v2/"><span class="n">2</span><div><h2>Noviny</h2><p class="zdroje">Bílá, obří nadpis, otáčející se razítko. Z šablon Shield a KeyMaster.</p></div><span class="barvy" aria-hidden="true"><i style="background:#fff"></i><i style="background:#004c93"></i></span></a></li>
-    <li><a href="v3/"><span class="n">3</span><div><h2>Polep</h2><p class="zdroje">Limetková jako auto, pruhy polepu, široké písmo. Z šablon Lockey a Locksmith.</p></div><span class="barvy" aria-hidden="true"><i style="background:#acf53d"></i><i style="background:#282b34;outline:1px solid #555"></i></span></a></li>
-    <li><a href="v4/"><span class="n">4</span><div><h2>Modrý výkres</h2><p class="zdroje">Modrá, velký řez vložkou, technické popisky. Z šablon Blocks a Smartkeiz.</p></div><span class="barvy" aria-hidden="true"><i style="background:#004c93"></i><i style="background:#acf53d"></i></span></a></li>
-  </ol>
-  <p class="pozn">Návrh je jen na ukázku. Formulář na localhostu poptávky neodesílá.</p>
+<header>
+  <h1>OTEVRU.cz · návrhy webu</h1>
+  <p>Současný web a čtyři nové návrhy, každý z počítače i z mobilu. V obou náhledech se dá scrollovat. Všechny drží barvy polepu dodávek a mají stejné texty, liší se písmem a rozvržením. Fotky zatím chybí, místo nich je animovaný řez vložkou.</p>
+  <div class="tabs" role="group" aria-label="Zobrazení">
+    <button type="button" aria-pressed="true" data-view="both">Počítač + mobil</button>
+    <button type="button" aria-pressed="false" data-view="phone">Jen mobil</button>
+  </div>
+</header>
+
+<main>
+  <section class="design" data-src="../">
+    <div>
+      <h2><span>0</span> · Současný web</h2>
+      <p>To, co je teď na ukázce: limetková hlavička, grafitový úvod s řezem vložkou, modrá sekce s kroky a služby v řádcích.</p>
+      <a class="open" href="../" target="_blank">Otevřít celý web</a>
+    </div>
+  </section>
+  <section class="design" data-src="v1/">
+    <div>
+      <h2><span>1</span> · Pohotovostní linka</h2>
+      <p>Tmavá, telefonní číslo jako hlavní prvek úvodu. Pod úvodem pás služeb, vedle kroků limetkový blok „K nouzi jedeme přednostně“ s telefonem.</p>
+      <p class="zdroj">Nápady ze šablon HotLock a Lockey (ThemeForest).</p>
+      <a class="open" href="v1/" target="_blank">Otevřít celý návrh</a>
+    </div>
+  </section>
+  <section class="design" data-src="v2/">
+    <div>
+      <h2><span>2</span> · Noviny</h2>
+      <p>Bílá, obří nadpis přes celou šířku a otáčející se razítko „Zavolejte · Přijedeme · Otevřeme“. Limetka jen jako zvýrazňovač pod slovy.</p>
+      <p class="zdroj">Nápady ze šablon Shield a KeyMaster (ThemeForest).</p>
+      <a class="open" href="v2/" target="_blank">Otevřít celý návrh</a>
+    </div>
+  </section>
+  <section class="design" data-src="v3/">
+    <div>
+      <h2><span>3</span> · Polep</h2>
+      <p>Limetková jako auto, pruhy polepu jako předěly a modrý pás s fakty přes spodní hranu úvodu. Široké tučné písmo jako nápis na dodávce.</p>
+      <p class="zdroj">Nápady ze šablon Lockey a Locksmith (ThemeForest).</p>
+      <a class="open" href="v3/" target="_blank">Otevřít celý návrh</a>
+    </div>
+  </section>
+  <section class="design" data-src="v4/">
+    <div>
+      <h2><span>4</span> · Modrý výkres</h2>
+      <p>Modrá převládá, řez vložkou přes celou šířku jako technický výkres, popisky v neproporcionálním písmu a dvě fakta hned vedle tlačítka.</p>
+      <p class="zdroj">Nápady ze šablon Blocks a Smartkeiz (ThemeForest).</p>
+      <a class="open" href="v4/" target="_blank">Otevřít celý návrh</a>
+    </div>
+  </section>
 </main>
+
+<script>
+// Do každého návrhu doplní náhled z počítače (zmenšený) a z mobilu (375 px v telefonu).
+document.querySelectorAll(".design").forEach((design) => {
+  const src = design.dataset.src;
+  const info = design.firstElementChild;
+  info.insertAdjacentHTML("beforeend",
+    `<div class="desk"><div class="desk-bar"><i></i><i></i><i></i></div><div class="desk-view"><iframe src="${src}" title="Náhled z počítače" loading="lazy"></iframe></div></div>`);
+  design.insertAdjacentHTML("beforeend",
+    `<div><div class="phone"><div class="screen"><iframe src="${src}" title="Náhled z mobilu" loading="lazy"></iframe></div></div><p class="phone-cap">Mobil · 375 px</p></div>`);
+});
+
+function fitDesk() {
+  document.querySelectorAll(".desk-view").forEach((view) => {
+    view.firstElementChild.style.transform = `scale(${view.clientWidth / 1440})`;
+  });
+}
+window.addEventListener("resize", fitDesk);
+fitDesk();
+
+document.querySelectorAll(".tabs button").forEach((button) => {
+  button.addEventListener("click", () => {
+    document.querySelectorAll(".tabs button").forEach((b) => b.setAttribute("aria-pressed", String(b === button)));
+    document.body.classList.toggle("only-phone", button.dataset.view === "phone");
+    fitDesk();
+  });
+});
+</script>
 </body>
 </html>
