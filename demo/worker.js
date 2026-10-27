@@ -37,6 +37,12 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
 
+    // Kořen otevře rovnou návrhy; současný web je v rozcestníku jako verze 0 na /soucasny.
+    if (url.pathname === '/') {
+      return Response.redirect(new URL('/navrhy/', url).toString(), 302);
+    }
+    const assetRequest = url.pathname === '/soucasny' ? new Request(new URL('/', url), request) : request;
+
     if (url.pathname === '/__demo/demo.css') {
       return new Response(CSS, {
         headers: noindex(new Headers({
@@ -57,7 +63,7 @@ export default {
       });
     }
 
-    const res = await env.ASSETS.fetch(request);
+    const res = await env.ASSETS.fetch(assetRequest);
     const headers = noindex(new Headers(res.headers));
     const type = headers.get('Content-Type') || '';
     if (!type.includes('text/html')) {
