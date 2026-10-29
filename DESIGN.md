@@ -13,7 +13,7 @@ Návrhy podle `redeye/docs/navrhy.md`: 4 verze z kombinace šablon z ThemeForest
 
 **Řez vložkou je součástí plochy, ne vložený obrázek.** Kolo 27. 10. mělo řez jako světlý „papír“ s rámečkem na jiném pozadí a působil vystřiženě. Teď se řez kreslí v barvách sekce, ve které je (`navrhy/spolecne/rez.css`, proměnné `--rez-papir`, `--rez-cara`, `--rez-klic`): na bílé tmavé čáry, na grafitu limetkové a bílé, na modré bílé jako skutečný výkres, na limetce grafitové. Rámeček a mřížka papíru jsou pryč.
 
-## Vybrané šablony (ThemeForest, 29. 10. 2026)
+## Vybrané šablony (29. 10. 2026: ThemeForest, Framer, Webflow)
 
 | Šablona | Demo | Co bereme |
 |---|---|---|
@@ -23,6 +23,9 @@ Návrhy podle `redeye/docs/navrhy.md`: 4 verze z kombinace šablon z ThemeForest
 | HotLock (axiomthemes) | hotlock.axiomthemes.com | blok „rychlá reakce + velké číslo“ v barvě značky |
 | Lockey (jegtheme) | templatekit.jegtheme.com/lockey | pás s fakty přes spodní hranu úvodu |
 | KeyMaster (moxcreative) | point.moxcreative.com/keymaster | časté otázky vedle nadpisu |
+| Keyline (Framer) | earlier-one-037570.framer.app | „What happened?“ – výběr situace, vedle formuláře panel „potřebujete pomoc hned?“ s telefonem |
+| Plumbee (Webflow) | webflow.com/templates/html/plumbee-website-template | telefon a provozní doba jako dvě fakta přímo v úvodu, velká úvodní věta přes šířku |
+| Agntix (ThemeForest) | html.aqlova.com/agntix-prv | pohyb při scrollu: zmenšení karty úvodu, vybarvení nadpisu, rozsvícení textu po slovech, pás se scrollem |
 
 Prošli jsme a nebereme: Plumby, Coolen, Electrik, Smartkeiz, Blocks (mřížky karet s ikonami), Towy (zastaralé), vymyšlená čísla a recenze (Doorix, Lockey).
 
@@ -31,14 +34,17 @@ Prošli jsme a nebereme: Plumby, Coolen, Electrik, Smartkeiz, Blocks (mřížky 
 ### V1 – Výjezd (Towis + HotLock)
 Bílá. Nahoře pruh polepu, telefon v kapsli nad obřím verzálkovým nadpisem na střed, pod ním velký řez vložkou přes šířku na bílé (tmavé čáry). Služby jako číslované řádky s limetkovou šipkou, vedle limetkový blok s telefonem. Barlow Condensed.
 
-### V2 – Dílna (Doorix + Lockey)
-Grafit. Úvod jako zaoblená tmavá karta s okrajem, druhý řádek nadpisu jen obrysem v limetce, řez kreslený limetkou a bílou na grafitu, dole v kartě řádek faktů. Sekce „Co se stalo?“ – čtyři situace a co dělat. Archivo.
+### V2 – Dílna (Doorix + Lockey + Keyline)
+Grafit. Úvod jako zaoblená tmavá karta s okrajem, druhý řádek nadpisu plně v limetce (obrys byl hůř čitelný), řez kreslený limetkou a bílou na grafitu, dole v kartě řádek faktů. Sekce „Co se stalo?“ – čtyři situace a co dělat. Archivo.
 
-### V3 – Výkres (Shield + KeyMaster)
+### V3 – Výkres (Shield + KeyMaster + Plumbee)
 Modrá. Obří levostranný nadpis, řez jako skutečný výkres bílými čarami na modré, otáčející se razítko. Světlé sekce s časté otázky vedle nadpisu. IBM Plex Sans + Mono.
 
-### V4 – Polep (Towis + Lockey)
+### V4 – Polep (Towis + Lockey + Plumbee)
 Limetka. Celý úvod limetkový jako dodávka, výstražné pruhy, řez grafitovými čarami na limetce, modrý pás s fakty přes spodní hranu. Manrope.
+
+## Pohyb při scrollu (Agntix)
+Každá verze jeden krátký efekt (`navrhy/spolecne/scroll.js`), bez zastavených sekcí: V1 vybarvení názvů služeb, V2 zmenšení karty úvodu, V3 rozsvícení věty po slovech, V4 pás služeb se scrollem.
 
 ## Správa (ukázka)
 `ukazka-spravy/` – klikací statická ukázka: poptávky z formuláře (nové / vyřízené, detail, zavolat), přepínač „dnes nejsem k zastižení“ (mění stav Otevřeno na webu), text akce (Yale Linus). Vzorová data bez skutečných osob, nic se neukládá, pruh „Ukázka správy, změny se neukládají“. Vzhled jako web (limetková lišta, grafit, Barlow).

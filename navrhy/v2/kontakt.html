@@ -7,6 +7,11 @@
 <title>Kontakt | Návrh 2: Dílna | OTEVRU.cz</title>
 <meta name="description" content="Zámečnická pohotovost ve Sviadnově, Frýdku-Místku a Ostravě. Nouzové otevírání, klíče, bezpečnostní dveře a trezory.">
 <link rel="icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="cs_CZ">
+<meta property="og:title" content="OTEVRU.cz · návrh 2: Dílna">
+<meta property="og:image" content="https://otevru-cz.radim-pajurek.workers.dev/og.png">
 <link rel="stylesheet" href="../spolecne/fonts.css">
 <link rel="stylesheet" href="../../styles.css">
 <link rel="stylesheet" href="../spolecne/zaklad.css">
@@ -18,7 +23,8 @@
 <header class="hlavicka">
   <div class="wrap hlavicka-in">
     <a class="logo" href="./"><img src="../../img/logo.png" width="295" height="60" alt="OTEVRU.cz – Patrik Panenka, zámečnická pohotovost"></a>
-    <nav class="menu" aria-label="Hlavní">
+    <button type="button" class="menu-tlacitko" aria-expanded="false" aria-controls="menu-v2">Menu</button>
+    <nav class="menu" id="menu-v2" aria-label="Hlavní">
       <a href="./#sluzby">Služby</a><a href="./#jak">Jak to funguje</a><a href="./#otazky">Otázky</a><a href="kontakt.html">Kontakt</a>
     </nav>
     <span class="open-status stav" data-open-status role="status"><span class="open-status-dot is-open" aria-hidden="true"></span><span class="open-status-label">Otevřeno</span><span class="open-status-detail"></span></span>

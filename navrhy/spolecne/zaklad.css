@@ -60,7 +60,7 @@ body.navrh { margin: 0; display: block; min-height: 100%; -webkit-font-smoothing
 .navrh .paticka-cislo { display: inline-block; text-decoration: none; }
 .navrh .paticka-sloupce { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.5rem; font-size: .95rem; line-height: 1.7; }
 .navrh .paticka-sloupce strong { display: block; margin-bottom: .3rem; }
-.navrh .paticka-sloupce a { text-decoration: underline; text-underline-offset: 3px; }
+.navrh .paticka-sloupce a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: underline; text-underline-offset: 3px; }
 
 /* Contact page skeleton */
 .navrh .kontakt-in { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: clamp(2rem, 5vw, 4rem); align-items: start; }
@@ -96,3 +96,20 @@ body.navrh { margin: 0; display: block; min-height: 100%; -webkit-font-smoothing
 .navrh .menu a { display: inline-flex; align-items: center; min-height: 44px; }
 .navrh .kroky-volat a { display: inline-flex; align-items: center; min-height: 44px; }
 .navrh .pas-sluzeb a { display: inline-flex; align-items: center; min-height: 44px; }
+
+/* Mobile menu (checklist A: hamburger items at least 44 px) */
+.navrh .menu-tlacitko { display: none; min-height: 44px; padding: 0 1rem; border: 1.5px solid currentColor; border-radius: 10px; background: transparent; color: inherit; font-weight: 600; cursor: pointer; }
+@media (max-width: 860px) {
+  .navrh .hlavicka-in { flex-wrap: wrap; }
+  .navrh .hlavicka-in { column-gap: .6rem; }
+  .navrh .logo img { width: 132px; height: auto; }
+  .navrh .menu-tlacitko { display: inline-flex; align-items: center; order: 3; }
+  .navrh .btn-hlavicka { order: 2; margin-left: auto; }
+  .navrh .menu { display: none; order: 5; width: 100%; flex-direction: column; gap: 0; margin: 0 0 .6rem; }
+  .navrh .menu-otevreno .menu { display: flex; }
+  .navrh .menu a { min-height: 48px; border-top: 1px solid rgba(127, 127, 127, .3); }
+}
+@media (max-width: 360px) {
+  .navrh .logo img { width: 100px; }
+  .navrh .menu-tlacitko, .navrh .btn-hlavicka { padding: 0 .7rem; }
+}
