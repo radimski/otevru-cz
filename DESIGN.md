@@ -1,8 +1,8 @@
 # Design – OTEVRU.cz (Patrik Panenka)
 
-Návrhy podle `redeye/docs/navrhy.md`: 4 verze z kombinace šablon z ThemeForestu, `navrhy/v1` … `navrhy/v4`. Bereme jen nápady, žádný kód, obrázky ani texty šablon.
+Návrhy podle `redeye/docs/navrhy.md`: 4 verze z kombinace šablon z ThemeForestu, `navrhy/v1` … `navrhy/v4`, rozcestník `navrhy/index.html` (šablona `_build_tools/navrhy/`), ukázka správy `ukazka-spravy/`. Bereme jen nápady, žádný kód, obrázky ani texty šablon.
 
-**Pevné pro všechny verze:** barvy polepu dodávek a loga (klient je má na autech), stejné texty a stejný obraz. Verze se liší písmem, rozvržením první obrazovky a tím, která barva převládá. Žádné mřížky stejných dlaždic s ikonami.
+**Pevné pro všechny verze:** barvy polepu dodávek a loga, stejné texty, stejný obraz (animovaný řez vložkou). Žádné mřížky dlaždic s ikonami. Pohyb krátký, žádné dlouhé zastavené sekce.
 
 | Token | Hodnota | Kde |
 |---|---|---|
@@ -11,38 +11,37 @@ Návrhy podle `redeye/docs/navrhy.md`: 4 verze z kombinace šablon z ThemeForest
 | modrá | `#004c93` | polep, odkazy, plochy s bílým textem |
 | bílá | `#ffffff` | světlé plochy |
 
-Obraz: zatím jen animovaný technický řez vložkou (žádné fotky od klienta). `TODO(klient)`: fotky Patrika, auta s polepem a práce.
+**Řez vložkou je součástí plochy, ne vložený obrázek.** Kolo 27. 10. mělo řez jako světlý „papír“ s rámečkem na jiném pozadí a působil vystřiženě. Teď se řez kreslí v barvách sekce, ve které je (`navrhy/spolecne/rez.css`, proměnné `--rez-papir`, `--rez-cara`, `--rez-klic`): na bílé tmavé čáry, na grafitu limetkové a bílé, na modré bílé jako skutečný výkres, na limetce grafitové. Rámeček a mřížka papíru jsou pryč.
 
-## Vybrané šablony (ThemeForest)
+## Vybrané šablony (ThemeForest, 29. 10. 2026)
 
 | Šablona | Demo | Co bereme |
 |---|---|---|
-| HotLock (axiomthemes) | hotlock.axiomthemes.com | blok „rychlá reakce + velké telefonní číslo“ v barvě značky; pás služeb hned pod úvodem |
-| Lockey / Keyman (jegtheme) | templatekit.jegtheme.com/lockey, fse.jegtheme.com/keyman | dělený úvod (tmavý text vlevo, obraz vpravo), barevný pás s fakty přes spodní hranu úvodu, pás „pohotovost“ s telefonem |
-| KeyMaster (moxcreative) | point.moxcreative.com/keymaster | časté otázky jako rozbalovací seznam vedle nadpisu |
-| Shield (axiomthemes) | shield.axiomthemes.com | obří levostranný nadpis, kulaté otáčející se razítko s textem kolem šipky, velká úvodní věta |
-| Smartkeiz (moxcreative) | newkit.moxcreative.com/smartkeiz | dvě krátká fakta přímo v úvodu vedle tlačítka |
-| Blocks (Rometheme) | kfkit.rometheme.pro/blocks | sytá modrá plocha úvodu a hlavičky |
-| Locksmith (webdevia) | themes.webdevia.com/locksmith-… | prostrkaný verzálkový nápis značky |
+| Towis (like-themes) | towis.like-themes.com | pruh s výstražnými pruhy nahoře, telefon v kapsli nad obřím verzálkovým nadpisem na střed, jeden velký předmět na čisté ploše, služby jako číslované řádky s kulatou šipkou vedle velkého obrazu |
+| Doorix (raddito) | preview.raddito.net/doorix | tmavý úvod jako zaoblená karta s okrajem, druhý řádek nadpisu obrysem, limetkové tlačítko, řádek faktů dole v úvodu, sekce „Co se stalo?“ s problémy kolem obrazu |
+| Shield (axiomthemes) | shield.axiomthemes.com | obří levostranný nadpis, kulaté otáčející se razítko kolem šipky |
+| HotLock (axiomthemes) | hotlock.axiomthemes.com | blok „rychlá reakce + velké číslo“ v barvě značky |
+| Lockey (jegtheme) | templatekit.jegtheme.com/lockey | pás s fakty přes spodní hranu úvodu |
+| KeyMaster (moxcreative) | point.moxcreative.com/keymaster | časté otázky vedle nadpisu |
 
-Neberem: mřížky karet s ikonami (Blocks, Smartkeiz, KeyMaster), vymyšlená čísla a recenze (Lockey, HotLock), slider.
+Prošli jsme a nebereme: Plumby, Coolen, Electrik, Smartkeiz, Blocks (mřížky karet s ikonami), Towy (zastaralé), vymyšlená čísla a recenze (Doorix, Lockey).
 
 ## Verze
 
-### V1 – Pohotovostní linka (HotLock + Lockey)
-Tmavý grafit převládá, limetka jen na volání. Dělený úvod: vlevo nadpis a obří číslo, vpravo řez vložkou. Pod úvodem textový pás služeb oddělený lomítky (ne dlaždice). Limetkový blok „K nouzi jedeme přednostně“ s telefonem vedle kroků co dělat. Písmo Barlow Condensed + Barlow.
+### V1 – Výjezd (Towis + HotLock)
+Bílá. Nahoře pruh polepu, telefon v kapsli nad obřím verzálkovým nadpisem na střed, pod ním velký řez vložkou přes šířku na bílé (tmavé čáry). Služby jako číslované řádky s limetkovou šipkou, vedle limetkový blok s telefonem. Barlow Condensed.
 
-### V2 – Noviny (Shield + KeyMaster)
-Bílá převládá, grafitový text, modré odkazy, limetka jako zvýrazňovač pod slovy. Obří levostranný nadpis přes celou šířku, otáčející se razítko „Zavolejte · Přijedeme · Otevřeme“ kolem šipky dolů. Služby jako číslovaný seznam, časté otázky vedle nadpisu. Písmo Manrope.
+### V2 – Dílna (Doorix + Lockey)
+Grafit. Úvod jako zaoblená tmavá karta s okrajem, druhý řádek nadpisu jen obrysem v limetce, řez kreslený limetkou a bílou na grafitu, dole v kartě řádek faktů. Sekce „Co se stalo?“ – čtyři situace a co dělat. Archivo.
 
-### V3 – Polep (Lockey + Locksmith webdevia)
-Limetka převládá jako na autě: limetkový úvod s grafitovým písmem, šikmé pruhy polepu jako dělicí prvek, modrý pás s fakty přes spodní hranu úvodu (Po–Ne 7–18 · Sviadnov, Frýdek-Místek, Ostrava · byty, domy i auta). Písmo Archivo (tučné, široké jako nápis na dodávce).
+### V3 – Výkres (Shield + KeyMaster)
+Modrá. Obří levostranný nadpis, řez jako skutečný výkres bílými čarami na modré, otáčející se razítko. Světlé sekce s časté otázky vedle nadpisu. IBM Plex Sans + Mono.
 
-### V4 – Modrý výkres (Blocks + Smartkeiz)
-Modrá převládá: modrý úvod s velkým řezem vložkou uprostřed, dvě fakta vedle tlačítka. Technické popisky v neproporcionálním písmu, bílé sekce se světle šedými linkami. Písmo IBM Plex Sans + IBM Plex Mono.
+### V4 – Polep (Towis + Lockey)
+Limetka. Celý úvod limetkový jako dodávka, výstražné pruhy, řez grafitovými čarami na limetce, modrý pás s fakty přes spodní hranu. Manrope.
 
-## Pohyb (všechny verze)
-Krátký: odkrytí nadpisu po řádcích, řádky služeb jednou najedou, animace vložky běží sama (main.js). Žádné dlouhé zastavené sekce (nejvýš jedna výška obrazovky). `prefers-reduced-motion` vypne vše, bez JS je vše vidět.
+## Správa (ukázka)
+`ukazka-spravy/` – klikací statická ukázka: poptávky z formuláře (nové / vyřízené, detail, zavolat), přepínač „dnes nejsem k zastižení“ (mění stav Otevřeno na webu), text akce (Yale Linus). Vzorová data bez skutečných osob, nic se neukládá, pruh „Ukázka správy, změny se neukládají“. Vzhled jako web (limetková lišta, grafit, Barlow).
 
 ## Kontroly
 Výsledky kontrol každé verze: `redeye/klienti/otevru-cz/todo.md`.

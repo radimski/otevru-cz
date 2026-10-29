@@ -17,3 +17,4 @@ Thumbs.db
 
 # Form submissions when dataDir resolves outside the webroot (local runs).
 form-data/
+.wrangler/

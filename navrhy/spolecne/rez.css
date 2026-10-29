@@ -1,0 +1,38 @@
+/* The lock cutaway drawn in the colours of the section it sits in, so it reads
+   as part of the page instead of a pasted-in light "paper" panel.
+   Set on any ancestor: --rez-papir (exactly the section background), --rez-cara
+   (lines), --rez-klic (key), --rez-kov (dark metal: pins, bolt, cam), --rez-stavitko.
+   CSS fill/stroke beat the SVG presentation attributes; !important only where the
+   original stylesheet animates or hard-codes the colour. */
+.rez {
+  --rez-papir: #ffffff;
+  --rez-cara: #23262d;
+  --rez-klic: #acf53d;
+  --rez-kov: #282b34;
+  --rez-stavitko: #d5d8de;
+}
+.rez .otevru-lock-embed, .rez .otevru-lock-layout { margin: 0; padding: 0; background: none; border: 0; box-shadow: none; overflow: visible; }
+.rez .otevru-lock-stage, .rez .otevru-lock-svg { background: var(--rez-papir) !important; border: 0; border-radius: 0; box-shadow: none; overflow: visible; }
+
+/* Paper, frame and grid go; the drawing sits straight on the section. */
+.rez .otevru-lock-svg > rect[fill="url(#lock-paper-grid)"],
+.rez .otevru-lock-svg > rect[x="6"],
+.rez .otevru-lock-svg > rect[x="10"] { display: none; }
+.rez .otevru-lock-svg [fill="#f4f4f2"] { fill: var(--rez-papir); }
+.rez .otevru-lock-svg [stroke="#111"],
+.rez .otevru-lock-svg .lock-driver,
+.rez .otevru-lock-svg .lock-keypin,
+.rez .otevru-lock-svg .lock-pin-axis { stroke: var(--rez-cara) !important; }
+.rez .otevru-lock-svg .lock-shear { stroke: var(--rez-cara) !important; }
+.rez .otevru-lock-svg [fill="#111"], .rez .otevru-lock-svg text { fill: var(--rez-cara); }
+.rez .otevru-lock-svg pattern line, .rez .otevru-lock-svg pattern path { stroke: var(--rez-cara); }
+.rez .otevru-lock-svg marker path { fill: var(--rez-cara); }
+.rez .otevru-lock-svg [fill="#9a8758"] { fill: var(--rez-klic); }
+.rez .otevru-lock-svg [fill="#3d3d3d"], .rez .otevru-lock-svg [fill="#6e6e6a"] { fill: var(--rez-kov); }
+.rez .otevru-lock-svg [fill="#e8e2d6"] { fill: var(--rez-stavitko); }
+.rez #lock-driver-metal stop { stop-color: var(--rez-kov); }
+.rez #lock-keypin-metal stop { stop-color: var(--rez-stavitko); }
+.rez .otevru-lock-svg .lock-annotations text { fill: var(--rez-cara); }
+
+/* Lamp line under the drawing */
+.rez .otevru-lock-state { display: flex; align-items: center; gap: .55rem; margin: .6rem 0 0; font-weight: 600; font-size: .95rem; color: inherit; }

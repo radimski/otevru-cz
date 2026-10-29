@@ -1,78 +1,83 @@
-/* V2 – Noviny (Shield + KeyMaster). White dominates, graphite type, blue links,
-   lime as a highlighter. Giant left-aligned headline, rotating stamp, FAQ beside. */
-.navrh-v2 { background: var(--white); color: var(--graphite); font: 400 1.0625rem/1.65 "Manrope", system-ui, sans-serif; }
-.navrh-v2 h1, .navrh-v2 h2, .navrh-v2 h3 { font-weight: 800; letter-spacing: -.02em; }
+/* V2 – Dílna (Doorix + Lockey). Graphite. The hero is a rounded dark card inset
+   from the page edge; the cutaway is drawn in lime and white on the same graphite. */
+.navrh-v2 { background: #fff; color: var(--graphite); font: 400 1.0625rem/1.6 "Archivo", system-ui, sans-serif; }
+.navrh-v2 h1, .navrh-v2 h2, .navrh-v2 h3 { font-weight: 800; letter-spacing: -.01em; }
+.navrh-v2 h1, .navrh-v2 .titul { text-transform: uppercase; font-stretch: 108%; font-variation-settings: "wdth" 108; }
 
-.navrh-v2 .hlavicka { background: rgba(255, 255, 255, .94); backdrop-filter: blur(6px); border-bottom: 1px solid var(--line); }
-.navrh-v2 .logo img { height: 30px; }
-.navrh-v2 .menu a { color: var(--graphite); }
+.navrh-v2 .hlavicka { background: #fff; }
+.navrh-v2 .btn-hlavicka { border-radius: 999px; }
 
-.navrh-v2 .uvod { padding: clamp(2.5rem, 7vw, 5.5rem) 0 clamp(2rem, 5vw, 4rem); }
-.navrh-v2 .h1-kicker { display: block; margin-bottom: 1.4rem; font-size: 1rem; font-weight: 700; letter-spacing: 0; color: var(--ink-2); }
-.navrh-v2 .h1-radek { display: block; font-size: clamp(3rem, 9.5vw, 8.5rem); line-height: .92; letter-spacing: -.045em; }
-.navrh-v2 .h1-radek + .h1-radek { padding-left: clamp(0rem, 9vw, 9rem); }
-.navrh-v2 .uvod-radek { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: 2rem; align-items: center; margin-top: 2.5rem; padding-top: 2rem; border-top: 2px solid var(--graphite); }
-.navrh-v2 .uvod-lede { max-width: 32ch; margin: 0; font-size: 1.2rem; }
-.navrh-v2 .btn-vedlejsi { color: var(--graphite); box-shadow: inset 0 0 0 1.5px var(--graphite); background: transparent; }
-.navrh-v2 .btn-vedlejsi:hover { background: var(--graphite); color: var(--white); }
-.navrh-v2 .razitko { position: relative; display: grid; place-items: center; width: 7.5rem; height: 7.5rem; border-radius: 50%; background: var(--graphite); color: var(--white); text-decoration: none; }
-.navrh-v2 .razitko svg { position: absolute; inset: 0; width: 100%; height: 100%; fill: var(--white); font: 700 9.5px/1 "Manrope", sans-serif; letter-spacing: .14em; animation: otacet 24s linear infinite; }
-.navrh-v2 .razitko span { font-size: 1.6rem; color: var(--lime); }
-@keyframes otacet { to { transform: rotate(360deg); } }
-.navrh-v2 .uvod-obraz { margin-top: 2.5rem; padding: clamp(1rem, 3vw, 2rem); border-radius: 20px; background: var(--soft); }
-.navrh-v2 .uvod-obraz .otevru-lock-embed { max-width: 56rem; margin: 0 auto; }
+.navrh-v2 .uvod { padding: 0 clamp(.5rem, 1.5vw, 1rem) 0; }
+.navrh-v2 .karta { border-radius: 24px; background: var(--graphite); color: #fff; overflow: hidden; }
+.navrh-v2 .karta-in { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(2rem, 4vw, 3.5rem); align-items: center; width: min(76rem, 100%); margin: 0 auto; padding: clamp(2rem, 5vw, 4.5rem) clamp(1rem, 4vw, 2.5rem); }
+.navrh-v2 .h1-kicker { display: block; margin-bottom: 1rem; font-size: .95rem; font-weight: 600; text-transform: none; font-stretch: 100%; font-variation-settings: "wdth" 100; color: #b1b4b9; }
+.navrh-v2 .h1-a, .navrh-v2 .h1-b { display: block; font-size: clamp(2.6rem, 5.8vw, 5.2rem); line-height: .92; }
+.navrh-v2 .h1-b { color: var(--lime); }
+.navrh-v2 .uvod-lede { max-width: 36ch; margin: 1.3rem 0 1.6rem; color: #d4d6da; font-size: 1.1rem; }
+.navrh-v2 .btn { border-radius: 999px; }
+.navrh-v2 .btn-vedlejsi { color: #fff; box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, .5); background: transparent; }
+.navrh-v2 .btn-vedlejsi:hover { box-shadow: inset 0 0 0 1.5px #fff; }
+.navrh-v2 .uvod-obraz { --rez-papir: #282b34; --rez-cara: #e6e8ec; --rez-klic: #acf53d; --rez-kov: #acf53d; --rez-stavitko: #8a8f99; color: #d4d6da; }
+.navrh-v2 .karta-fakta { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); width: min(76rem, 100%); margin: 0 auto; padding: 0 clamp(1rem, 4vw, 2.5rem) clamp(1.5rem, 3vw, 2.2rem); }
+.navrh-v2 .karta-fakta li { padding: 1rem 1rem 0 0; border-top: 1px solid #3d424c; color: #d4d6da; font-size: .95rem; }
+.navrh-v2 .karta-fakta strong { display: block; font-size: 1.35rem; color: #fff; }
 
-.navrh-v2 .sekce { padding: clamp(3.5rem, 8vw, 6.5rem) 0; }
-.navrh-v2 .nadtitul { display: inline-block; margin: 0 0 .9rem; font-weight: 700; font-size: .95rem; background: linear-gradient(transparent 58%, var(--lime) 58%); }
-.navrh-v2 .titul { font-size: clamp(2.2rem, 5vw, 4rem); line-height: 1; margin-bottom: 2.5rem; }
+.navrh-v2 .sekce { padding: clamp(3.5rem, 8vw, 6rem) 0; }
+.navrh-v2 .nadtitul { margin: 0 0 .7rem; font-weight: 700; color: var(--blue); }
+.navrh-v2 .titul { font-size: clamp(2rem, 4.4vw, 3.4rem); line-height: .98; margin-bottom: 2rem; }
 
-.navrh-v2 .kroky { background: var(--graphite); color: var(--white); }
-.navrh-v2 .kroky .nadtitul { background: linear-gradient(transparent 58%, var(--blue) 58%); }
-.navrh-v2 .kroky-seznam { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2.5rem; }
-.navrh-v2 .krok-n { display: block; font-size: clamp(3.5rem, 7vw, 5.5rem); font-weight: 800; line-height: 1; color: var(--lime); letter-spacing: -.04em; }
-.navrh-v2 .krok h3 { margin-top: .8rem; font-size: 1.5rem; }
-.navrh-v2 .krok p { margin: .5rem 0 0; color: #d4d6da; }
-.navrh-v2 .kroky-dalsi { margin: 2.5rem 0 0; color: #d4d6da; }
-.navrh-v2 .kroky-dalsi a, .navrh-v2 .kroky-volat a { color: var(--lime); font-weight: 700; }
-.navrh-v2 .kroky-volat { display: flex; flex-wrap: wrap; gap: .3rem 1.2rem; align-items: baseline; margin-top: 1rem; color: #d4d6da; }
+/* "Co se stalo?" – four situations around a call (Doorix) */
+.navrh-v2 .situace-seznam { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; counter-reset: s; }
+.navrh-v2 .situace { position: relative; padding: 1.5rem 1.5rem 1.5rem 4rem; border: 1px solid var(--line); border-radius: 18px; counter-increment: s; }
+.navrh-v2 .situace::before { content: "0" counter(s); position: absolute; left: 1.4rem; top: 1.55rem; font-weight: 800; color: var(--blue); }
+.navrh-v2 .situace h3 { font-size: 1.2rem; }
+.navrh-v2 .situace p { margin: .35rem 0 0; color: var(--ink-2); }
+.navrh-v2 .situace-volat { margin-top: 1.5rem; }
+
+.navrh-v2 .kroky { background: var(--soft); }
+.navrh-v2 .kroky-seznam { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2rem; }
+.navrh-v2 .krok-n { font-size: 2.6rem; font-weight: 800; color: var(--graphite); -webkit-text-stroke: 0; }
+.navrh-v2 .krok h3 { margin: .4rem 0; font-size: 1.25rem; }
+.navrh-v2 .krok p { margin: 0; color: var(--ink-2); }
+.navrh-v2 .kroky-volat { display: flex; flex-wrap: wrap; gap: .3rem 1rem; align-items: center; margin-top: 2rem; padding: 1rem 1.4rem; border-radius: 999px; background: var(--graphite); color: #d4d6da; }
 .navrh-v2 .kroky-volat p { margin: 0; }
-.navrh-v2 .kroky-volat a { font-size: 1.5rem; text-decoration: none; }
+.navrh-v2 .kroky-volat a { font-size: 1.4rem; font-weight: 800; color: var(--lime); text-decoration: none; }
+.navrh-v2 .kroky-dalsi { margin: 1.2rem 0 0; }
+.navrh-v2 .kroky-dalsi a, .navrh-v2 .onas-text a, .navrh-v2 .kontakt-udaje a { color: var(--blue); font-weight: 700; }
 
-.navrh-v2 .sluzby-seznam { counter-reset: s; }
-.navrh-v2 .sluzba { display: grid; grid-template-columns: 4rem minmax(0, 1fr) minmax(0, 1fr); gap: 2rem; align-items: baseline; padding: 1.6rem 0; border-top: 1px solid var(--line); }
-.navrh-v2 .sluzba:last-child { border-bottom: 1px solid var(--line); }
-.navrh-v2 .sluzba-n { font-weight: 800; color: var(--blue); }
-.navrh-v2 .sluzba h3 { font-size: clamp(1.5rem, 2.8vw, 2.25rem); line-height: 1.05; }
+.navrh-v2 .sluzby-seznam { border-top: 2px solid var(--graphite); }
+.navrh-v2 .sluzba { display: grid; grid-template-columns: 3rem minmax(0, 1fr) minmax(0, 1.2fr) 2rem; gap: 1.5rem; align-items: center; padding: 1.3rem 0; border-bottom: 1px solid var(--line); }
+.navrh-v2 .sluzba-n { font-weight: 700; color: var(--ink-2); }
+.navrh-v2 .sluzba h3 { font-size: 1.3rem; }
 .navrh-v2 .sluzba p { margin: 0; color: var(--ink-2); }
-.navrh-v2 .stitek { display: inline-block; margin-top: .3rem; font-weight: 700; color: var(--graphite); background: linear-gradient(transparent 55%, var(--lime) 55%); }
+.navrh-v2 .sluzba-sipka { font-weight: 800; color: var(--blue); }
+.navrh-v2 .stitek { display: inline-block; margin-top: .3rem; padding: .15rem .55rem; border-radius: 999px; background: var(--lime); color: var(--graphite); font-weight: 700; font-size: .85rem; }
 
-.navrh-v2 .onas { background: var(--soft); }
-.navrh-v2 .onas-in { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 3rem; align-items: end; }
-.navrh-v2 .onas-text { margin: 0; max-width: 42ch; font-size: 1.25rem; }
-.navrh-v2 .onas-text a, .navrh-v2 .kontakt-udaje a { color: var(--blue); font-weight: 700; }
+.navrh-v2 .onas { background: var(--graphite); color: #fff; border-radius: 24px; margin: 0 clamp(.5rem, 1.5vw, 1rem); }
+.navrh-v2 .onas .nadtitul { color: var(--lime); }
+.navrh-v2 .onas-in { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 3rem; align-items: end; }
+.navrh-v2 .onas-text { margin: 0; max-width: 44ch; color: #d4d6da; font-size: 1.15rem; }
+.navrh-v2 .onas .onas-text a { color: var(--lime); }
+.navrh-v2 .partneri li { padding: .9rem 1.1rem; border-radius: 14px; background: #fff; }
 .navrh-v2 .partneri span { color: var(--ink-2); }
 
-.navrh-v2 .otazky-in { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr); gap: 3rem; }
+.navrh-v2 .otazky-in { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr); gap: 3rem; }
 .navrh-v2 .otazky details p { color: var(--ink-2); }
 
-.navrh-v2 .paticka { padding: 4.5rem 0 2.5rem; background: var(--blue); color: #dbe7f5; }
-.navrh-v2 .paticka-label { margin: 0; font-weight: 700; }
-.navrh-v2 .paticka-cislo { margin: .4rem 0 2.5rem; font-size: clamp(2.6rem, 8vw, 6rem); font-weight: 800; letter-spacing: -.04em; line-height: 1; color: var(--white); }
-.navrh-v2 .paticka-cislo:hover { color: var(--lime); }
-.navrh-v2 .paticka-sloupce { padding-top: 1.5rem; border-top: 1px solid rgba(255, 255, 255, .25); }
-.navrh-v2 .paticka-sloupce strong { color: var(--white); }
+.navrh-v2 .paticka { padding: 4rem 0 2.5rem; background: var(--graphite); color: #d4d6da; margin-top: 2rem; }
+.navrh-v2 .paticka-label { margin: 0; font-weight: 600; color: #b1b4b9; }
+.navrh-v2 .paticka-cislo { margin: .5rem 0 2.5rem; font-size: clamp(2.6rem, 7vw, 5.4rem); font-weight: 800; line-height: 1; color: var(--lime); }
+.navrh-v2 .paticka-sloupce { padding-top: 1.5rem; border-top: 1px solid #3d424c; }
+.navrh-v2 .paticka-sloupce strong { color: #fff; }
 
-.navrh-v2 .kontakt { padding-top: clamp(2.5rem, 6vw, 4.5rem); }
-.navrh-v2 .formular { background: var(--soft); }
+.navrh-v2 .formular { background: var(--soft); border-radius: 18px; }
 
 @media (max-width: 860px) {
-  .navrh-v2 .h1-radek + .h1-radek { padding-left: 0; }
-  .navrh-v2 .uvod-radek { grid-template-columns: 1fr; gap: 1.5rem; }
-  .navrh-v2 .razitko { display: none; }
-  .navrh-v2 .kroky-seznam { grid-template-columns: 1fr; gap: 2rem; }
-  .navrh-v2 .sluzba { grid-template-columns: 2.5rem minmax(0, 1fr); gap: .3rem 1rem; }
-  .navrh-v2 .sluzba p { grid-column: 2; }
-  .navrh-v2 .onas-in, .navrh-v2 .otazky-in { grid-template-columns: 1fr; gap: 1.5rem; }
+  .navrh-v2 .karta-in, .navrh-v2 .onas-in, .navrh-v2 .otazky-in { grid-template-columns: 1fr; gap: 1.5rem; }
+  .navrh-v2 .karta-fakta { grid-template-columns: 1fr 1fr; }
+  .navrh-v2 .situace-seznam, .navrh-v2 .kroky-seznam { grid-template-columns: 1fr; }
+  .navrh-v2 .kroky-volat { border-radius: 18px; }
+  .navrh-v2 .sluzba { grid-template-columns: 2.2rem minmax(0, 1fr) 1.5rem; gap: .3rem .8rem; }
+  .navrh-v2 .sluzba p { grid-column: 2; grid-row: 2; }
+  .navrh-v2 .sluzba-sipka { grid-column: 3; grid-row: 1; }
 }
-@media (prefers-reduced-motion: reduce) { .navrh-v2 .razitko svg { animation: none; } }
-.navrh-v2 .otevru-lock-state { color: var(--graphite); }

@@ -1,83 +1,86 @@
-/* V3 – Polep (Lockey + Locksmith webdevia). Lime dominates like the van:
-   lime hero with graphite type, livery stripes as dividers, blue facts band
-   over the hero edge. Archivo, wide and heavy like vehicle lettering. */
-.navrh-v3 { background: var(--white); color: var(--graphite); font: 400 1.0625rem/1.6 "Archivo", system-ui, sans-serif; }
-.navrh-v3 h1, .navrh-v3 h2, .navrh-v3 h3 { font-weight: 800; font-stretch: 112%; font-variation-settings: "wdth" 112; text-transform: uppercase; letter-spacing: -.01em; }
+/* V3 – Výkres (Shield + KeyMaster). Brand blue; the cutaway is a real blueprint
+   (white lines on the same blue), giant left headline, rotating stamp, lime calls. */
+.navrh-v3 { background: #fff; color: var(--graphite); font: 400 1.0625rem/1.6 "IBM Plex Sans", system-ui, sans-serif; }
+.navrh-v3 h1, .navrh-v3 h2, .navrh-v3 h3 { font-weight: 700; letter-spacing: -.02em; }
+.navrh-v3 .nadtitul, .navrh-v3 .vykres-popis, .navrh-v3 .krok-n, .navrh-v3 .sluzba-n, .navrh-v3 .paticka-label { font-family: "IBM Plex Mono", ui-monospace, monospace; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; }
 
-.navrh-v3 .hlavicka { background: var(--graphite); color: var(--white); }
-.navrh-v3 .menu a { color: var(--white); }
-.navrh-v3 .stav { color: #d4d6da; }
+.navrh-v3 .hlavicka { background: var(--blue); color: #fff; border-bottom: 1px solid rgba(255, 255, 255, .2); }
+.navrh-v3 .logo img { background: var(--lime); border-radius: 4px; padding: 3px 6px; }
+.navrh-v3 .menu a, .navrh-v3 .stav { color: #fff; }
 
-.navrh-v3 .uvod { position: relative; background: var(--lime); }
-.navrh-v3 .uvod-in { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: clamp(2rem, 5vw, 4rem); align-items: center; padding: clamp(2.5rem, 6vw, 4.5rem) 0 clamp(5rem, 9vw, 7rem); }
-.navrh-v3 .znacka { margin: 0 0 1.4rem; font-weight: 800; letter-spacing: .5em; font-size: .85rem; }
-.navrh-v3 .h1-kicker { display: block; margin-bottom: .9rem; font-size: 1rem; font-weight: 700; text-transform: none; font-stretch: 100%; font-variation-settings: "wdth" 100; }
-.navrh-v3 .h1-radek { display: block; font-size: clamp(2.6rem, 6vw, 5rem); line-height: .95; }
-.navrh-v3 .uvod-lede { max-width: 34ch; margin: 1.3rem 0 1.6rem; font-size: 1.15rem; }
-.navrh-v3 .btn-call { background: var(--graphite); color: var(--white); }
-.navrh-v3 .btn-call:hover { background: var(--blue); }
-.navrh-v3 .btn-vedlejsi { color: var(--graphite); box-shadow: inset 0 0 0 2px var(--graphite); background: transparent; }
-.navrh-v3 .btn-vedlejsi:hover { background: var(--graphite); color: var(--white); }
-.navrh-v3 .uvod-obraz { padding: 1rem; border-radius: 6px; background: var(--graphite); color: var(--white); transform: rotate(-1.5deg); }
-.navrh-v3 .polep { position: absolute; left: 0; right: 0; bottom: 0; height: 26px; background: repeating-linear-gradient(-58deg, var(--lime) 0 60px, var(--graphite) 60px 72px, var(--blue) 72px 132px, var(--graphite) 132px 144px); }
-
-.navrh-v3 .fakta { position: relative; z-index: 2; margin-top: -2.6rem; }
-.navrh-v3 .fakta-in { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); background: var(--blue); color: #dbe7f5; border-radius: 4px; }
-.navrh-v3 .fakta p { margin: 0; padding: 1.3rem 1.5rem; border-right: 1px solid rgba(255, 255, 255, .2); }
-.navrh-v3 .fakta p:last-child { border-right: 0; }
-.navrh-v3 .fakta strong { display: block; color: var(--white); font-size: 1.3rem; font-weight: 800; }
+.navrh-v3 .uvod { background: var(--blue); color: #fff; padding: clamp(2.5rem, 6vw, 4.5rem) 0 clamp(2rem, 4vw, 3rem); }
+.navrh-v3 .h1-kicker { display: block; margin-bottom: 1.2rem; font: 500 .9rem/1.3 "IBM Plex Mono", monospace; letter-spacing: .04em; color: #c9daee; }
+.navrh-v3 .h1-a, .navrh-v3 .h1-b { display: block; font-size: clamp(2.8rem, 8.6vw, 7.6rem); line-height: .95; letter-spacing: -.04em; }
+.navrh-v3 .h1-b { padding-left: clamp(0rem, 8vw, 8rem); color: var(--lime); }
+.navrh-v3 .uvod-radek { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: 2rem; align-items: center; margin-top: 2.2rem; padding-top: 1.8rem; border-top: 1px solid rgba(255, 255, 255, .3); }
+.navrh-v3 .uvod-lede { max-width: 34ch; margin: 0; color: #dbe7f5; font-size: 1.15rem; }
+.navrh-v3 .btn-vedlejsi { color: #fff; box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, .55); background: transparent; }
+.navrh-v3 .btn-vedlejsi:hover { box-shadow: inset 0 0 0 1.5px #fff; }
+.navrh-v3 .razitko { position: relative; display: grid; place-items: center; width: 7.5rem; height: 7.5rem; border-radius: 50%; background: var(--lime); color: var(--graphite); text-decoration: none; }
+.navrh-v3 .razitko svg { position: absolute; inset: 0; width: 100%; height: 100%; fill: var(--graphite); font: 600 9.5px/1 "IBM Plex Mono", monospace; letter-spacing: .12em; animation: otacet 24s linear infinite; }
+.navrh-v3 .razitko span { font-size: 1.6rem; }
+@keyframes otacet { to { transform: rotate(360deg); } }
+.navrh-v3 .uvod-obraz { --rez-papir: #004c93; --rez-cara: #ffffff; --rez-klic: #acf53d; --rez-kov: #acf53d; --rez-stavitko: #7fa3cc; margin-top: clamp(2rem, 5vw, 3rem); color: #dbe7f5; }
+.navrh-v3 .vykres-popis { margin: 0 0 .6rem; font-size: .8rem; color: #c9daee; }
 
 .navrh-v3 .sekce { padding: clamp(3.5rem, 8vw, 6rem) 0; }
-.navrh-v3 .nadtitul { margin: 0 0 .8rem; font-weight: 800; letter-spacing: .3em; font-size: .8rem; text-transform: uppercase; color: var(--blue); }
-.navrh-v3 .titul { font-size: clamp(2rem, 4.4vw, 3.4rem); line-height: 1; margin-bottom: 2.2rem; }
+.navrh-v3 .nadtitul { margin: 0 0 .7rem; font-size: .85rem; color: var(--blue); }
+.navrh-v3 .titul { font-size: clamp(2rem, 4.4vw, 3.4rem); line-height: 1.02; margin-bottom: 2rem; }
 
-.navrh-v3 .kroky-seznam { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; }
-.navrh-v3 .krok { padding: 1.5rem 1.8rem 1.5rem 0; border-top: 6px solid var(--graphite); }
-.navrh-v3 .krok + .krok { padding-left: 1.8rem; border-left: 1px solid var(--line); }
-.navrh-v3 .krok:first-child { border-top-color: var(--lime); }
-.navrh-v3 .krok-n { font-weight: 800; color: var(--blue); }
+.navrh-v3 .situace-seznam { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid var(--graphite); }
+.navrh-v3 .situace { padding: 1.4rem 1.4rem 1.4rem 0; }
+.navrh-v3 .situace + .situace { padding-left: 1.4rem; border-left: 1px solid var(--line); }
+.navrh-v3 .situace h3 { font-size: 1.15rem; line-height: 1.25; }
+.navrh-v3 .situace p { margin: .5rem 0 0; color: var(--ink-2); font-size: .98rem; }
+.navrh-v3 .situace-volat { margin-top: 1.5rem; }
+
+.navrh-v3 .kroky { background: var(--soft); }
+.navrh-v3 .kroky-seznam { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2rem; }
+.navrh-v3 .krok-n { font-size: .85rem; color: var(--blue); }
 .navrh-v3 .krok h3 { margin: .5rem 0; font-size: 1.35rem; }
 .navrh-v3 .krok p { margin: 0; color: var(--ink-2); }
-.navrh-v3 .kroky-dalsi { margin: 2rem 0 0; }
-.navrh-v3 .kroky-dalsi a, .navrh-v3 .onas-text a, .navrh-v3 .kontakt-udaje a { color: var(--blue); font-weight: 700; }
-.navrh-v3 .kroky-volat { display: flex; flex-wrap: wrap; gap: .3rem 1rem; align-items: baseline; margin-top: 1.2rem; padding: 1rem 1.3rem; background: var(--lime); border-radius: 4px; }
-.navrh-v3 .kroky-volat p { margin: 0; font-weight: 700; }
-.navrh-v3 .kroky-volat a { font-size: 1.5rem; font-weight: 800; text-decoration: none; }
+.navrh-v3 .kroky-volat { display: flex; flex-wrap: wrap; gap: .3rem 1rem; align-items: baseline; margin-top: 2rem; }
+.navrh-v3 .kroky-volat p { margin: 0; color: var(--ink-2); }
+.navrh-v3 .kroky-volat a { font-size: 1.5rem; font-weight: 700; color: var(--blue); text-decoration: none; }
+.navrh-v3 .kroky-dalsi { margin: 1rem 0 0; }
+.navrh-v3 .kroky-dalsi a, .navrh-v3 .onas-text a, .navrh-v3 .kontakt-udaje a { color: var(--blue); font-weight: 600; }
 
-.navrh-v3 .sluzby { background: var(--graphite); color: var(--white); }
-.navrh-v3 .sluzby .nadtitul { color: var(--lime); }
-.navrh-v3 .sluzby-seznam { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 3rem; }
-.navrh-v3 .sluzba { display: grid; grid-template-columns: 2.6rem minmax(0, 1fr); column-gap: .8rem; padding: 1.4rem 0; border-top: 1px solid #3d424c; }
-.navrh-v3 .sluzba-n { grid-row: span 2; font-weight: 800; color: var(--lime); }
+.navrh-v3 .sluzba { display: grid; grid-template-columns: 4rem minmax(0, 1fr) minmax(0, 1.2fr) 1.5rem; gap: 1.5rem; align-items: baseline; padding: 1.3rem 0; border-bottom: 1px solid var(--line); }
+.navrh-v3 .sluzby-seznam { border-top: 1px solid var(--graphite); }
+.navrh-v3 .sluzba-n { font-size: .85rem; color: var(--blue); }
 .navrh-v3 .sluzba h3 { font-size: 1.35rem; }
-.navrh-v3 .sluzba p { margin: .35rem 0 0; color: #d4d6da; }
-.navrh-v3 .stitek { display: inline-block; margin-top: .4rem; padding: .15rem .45rem; background: var(--lime); color: var(--graphite); font-weight: 700; font-size: .85rem; }
+.navrh-v3 .sluzba p { margin: 0; color: var(--ink-2); }
+.navrh-v3 .sluzba-sipka { color: var(--blue); }
+.navrh-v3 .stitek { display: inline-block; margin-top: .3rem; padding: .1rem .45rem; background: var(--lime); color: var(--graphite); font: 500 .8rem/1.5 "IBM Plex Mono", monospace; }
 
+.navrh-v3 .onas { background: var(--graphite); color: #fff; }
+.navrh-v3 .onas .nadtitul { color: var(--lime); }
 .navrh-v3 .onas-in { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 3rem; align-items: end; }
-.navrh-v3 .onas-text { margin: 0; max-width: 42ch; font-size: 1.2rem; }
+.navrh-v3 .onas-text { margin: 0; max-width: 44ch; color: #d4d6da; font-size: 1.15rem; }
+.navrh-v3 .onas .onas-text a { color: var(--lime); }
+.navrh-v3 .partneri li { padding: .9rem 1.1rem; background: #fff; }
 .navrh-v3 .partneri span { color: var(--ink-2); }
 
-.navrh-v3 .otazky { background: var(--soft); }
 .navrh-v3 .otazky-in { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr); gap: 3rem; }
-.navrh-v3 .otazky summary { text-transform: uppercase; font-size: 1.05rem; letter-spacing: .02em; }
 .navrh-v3 .otazky details p { color: var(--ink-2); }
 
-.navrh-v3 .paticka { position: relative; padding: 4.5rem 0 2.5rem; background: var(--graphite); color: #d4d6da; }
-.navrh-v3 .paticka::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 14px; background: repeating-linear-gradient(-58deg, var(--lime) 0 60px, var(--graphite) 60px 72px, var(--blue) 72px 132px, var(--graphite) 132px 144px); }
-.navrh-v3 .paticka-label { margin: 0; font-weight: 700; letter-spacing: .2em; font-size: .8rem; text-transform: uppercase; }
-.navrh-v3 .paticka-cislo { margin: .5rem 0 2.5rem; font-size: clamp(2.6rem, 7.5vw, 5.5rem); font-weight: 800; font-stretch: 112%; line-height: 1; color: var(--lime); }
-.navrh-v3 .paticka-sloupce { padding-top: 1.5rem; border-top: 1px solid #3d424c; }
-.navrh-v3 .paticka-sloupce strong { color: var(--white); }
+.navrh-v3 .paticka { padding: 4rem 0 2.5rem; background: var(--blue); color: #dbe7f5; }
+.navrh-v3 .paticka-label { margin: 0; font-size: .85rem; }
+.navrh-v3 .paticka-cislo { margin: .6rem 0 2.5rem; font-size: clamp(2.4rem, 7vw, 5rem); font-weight: 700; line-height: 1; color: var(--lime); }
+.navrh-v3 .paticka-sloupce { padding-top: 1.5rem; border-top: 1px solid rgba(255, 255, 255, .25); }
+.navrh-v3 .paticka-sloupce strong { color: #fff; }
 
-.navrh-v3 .formular { background: var(--soft); border-top: 6px solid var(--lime); border-radius: 0; }
+.navrh-v3 .formular { background: var(--soft); border: 1px solid var(--line); }
 
 @media (max-width: 860px) {
-  .navrh-v3 .uvod-in, .navrh-v3 .onas-in, .navrh-v3 .otazky-in { grid-template-columns: 1fr; }
-  .navrh-v3 .uvod-obraz { transform: none; }
-  .navrh-v3 .fakta-in { grid-template-columns: 1fr; }
-  .navrh-v3 .fakta p { border-right: 0; border-bottom: 1px solid rgba(255, 255, 255, .2); }
-  .navrh-v3 .kroky-seznam, .navrh-v3 .sluzby-seznam { grid-template-columns: 1fr; }
-  .navrh-v3 .krok + .krok { padding-left: 0; border-left: 0; }
+  .navrh-v3 .h1-b { padding-left: 0; }
+  .navrh-v3 .uvod-radek { grid-template-columns: 1fr; gap: 1.4rem; }
+  .navrh-v3 .razitko { display: none; }
+  .navrh-v3 .situace-seznam { grid-template-columns: 1fr; }
+  .navrh-v3 .situace + .situace { padding-left: 0; border-left: 0; border-top: 1px solid var(--line); }
+  .navrh-v3 .kroky-seznam, .navrh-v3 .onas-in, .navrh-v3 .otazky-in { grid-template-columns: 1fr; gap: 1.5rem; }
+  .navrh-v3 .sluzba { grid-template-columns: 2.6rem minmax(0, 1fr); gap: .3rem .8rem; }
+  .navrh-v3 .sluzba p { grid-column: 2; }
+  .navrh-v3 .sluzba-sipka { display: none; }
 }
-.navrh-v3 .btn-hlavicka { background: var(--lime); color: var(--graphite); }
-.navrh-v3 .btn-hlavicka:hover { background: var(--lime-hover); }
+@media (prefers-reduced-motion: reduce) { .navrh-v3 .razitko svg { animation: none; } }

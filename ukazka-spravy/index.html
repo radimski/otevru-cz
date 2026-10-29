@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Ukázka správy | OTEVRU.cz</title>
+<link rel="icon" href="/favicon.ico">
+<link rel="stylesheet" href="/fonts.css">
+<style>
+/* Static, clickable demo of the client admin (docs/navrhy.md "Správa v ukázce").
+   Sample data only, nothing is stored or sent; same look as the site. */
+:root { --lime: #acf53d; --graphite: #282b34; --graphite-2: #32363f; --blue: #004c93; --soft: #f3f4f6; --line: #d5d8de; --ink-2: #575c66; --red: #b42318; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--soft); color: var(--graphite); font: 400 1rem/1.55 "Barlow", system-ui, sans-serif; }
+button, input, textarea, select { font: inherit; }
+a { color: var(--blue); }
+:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
+.demo-pruh { padding: .5rem 1rem; background: var(--graphite); color: #fff; text-align: center; font-weight: 600; font-size: .9rem; }
+.demo-pruh strong { color: var(--lime); }
+.lista { background: var(--lime); }
+.lista-in { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem 1.2rem; width: min(72rem, 100%); margin: 0 auto; padding: .6rem 1rem; }
+.lista img { height: 30px; display: block; }
+.lista nav { display: flex; gap: .3rem; margin-left: .5rem; }
+.lista nav button { min-height: 44px; padding: 0 .9rem; border: 0; border-radius: 8px; background: transparent; color: var(--graphite); font-weight: 600; cursor: pointer; }
+.lista nav button[aria-current="page"] { background: var(--graphite); color: #fff; }
+.ucet { display: flex; align-items: center; gap: .9rem; margin-left: auto; font-size: .92rem; }
+.ucet a, .ucet button { display: inline-flex; align-items: center; min-height: 44px; background: none; border: 0; padding: 0; color: var(--graphite); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+main { width: min(72rem, 100%); margin: 0 auto; padding: 1.5rem 1rem 4rem; }
+h1 { margin: 0 0 .3rem; font: 700 2.2rem/1.05 "Barlow Condensed", sans-serif; }
+.pod { margin: 0 0 1.5rem; color: var(--ink-2); }
+.karta { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 1.25rem; }
+.filtry { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1rem; }
+.filtry button { min-height: 44px; padding: 0 1rem; border: 1px solid var(--graphite); border-radius: 999px; background: #fff; cursor: pointer; font-weight: 600; }
+.filtry button[aria-pressed="true"] { background: var(--graphite); color: #fff; }
+.seznam { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 1rem; align-items: start; }
+.poptavky { list-style: none; margin: 0; padding: 0; display: grid; gap: .5rem; }
+.poptavky button { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: .2rem .8rem; width: 100%; padding: .9rem 1rem; text-align: left; background: #fff; border: 1px solid var(--line); border-radius: 10px; cursor: pointer; }
+.poptavky button[aria-current="true"] { border-color: var(--graphite); box-shadow: inset 4px 0 0 var(--lime); }
+.poptavky .tecka { width: 10px; height: 10px; border-radius: 50%; margin-top: .45rem; background: var(--lime); box-shadow: 0 0 0 1px #6c9a23; }
+.poptavky .hotovo .tecka { background: var(--line); box-shadow: none; }
+.poptavky strong { font-weight: 700; }
+.poptavky .cas { color: var(--ink-2); font-size: .85rem; white-space: nowrap; }
+.poptavky .uryvek { grid-column: 2 / 4; color: var(--ink-2); font-size: .92rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.detail h2 { margin: 0; font: 700 1.6rem/1.1 "Barlow Condensed", sans-serif; }
+.detail dl { display: grid; grid-template-columns: 8rem minmax(0, 1fr); gap: .4rem 1rem; margin: 1rem 0; }
+.detail dt { color: var(--ink-2); }
+.detail dd { margin: 0; }
+.detail .zprava { margin: 0 0 1rem; padding: .9rem 1rem; background: var(--soft); border-radius: 8px; }
+.akce { display: flex; flex-wrap: wrap; gap: .6rem; }
+.btn { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 1.1rem; border: 0; border-radius: 10px; font-weight: 600; text-decoration: none; cursor: pointer; }
+.btn-lime { background: var(--lime); color: var(--graphite); }
+.btn-tmavy { background: var(--graphite); color: #fff; }
+.btn-obrys { background: #fff; color: var(--graphite); box-shadow: inset 0 0 0 1.5px var(--graphite); }
+.stitek { display: inline-block; padding: .1rem .5rem; border-radius: 999px; font-size: .8rem; font-weight: 700; background: var(--lime); }
+.stitek.hotovo { background: var(--line); }
+.pole { display: grid; gap: .35rem; margin-bottom: 1rem; }
+.pole label { font-weight: 600; }
+.pole input, .pole textarea, .pole select { min-height: 44px; padding: .6rem .75rem; border: 1px solid #9ea3ad; border-radius: 8px; background: #fff; font-size: 16px; }
+.prepinac { display: flex; align-items: center; gap: .8rem; min-height: 44px; cursor: pointer; font-weight: 600; }
+.prepinac input { width: 22px; height: 22px; accent-color: var(--graphite); }
+.nahled { margin-top: 1rem; padding: 1rem; border-radius: 10px; background: var(--lime); }
+.nahled p { margin: 0; }
+.nahled .stav { display: inline-flex; align-items: center; gap: .5rem; font-weight: 700; }
+.nahled .stav i { width: 10px; height: 10px; border-radius: 50%; background: #2a8a1c; }
+.nahled .stav.ne i { background: var(--red); }
+.nahled-akce { margin-top: .6rem; display: inline-block; padding: .2rem .55rem; border-radius: 4px; background: var(--graphite); color: #fff; font-weight: 600; font-size: .9rem; }
+.dvojice { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 1rem; }
+.toast { position: fixed; left: 50%; bottom: 1.2rem; transform: translateX(-50%); padding: .7rem 1.1rem; border-radius: 10px; background: var(--graphite); color: #fff; font-weight: 600; opacity: 0; transition: opacity .2s; pointer-events: none; }
+.toast.on { opacity: 1; }
+[hidden] { display: none !important; }
+@media (max-width: 820px) {
+  .seznam, .dvojice { grid-template-columns: 1fr; }
+  .lista nav { order: 3; width: 100%; margin: 0; overflow-x: auto; }
+  .ucet { font-size: .85rem; gap: .6rem; }
+  .detail dl { grid-template-columns: 1fr; gap: 0; }
+  .detail dt { margin-top: .5rem; }
+}
+@media (prefers-reduced-motion: reduce) { .toast { transition: none; } }
+</style>
+</head>
+<body>
+<p class="demo-pruh" role="note"><strong>Ukázka správy</strong> · změny se neukládají, nic se neodesílá</p>
+<header class="lista">
+  <div class="lista-in">
+    <img src="/img/logo.png" width="295" height="60" alt="OTEVRU.cz – správa">
+    <nav aria-label="Správa">
+      <button type="button" data-tab="poptavky" aria-current="page">Poptávky</button>
+      <button type="button" data-tab="dostupnost">Dostupnost</button>
+      <button type="button" data-tab="akce">Akce na webu</button>
+    </nav>
+    <div class="ucet">
+      <span>Ukázka</span>
+      <button type="button" data-demo-off>Heslo</button>
+      <a href="/navrhy/" target="_blank">Web ↗</a>
+      <button type="button" data-demo-off>Odhlásit</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section data-panel="poptavky">
+    <h1>Poptávky</h1>
+    <p class="pod">Co lidé poslali formulářem na webu. Každá nová poptávka vám zároveň přijde e-mailem na patrik@otevru.cz. Nové jsou zelené, po vyřízení je označte jako vyřízené.</p>
+    <div class="filtry" role="group" aria-label="Filtr">
+      <button type="button" data-filtr="nove" aria-pressed="true">Nové</button>
+      <button type="button" data-filtr="vse" aria-pressed="false">Všechny</button>
+      <button type="button" data-filtr="hotovo" aria-pressed="false">Vyřízené</button>
+    </div>
+    <div class="seznam">
+      <ul class="poptavky" id="poptavky"></ul>
+      <article class="karta detail" id="detail" aria-live="polite"></article>
+    </div>
+  </section>
+
+  <section data-panel="dostupnost" hidden>
+    <h1>Dostupnost</h1>
+    <p class="pod">Když jste na dovolené nebo nemocný, web místo „Otevřeno“ ukáže, že dnes nejste k zastižení, a od kdy zase ano.</p>
+    <div class="dvojice">
+      <div class="karta">
+        <label class="prepinac"><input type="checkbox" id="pryc"> Dnes nejsem k zastižení</label>
+        <div class="pole" id="zpet-pole" hidden>
+          <label for="zpet">Zpět od</label>
+          <input id="zpet" type="datetime-local" value="2026-11-02T07:00">
+        </div>
+        <div class="pole">
+          <label for="hodiny">Běžná provozní doba</label>
+          <input id="hodiny" type="text" value="Po–Ne 07:00–18:00">
+        </div>
+        <button type="button" class="btn btn-tmavy" data-ulozit="Dostupnost">Uložit</button>
+      </div>
+      <div class="karta">
+        <p><strong>Takhle to uvidí návštěvník webu:</strong></p>
+        <div class="nahled"><p class="stav" id="nahled-stav"><i></i><span>Otevřeno</span></p><p id="nahled-hodiny">Po–Ne 07:00–18:00</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section data-panel="akce" hidden>
+    <h1>Akce na webu</h1>
+    <p class="pod">Krátký štítek u služby na webu. Prázdné pole štítek schová.</p>
+    <div class="dvojice">
+      <div class="karta">
+        <div class="pole">
+          <label for="akce-text">Text akce</label>
+          <input id="akce-text" type="text" maxlength="60" value="Yale Linus – ptejte se na akci">
+        </div>
+        <div class="pole">
+          <label for="akce-u">U služby</label>
+          <select id="akce-u"><option>Klíčová služba</option><option>Bezpečnostní dveře</option><option>Trezory a sejfy</option></select>
+        </div>
+        <button type="button" class="btn btn-tmavy" data-ulozit="Akce">Uložit</button>
+      </div>
+      <div class="karta">
+        <p><strong>Náhled na webu:</strong></p>
+        <p style="margin:.6rem 0 0;font:700 1.4rem/1.1 'Barlow Condensed',sans-serif" id="akce-sluzba">Klíčová služba</p>
+        <span class="nahled-akce" id="akce-nahled">Yale Linus – ptejte se na akci</span>
+      </div>
+    </div>
+  </section>
+</main>
+<p class="toast" id="toast" role="status"></p>
+
+<script>
+// Sample inquiries – invented, no real people; numbers are not real.
+var DATA = [
+  { id: 1, jmeno: "Zákazník A (ukázka)", tel: "+420 600 000 001", sluzba: "Nouzové otevírání", cas: "dnes 9:12", zprava: "Zabouchnuté dveře bytu, panelový dům ve Frýdku, 3. patro. Klíče jsou uvnitř.", hotovo: false },
+  { id: 2, jmeno: "Zákazník B (ukázka)", tel: "+420 600 000 002", sluzba: "Klíčová služba", cas: "dnes 8:40", zprava: "Potřebuji 3 kopie klíče od vchodu a dotaz na Yale Linus.", hotovo: false },
+  { id: 3, jmeno: "Zákazník C (ukázka)", tel: "+420 600 000 003", sluzba: "Opravy po vloupání", cas: "včera 17:05", zprava: "Po vloupání do sklepa poškozená vložka a kování, prosím výměnu.", hotovo: false },
+  { id: 4, jmeno: "Zákazník D (ukázka)", tel: "+420 600 000 004", sluzba: "Trezory a sejfy", cas: "28. 10.", zprava: "Montáž trezoru do zdi v rodinném domě, Sviadnov.", hotovo: true }
+];
+var filtr = "nove", vybrana = 1;
+var list = document.getElementById("poptavky"), detail = document.getElementById("detail");
+
+function toast(t) {
+  var el = document.getElementById("toast");
+  el.textContent = t; el.classList.add("on");
+  clearTimeout(toast.t); toast.t = setTimeout(function () { el.classList.remove("on"); }, 2200);
+}
+function viditelne() {
+  return DATA.filter(function (p) { return filtr === "vse" || (filtr === "hotovo") === p.hotovo; });
+}
+function vykresli() {
+  var v = viditelne();
+  if (!v.some(function (p) { return p.id === vybrana; })) vybrana = v.length ? v[0].id : null;
+  list.innerHTML = "";
+  v.forEach(function (p) {
+    var li = document.createElement("li");
+    var b = document.createElement("button");
+    b.type = "button"; b.className = p.hotovo ? "hotovo" : "";
+    if (p.id === vybrana) b.setAttribute("aria-current", "true");
+    b.innerHTML = '<span class="tecka" aria-hidden="true"></span><strong></strong><span class="cas"></span><span class="uryvek"></span>';
+    b.querySelector("strong").textContent = p.sluzba;
+    b.querySelector(".cas").textContent = p.cas;
+    b.querySelector(".uryvek").textContent = p.zprava;
+    b.addEventListener("click", function () { vybrana = p.id; vykresli(); });
+    li.appendChild(b); list.appendChild(li);
+  });
+  var p = DATA.find(function (x) { return x.id === vybrana; });
+  if (!p) { detail.innerHTML = '<p>Žádné poptávky v tomhle filtru.</p>'; return; }
+  detail.innerHTML =
+    '<h2></h2><p style="margin:.4rem 0 0"><span class="stitek"></span></p>' +
+    '<dl><dt>Od</dt><dd data-k="jmeno"></dd><dt>Telefon</dt><dd data-k="tel"></dd><dt>Přišlo</dt><dd data-k="cas"></dd></dl>' +
+    '<p class="zprava"></p><div class="akce"><a class="btn btn-lime">Zavolat</a><button type="button" class="btn btn-tmavy" data-prepnout></button></div>';
+  detail.querySelector("h2").textContent = p.sluzba;
+  var st = detail.querySelector(".stitek"); st.textContent = p.hotovo ? "Vyřízeno" : "Nová"; if (p.hotovo) st.classList.add("hotovo");
+  ["jmeno", "tel", "cas"].forEach(function (k) { detail.querySelector('[data-k="' + k + '"]').textContent = p[k]; });
+  detail.querySelector(".zprava").textContent = p.zprava;
+  var call = detail.querySelector(".btn-lime");
+  call.href = "#"; call.addEventListener("click", function (e) { e.preventDefault(); toast("V ukázce se nevolá. Ve správě tlačítko vytočí " + p.tel + "."); });
+  var sw = detail.querySelector("[data-prepnout]");
+  sw.textContent = p.hotovo ? "Vrátit mezi nové" : "Označit jako vyřízené";
+  sw.addEventListener("click", function () { p.hotovo = !p.hotovo; toast(p.hotovo ? "Označeno jako vyřízené (jen v ukázce)" : "Vráceno mezi nové (jen v ukázce)"); vykresli(); });
+}
+document.querySelectorAll("[data-filtr]").forEach(function (b) {
+  b.addEventListener("click", function () {
+    filtr = b.dataset.filtr;
+    document.querySelectorAll("[data-filtr]").forEach(function (x) { x.setAttribute("aria-pressed", String(x === b)); });
+    vykresli();
+  });
+});
+document.querySelectorAll("[data-tab]").forEach(function (b) {
+  b.addEventListener("click", function () {
+    document.querySelectorAll("[data-tab]").forEach(function (x) { if (x === b) x.setAttribute("aria-current", "page"); else x.removeAttribute("aria-current"); });
+    document.querySelectorAll("[data-panel]").forEach(function (s) { s.hidden = s.dataset.panel !== b.dataset.tab; });
+  });
+});
+document.querySelectorAll("[data-demo-off]").forEach(function (b) { b.addEventListener("click", function () { toast("V ukázce nejde, správa je bez přihlášení."); }); });
+document.querySelectorAll("[data-ulozit]").forEach(function (b) { b.addEventListener("click", function () { toast(b.dataset.ulozit + ": v ukázce se nic neukládá."); }); });
+
+var pryc = document.getElementById("pryc"), zpet = document.getElementById("zpet"), hodiny = document.getElementById("hodiny");
+function dostupnost() {
+  document.getElementById("zpet-pole").hidden = !pryc.checked;
+  var s = document.getElementById("nahled-stav");
+  s.classList.toggle("ne", pryc.checked);
+  var d = zpet.value ? new Date(zpet.value) : null;
+  var kdy = d && !isNaN(d) ? d.toLocaleDateString("cs-CZ", { weekday: "long", day: "numeric", month: "numeric" }) + " od " + d.toLocaleTimeString("cs-CZ", { hour: "2-digit", minute: "2-digit" }) : "";
+  s.querySelector("span").textContent = pryc.checked ? "Dnes nejsem k zastižení" + (kdy ? ", zpět " + kdy : "") : "Otevřeno";
+  document.getElementById("nahled-hodiny").textContent = hodiny.value;
+}
+[pryc, zpet, hodiny].forEach(function (el) { el.addEventListener("input", dostupnost); });
+var at = document.getElementById("akce-text"), au = document.getElementById("akce-u");
+function akce() {
+  var n = document.getElementById("akce-nahled");
+  n.textContent = at.value; n.hidden = !at.value.trim();
+  document.getElementById("akce-sluzba").textContent = au.value;
+}
+[at, au].forEach(function (el) { el.addEventListener("input", akce); });
+vykresli(); dostupnost(); akce();
+</script>
+</body>
+</html>
