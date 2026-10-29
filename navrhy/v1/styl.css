@@ -82,3 +82,6 @@
   .navrh-v1 .sluzba p { grid-column: 2; grid-row: 2; }
   .navrh-v1 .sluzba-sipka { grid-column: 3; grid-row: 1; }
 }
+
+/* Scroll effect (spolecne/scroll.js): service names fill left to right */
+.efekt-vypln.navrh-v1 .sluzba h3 { color: transparent; background: linear-gradient(90deg, #fff 50%, #6b707b 50%) 100% 0 / 200% 100% no-repeat; -webkit-background-clip: text; background-clip: text; }

@@ -83,3 +83,7 @@
   .navrh-v4 .situace-seznam, .navrh-v4 .kroky-seznam, .navrh-v4 .sluzby-seznam { grid-template-columns: 1fr; gap: 0 0; }
   .navrh-v4 .kroky-seznam { gap: 2rem; }
 }
+
+/* Scroll effect: a band that moves with the scroll */
+.navrh-v4 .pas { overflow: hidden; margin-top: 2.5rem; padding: .9rem 0; background: var(--graphite); color: #fff; }
+.navrh-v4 .pas-jizda { white-space: nowrap; font-weight: 800; font-size: clamp(1.3rem, 2.6vw, 2rem); letter-spacing: -.01em; will-change: transform; }

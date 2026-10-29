@@ -84,3 +84,7 @@
   .navrh-v3 .sluzba-sipka { display: none; }
 }
 @media (prefers-reduced-motion: reduce) { .navrh-v3 .razitko svg { animation: none; } }
+
+/* Scroll effect: the about text darkens word by word, so it is set large */
+.navrh-v3 .onas-text { font-size: clamp(1.5rem, 2.8vw, 2.3rem); line-height: 1.25; max-width: 30ch; color: #fff; }
+.navrh-v3 .onas-text a { color: var(--lime); }
