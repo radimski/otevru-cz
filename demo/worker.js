@@ -13,10 +13,10 @@
 const OWNER = 'Redeye';
 const OWNER_URL = 'https://redeye.radim-pajurek.workers.dev/';
 
-const CSS = `.rdm-demo{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:.25rem .75rem;margin:0;padding:.55rem 1rem;background:#0e0f12;color:#f2f2f2;font:500 14px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;text-align:center;border-bottom:2px solid #e3342f;position:relative;z-index:2147483000}
-.rdm-demo strong{color:#ff5a52;font-weight:700;letter-spacing:.04em;text-transform:uppercase;font-size:12px}
+const CSS = `.rdm-demo{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:.25rem .75rem;margin:0;padding:.55rem 1rem;background:#08080c;color:#f4f2ff;font:500 14px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;text-align:center;border-bottom:2px solid #c6ff3d;position:relative;z-index:2147483000}
+.rdm-demo strong{color:#c6ff3d;font-weight:700;letter-spacing:.04em;text-transform:uppercase;font-size:12px}
 .rdm-demo a{color:#fff;text-decoration:underline;text-underline-offset:2px}
-.rdm-demo a:focus-visible{outline:2px solid #ff5a52;outline-offset:2px}
+.rdm-demo a:focus-visible{outline:2px solid #c6ff3d;outline-offset:2px}
 form [data-rdm-off]{opacity:.55;cursor:not-allowed}
 @media print{.rdm-demo{display:none}}`;
 
