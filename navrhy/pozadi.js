@@ -97,8 +97,9 @@
     ['r', 't', 'm', 's', 'k0', 'kp'].forEach(function (k) { U[k] = gl.getUniformLocation(pr, k); });
 
     var touch = window.matchMedia('(hover: none)').matches;
-    var SCALES = [0.35, 0.25, 0.18];
-    var FRAME_MS = 33, SLOW_MS = 40, WINDOW = 40, SLOW_LIMIT = 12, GRACE_MS = 2500;
+    // Strop počtu pixelů bez ohledu na šířku monitoru: přechod je rozmazaný, zvětšení z malého plátna není vidět.
+    var MAX_SCALE = 0.35, BUDGETS = [160000, 90000, 50000];
+    var FRAME_MS = 40, SLOW_MS = 45, WINDOW = 40, SLOW_LIMIT = 12, GRACE_MS = 2500;
     var EASE = touch ? 0.05 : 0.09, FADE = touch ? 0.012 : 0.022;
     var level = touch ? 1 : 0, frozen = false, sizedW = 0, sizedH = 0;
     var mx = 0.7, my = 0.6, tx = 0.7, ty = 0.6, pulse = 0, kx = 0.5, ky = 0.5;
@@ -106,8 +107,9 @@
 
     function size() {
       sizedW = innerWidth; sizedH = innerHeight;
-      cv.width = Math.max(1, Math.round(sizedW * SCALES[level]));
-      cv.height = Math.max(1, Math.round(sizedH * SCALES[level]));
+      var scale = Math.min(MAX_SCALE, Math.sqrt(BUDGETS[level] / Math.max(1, sizedW * sizedH)));
+      cv.width = Math.max(1, Math.round(sizedW * scale));
+      cv.height = Math.max(1, Math.round(sizedH * scale));
       gl.viewport(0, 0, cv.width, cv.height);
     }
     function draw() {
@@ -145,7 +147,7 @@
       var tooSlow = slow > SLOW_LIMIT;
       samples = 0; slow = 0;
       if (!tooSlow) return;
-      if (level < SCALES.length - 1) { level++; size(); } else { frozen = true; }
+      if (level < BUDGETS.length - 1) { level++; size(); } else { frozen = true; }
     }
     function frame(t) {
       if (frozen) return;
