@@ -15,53 +15,64 @@
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <title>Návrhy webu | OTEVRU.cz</title>
-<link rel="stylesheet" href="../fonts.css">
 <style>
-:root { --lime: #acf53d; --graphite: #282b34; --graphite-2: #1f2229; --blue: #004c93; --line: #3d424c; --muted: #b1b4b9; }
+/* Rám rozcestníku je vždy v designu Redeye (redeye.red), stejný u všech klientů. Barvy klienta jsou jen v návrzích. */
+@font-face { font-family: "Inter Tight"; src: url("/navrhy/intertight-latin.woff2") format("woff2"); font-weight: 200 800; font-display: swap; unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122; }
+@font-face { font-family: "Inter Tight"; src: url("/navrhy/intertight-latinext.woff2") format("woff2"); font-weight: 200 800; font-display: swap; unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+1E00-1EFF, U+20A0-20AB, U+20AD-20C0; }
+:root { color-scheme: dark; --ink: #f4f2ff; --muted: #bab7cd; --night: #08080c; --sheet: #0e0d16; --glass: rgba(14,13,22,.84); --line: rgba(255,255,255,.14); --accent: #c6ff3d; --accent-text: #08080c; }
 * { box-sizing: border-box; }
-body { margin: 0; background: var(--graphite); color: #fff; font: 1rem/1.55 "Barlow", system-ui, sans-serif; }
-header { width: min(1280px, calc(100% - 32px)); margin: 0 auto; padding: 40px 0 8px; }
-h1 { margin: 0 0 6px; font: 700 clamp(2rem, 4.4vw, 3rem)/1 "Barlow Condensed", sans-serif; }
-header p { margin: 0; color: #d4d6da; max-width: 72ch; }
+html { background: var(--night); }
+html::before { content: ""; position: fixed; inset: 0 0 auto; z-index: -1; height: 100lvh; pointer-events: none; background: radial-gradient(60rem 40rem at 85% -10%, rgba(107,44,255,.35), transparent 70%), radial-gradient(50rem 36rem at -10% 110%, rgba(255,61,127,.22), transparent 70%); }
+body { margin: 0; color: var(--ink); font: 1rem/1.5 "Inter Tight", system-ui, sans-serif; }
+::selection { background: var(--accent); color: var(--accent-text); }
+header { width: min(1280px, calc(100% - 32px)); margin: 0 auto; padding: 48px 0 8px; }
+h1 { font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.05; font-weight: 700; margin: 0 0 12px; letter-spacing: -.025em; }
+header p { margin: 0; color: var(--muted); max-width: 70ch; }
 
 /* Přepínač zobrazení: počítač + mobil / jen mobil */
-.tabs { display: flex; gap: 8px; margin-top: 20px; }
-.tabs button { min-height: 44px; padding: 0 18px; border: 1px solid var(--lime); border-radius: 10px; background: none; color: #fff; font: 600 .95rem "Barlow", sans-serif; cursor: pointer; }
-.tabs button[aria-pressed="true"] { background: var(--lime); color: var(--graphite); }
-.tabs button:focus-visible, .open:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+.tabs { display: inline-flex; gap: 4px; margin-top: 24px; padding: 4px; border: 1px solid var(--line); border-radius: 999px; background: var(--glass); }
+.tabs button { min-height: 44px; padding: 0 18px; border: 0; border-radius: 999px; background: none; color: var(--muted); font: 600 .95rem "Inter Tight", system-ui, sans-serif; cursor: pointer; }
+.tabs button:hover { color: var(--ink); }
+.tabs button[aria-pressed="true"] { background: var(--accent); color: var(--accent-text); }
+.tabs button:focus-visible, .open:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
 
-main { width: min(1280px, calc(100% - 32px)); margin: 0 auto; padding: 24px 0 64px; display: grid; gap: 56px; }
-.design { display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: start; padding-top: 32px; border-top: 1px solid var(--line); }
-.design h2 { margin: 0 0 6px; font: 700 1.9rem/1.1 "Barlow Condensed", sans-serif; }
-.design h2 span { color: var(--lime); }
-.design p { margin: 0 0 16px; color: #d4d6da; max-width: 56ch; }
-.design .zdroj { color: var(--muted); font-size: .9rem; margin-top: -8px; }
-.open { display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px; border-radius: 10px; background: var(--lime); color: var(--graphite); text-decoration: none; font-weight: 600; }
+main { width: min(1280px, calc(100% - 32px)); margin: 0 auto; padding: 32px 0 72px; display: grid; gap: 24px; }
+.design { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 32px; align-items: start; padding: clamp(20px, 3vw, 32px); border: 1px solid var(--line); border-radius: 28px; background: var(--glass); }
+.design h2 { margin: 0 0 6px; font-size: 1.6rem; font-weight: 700; letter-spacing: -.02em; }
+.design h2 span { color: var(--accent); }
+.design p { margin: 0 0 16px; color: var(--muted); max-width: 52ch; }
+.open { display: inline-flex; align-items: center; min-height: 44px; padding: 0 20px; border-radius: 999px; background: var(--accent); color: var(--accent-text); text-decoration: none; font-weight: 600; }
 
 /* Náhled z počítače: stránka v šířce 1440 px zmenšená do sloupce */
-.desk { margin-top: 20px; border: 1px solid var(--line); background: #fff; border-radius: 10px; overflow: hidden; }
-.desk-bar { display: flex; gap: 6px; padding: 10px 12px; background: var(--graphite-2); }
-.desk-bar i { width: 10px; height: 10px; border-radius: 50%; background: #4a4f5a; }
+.desk { margin-top: 20px; border: 1px solid var(--line); background: var(--sheet); border-radius: 16px; overflow: hidden; }
+.desk-bar { display: flex; gap: 6px; padding: 10px 12px; border-bottom: 1px solid var(--line); }
+.desk-bar i { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,.22); }
 .desk-view { position: relative; width: 100%; aspect-ratio: 1440 / 860; overflow: hidden; }
 .desk-view iframe { position: absolute; left: 0; top: 0; width: 1440px; height: 860px; border: 0; transform-origin: 0 0; }
 
 /* Náhled z mobilu: skutečná šířka 375 px v rámečku telefonu */
-.phone { width: 300px; flex: none; padding: 12px; background: #0d0e11; border-radius: 44px; position: relative; }
+.phone { width: 300px; flex: none; padding: 12px; background: #000; border: 1px solid var(--line); border-radius: 44px; position: relative; }
 .phone::before { content: ""; position: absolute; top: 20px; left: 50%; width: 76px; height: 20px; margin-left: -38px; border-radius: 12px; background: #000; z-index: 2; }
-.screen { position: relative; width: 276px; height: 598px; border-radius: 34px; overflow: hidden; background: #fff; }
+.screen { position: relative; width: 274px; height: 598px; border-radius: 34px; overflow: hidden; background: var(--sheet); }
 .screen iframe { position: absolute; left: 0; top: 0; width: 375px; height: 812px; border: 0; transform: scale(.736); transform-origin: 0 0; }
 .phone-cap { text-align: center; color: var(--muted); font-size: .85rem; margin-top: 10px; }
 
+/* Odkaz na ukázku správy: jen blok s tlačítkem, bez náhledů */
+.sprava { padding: clamp(20px, 3vw, 32px); border: 1px solid var(--line); border-radius: 28px; background: var(--glass); }
+.sprava h2 { margin: 0 0 6px; font-size: 1.6rem; font-weight: 700; letter-spacing: -.02em; }
+.sprava p { margin: 0 0 16px; color: var(--muted); max-width: 60ch; }
+
 body.only-phone .desk { display: none; }
 @media (max-width: 900px) {
-  .design { grid-template-columns: 1fr; }
+  .design { grid-template-columns: minmax(0, 1fr); }
   .desk { display: none; }
   .phone { margin: 0 auto; }
   .tabs { display: none; }
 }
-.sprava { padding: 32px 0 0; border-top: 1px solid var(--line); }
-.sprava h2 { margin: 0 0 6px; font: 700 1.9rem/1.1 "Barlow Condensed", sans-serif; }
-.sprava p { margin: 0 0 16px; color: #d4d6da; max-width: 60ch; }
+@media (max-width: 400px) {
+  .phone { zoom: .8; }
+}
+.design .zdroj { color: var(--muted); font-size: .9rem; margin-top: -8px; }
 </style>
 </head>
 <body>
